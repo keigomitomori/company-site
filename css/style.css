@@ -1,0 +1,854 @@
+/* ========================================
+   企業サイト共通CSS
+   ======================================== */
+
+/* Reset & Base */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Yu Gothic Medium", "游ゴシック Medium", YuGothic, "游ゴシック体", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, sans-serif;
+  font-size: 16px;
+  line-height: 1.8;
+  color: #333;
+  background-color: #fff;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Container */
+.container {
+  width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ========================================
+   Header
+   ======================================== */
+.header {
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 56px;
+}
+
+.logo a {
+  display: flex;
+  align-items: center;
+}
+
+.logo a img {
+  height: 30px;
+  width: auto;
+}
+
+/* Navigation */
+.nav-list {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+
+.nav-list a {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #333;
+  transition: color 0.3s;
+  position: relative;
+}
+
+.nav-list a::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #2196f3;
+  transition: width 0.3s;
+}
+
+.nav-list a:hover {
+  color: #2196f3;
+}
+
+.nav-list a:hover::after {
+  width: 100%;
+}
+
+.nav-list .nav-contact {
+  background-color: #2196f3;
+  color: #fff;
+  padding: 10px 24px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.nav-list .nav-contact::after {
+  display: none;
+}
+
+.nav-list .nav-contact:hover {
+  background-color: #1976d2;
+  color: #fff;
+}
+
+/* Hamburger Menu (CSS only) */
+.menu-toggle {
+  display: none;
+}
+
+.menu-icon {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.menu-icon span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: #1a2b5e;
+  transition: all 0.3s;
+  position: relative;
+}
+
+.menu-icon span::before,
+.menu-icon span::after {
+  content: "";
+  position: absolute;
+  width: 24px;
+  height: 2px;
+  background-color: #1a2b5e;
+  transition: all 0.3s;
+}
+
+.menu-icon span::before {
+  top: -7px;
+}
+
+.menu-icon span::after {
+  top: 7px;
+}
+
+.menu-toggle:checked + .menu-icon span {
+  background-color: transparent;
+}
+
+.menu-toggle:checked + .menu-icon span::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.menu-toggle:checked + .menu-icon span::after {
+  top: 0;
+  transform: rotate(-45deg);
+}
+
+/* ========================================
+   Hero Section
+   ======================================== */
+.hero {
+  background: linear-gradient(rgba(26, 43, 94, 0.6), rgba(44, 74, 138, 0.6)),
+              url("../images/hero-bg.jpg") center / cover no-repeat;
+  color: #fff;
+  padding: 120px 0;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+
+.hero p {
+  font-size: 1.1rem;
+  margin-bottom: 40px;
+  opacity: 0.9;
+  line-height: 1.8;
+}
+
+.btn {
+  display: inline-block;
+  padding: 14px 40px;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.3s;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary {
+  background-color: #2196f3;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background-color: #1976d2;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(33, 150, 243, 0.4);
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: #fff;
+  border: 2px solid #fff;
+}
+
+.btn-outline:hover {
+  background-color: #fff;
+  color: #2196f3;
+}
+
+/* ========================================
+   Page Header (Sub pages)
+   ======================================== */
+.page-header {
+  background: linear-gradient(135deg, #1a2b5e 0%, #2c4a8a 100%);
+  color: #fff;
+  padding: 60px 0;
+  text-align: center;
+}
+
+.page-header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.page-header p {
+  font-size: 0.9rem;
+  margin-top: 8px;
+  opacity: 0.8;
+}
+
+/* ========================================
+   Sections
+   ======================================== */
+.section {
+  padding: 80px 0;
+}
+
+.section-gray {
+  background-color: #f8f9fa;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.section-title h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1a2b5e;
+  margin-bottom: 12px;
+}
+
+.section-title p {
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.section-title::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 3px;
+  background-color: #2196f3;
+  margin: 16px auto 0;
+}
+
+/* ========================================
+   Cards
+   ======================================== */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.card-icon {
+  background: linear-gradient(135deg, #1a2b5e 0%, #2c4a8a 100%);
+  color: #fff;
+  padding: 40px 24px;
+  text-align: center;
+  font-size: 2.5rem;
+}
+
+.card-icon:has(img) {
+  background: none;
+  padding: 0;
+  overflow: hidden;
+  height: 160px;
+}
+
+.card-icon img {
+  width: 100%;
+  height: 110%;
+  object-fit: cover;
+  object-position: top;
+}
+
+.card-body {
+  padding: 24px;
+}
+
+.card-body h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #1a2b5e;
+  margin-bottom: 12px;
+}
+
+.card-body p {
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.8;
+}
+
+/* ========================================
+   About Section (Top page)
+   ======================================== */
+.about-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.about-intro-text h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1a2b5e;
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+
+.about-intro-text p {
+  color: #666;
+  margin-bottom: 10px;
+  line-height: 1.6;
+  font-size: 0.9rem;
+}
+
+.about-intro-image {
+  border-radius: 8px;
+  overflow: hidden;
+  height: 300px;
+}
+
+.about-intro-image img {
+  width: 100%;
+  height: 110%;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 8px;
+}
+
+/* ========================================
+   Company Info Table
+   ======================================== */
+.info-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 30px;
+}
+
+.info-table th,
+.info-table td {
+  padding: 16px 20px;
+  border-bottom: 1px solid #e0e0e0;
+  text-align: left;
+  font-size: 0.95rem;
+}
+
+.info-table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  color: #1a2b5e;
+  width: 200px;
+  white-space: nowrap;
+}
+
+/* ========================================
+   Vision / Philosophy
+   ======================================== */
+.philosophy {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.philosophy h3 {
+  font-size: 1.5rem;
+  color: #1a2b5e;
+  margin-bottom: 20px;
+}
+
+.philosophy p {
+  color: #666;
+  line-height: 2;
+}
+
+/* History / Timeline */
+.timeline {
+  max-width: 700px;
+  margin: 40px auto 0;
+}
+
+.timeline-item {
+  display: flex;
+  gap: 24px;
+  padding: 20px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.timeline-item:last-child {
+  border-bottom: none;
+}
+
+.timeline-year {
+  font-weight: 700;
+  color: #1a2b5e;
+  min-width: 80px;
+  font-size: 1.1rem;
+}
+
+.timeline-desc {
+  color: #555;
+}
+
+/* ========================================
+   Service Detail
+   ======================================== */
+.service-detail {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  padding: 60px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.service-detail:last-child {
+  border-bottom: none;
+}
+
+.service-detail.reverse {
+  direction: rtl;
+}
+
+.service-detail.reverse > * {
+  direction: ltr;
+}
+
+.service-detail-image {
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+  border-radius: 8px;
+  height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.5rem;
+  color: #1a2b5e;
+  overflow: hidden;
+}
+
+.service-detail-image img {
+  width: 100%;
+  height: 115%;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 8px;
+}
+
+.service-detail-text h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #1a2b5e;
+  margin-bottom: 16px;
+}
+
+.service-detail-text p {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.feature-list {
+  list-style: none;
+}
+
+.feature-list li {
+  padding: 6px 0;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.feature-list li::before {
+  content: "\2713";
+  color: #2196f3;
+  font-weight: 700;
+  margin-right: 8px;
+}
+
+/* ========================================
+   CTA Section
+   ======================================== */
+.cta {
+  background: linear-gradient(135deg, #1a2b5e 0%, #2c4a8a 100%);
+  color: #fff;
+  text-align: center;
+  padding: 60px 0;
+}
+
+.cta h2 {
+  font-size: 1.8rem;
+  margin-bottom: 16px;
+}
+
+.cta p {
+  opacity: 0.9;
+  margin-bottom: 30px;
+}
+
+/* ========================================
+   Contact Form
+   ======================================== */
+.contact-form {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: 24px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  color: #1a2b5e;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+}
+
+.form-group label .required {
+  color: #e53935;
+  font-size: 0.8rem;
+  margin-left: 4px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-family: "Yu Gothic Medium", "游ゴシック Medium", YuGothic, "游ゴシック体", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, sans-serif;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+  background-color: #fff;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #2196f3;
+  box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+}
+
+.form-group textarea {
+  height: 180px;
+  resize: vertical;
+}
+
+.form-submit {
+  text-align: center;
+  margin-top: 32px;
+}
+
+.form-submit .btn {
+  min-width: 240px;
+  font-family: "Yu Gothic Medium", "游ゴシック Medium", YuGothic, "游ゴシック体", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, sans-serif;
+}
+
+.contact-info {
+  margin-top: 60px;
+  text-align: center;
+  color: #666;
+}
+
+.contact-info p {
+  margin-bottom: 8px;
+}
+
+.contact-info a {
+  color: #2196f3;
+}
+
+/* ========================================
+   Footer
+   ======================================== */
+.footer {
+  background-color: #1a2b5e;
+  color: #fff;
+  padding: 60px 0 0;
+}
+
+.footer-inner {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 40px;
+  padding-bottom: 40px;
+}
+
+.footer-company .footer-logo {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.footer-company p {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  line-height: 1.8;
+}
+
+.footer-nav h4,
+.footer-contact h4 {
+  font-size: 0.95rem;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.footer-nav ul li {
+  margin-bottom: 8px;
+}
+
+.footer-nav ul a {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+
+.footer-nav ul a:hover {
+  opacity: 1;
+}
+
+.footer-contact p {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  margin-bottom: 4px;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 20px 0;
+  text-align: center;
+  font-size: 0.8rem;
+  opacity: 0.6;
+}
+
+/* ========================================
+   Responsive (768px)
+   ======================================== */
+@media (max-width: 1040px) {
+  .container {
+    width: auto;
+    padding: 0 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Header */
+  .menu-icon {
+    display: flex;
+  }
+
+  .nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 320px;
+    height: 100vh;
+    background-color: #fff;
+    box-shadow: -4px 0 12px rgba(0, 0, 0, 0.1);
+    transition: right 0.3s;
+    padding: 80px 30px 30px;
+    z-index: 999;
+  }
+
+  .menu-toggle:checked ~ .nav {
+    right: 0;
+  }
+
+  .nav-list {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .nav-list li {
+    width: 100%;
+  }
+
+  .nav-list a {
+    display: block;
+    padding: 14px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 1rem;
+  }
+
+  .nav-list a::after {
+    display: none;
+  }
+
+  .nav-list .nav-contact {
+    text-align: center;
+    margin-top: 16px;
+    border-radius: 4px;
+  }
+
+  /* Overlay */
+  .menu-toggle:checked ~ .nav-overlay {
+    display: block;
+  }
+
+  .nav-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 998;
+  }
+
+  /* Hero */
+  .hero {
+    padding: 60px 0;
+  }
+
+  .hero h1 {
+    font-size: 1.7rem;
+  }
+
+  .hero p {
+    font-size: 0.95rem;
+  }
+
+  /* Page Header */
+  .page-header {
+    padding: 40px 0;
+  }
+
+  .page-header h1 {
+    font-size: 1.5rem;
+  }
+
+  /* Sections */
+  .section {
+    padding: 50px 0;
+  }
+
+  .section-title h2 {
+    font-size: 1.4rem;
+  }
+
+  /* Cards */
+  .card-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  /* About */
+  .about-intro {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  /* Table */
+  .info-table th {
+    width: 120px;
+    font-size: 0.85rem;
+  }
+
+  .info-table td {
+    font-size: 0.85rem;
+  }
+
+  /* Service Detail */
+  .service-detail {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .service-detail.reverse {
+    direction: ltr;
+  }
+
+  /* CTA */
+  .cta h2 {
+    font-size: 1.4rem;
+  }
+
+  /* Footer */
+  .footer-inner {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}
