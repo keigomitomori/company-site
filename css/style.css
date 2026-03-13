@@ -186,7 +186,7 @@ img {
    ======================================== */
 .hero {
   background: linear-gradient(rgba(26, 43, 94, 0.6), rgba(44, 74, 138, 0.6)),
-              url("../images/hero-bg.jpg") center / cover no-repeat;
+              url("../images/hero-bg.webp") center / cover no-repeat;
   color: #fff;
   padding: 120px 0;
   text-align: center;
@@ -596,7 +596,7 @@ img {
   padding: 12px 16px;
   border: 1px solid #ddd;
   border-radius: 4px;
-  font-family: "Yu Gothic Medium", "游ゴシック Medium", YuGothic, "游ゴシック体", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, sans-serif;
+  font-family: inherit;
   font-size: 1rem;
   transition: border-color 0.3s;
   background-color: #fff;
@@ -622,7 +622,7 @@ img {
 
 .form-submit .btn {
   min-width: 240px;
-  font-family: "Yu Gothic Medium", "游ゴシック Medium", YuGothic, "游ゴシック体", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, sans-serif;
+  font-family: inherit;
 }
 
 .contact-info {

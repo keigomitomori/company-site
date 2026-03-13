@@ -3,12 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="株式会社NEXT Bridgeのサービス紹介ページです。Webシステム開発・クラウドソリューション・DX推進コンサルティングをご提供しています。">
-  <title>サービス | 株式会社NEXT Bridge</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="icon" href="images/favicon.png" type="image/png">
+  <meta name="description" content="NEXT Bridgeのサービス紹介ページです。情シスコンサルティング・製品導入支援・生成AI導入支援をご提供しています。">
+  <title>サービス | NEXT Bridge</title>
+  <link rel="canonical" href="https://nextb.net/services.html">
+  <!-- OGP -->
+  <meta property="og:title" content="サービス | NEXT Bridge">
+  <meta property="og:description" content="情シスコンサルティング・製品導入支援・生成AI導入支援をご提供しています。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://nextb.net/services.html">
+  <meta property="og:image" content="https://nextb.net/images/hero-bg.webp">
+  <meta property="og:site_name" content="NEXT Bridge">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="images/favicon.webp" type="image/webp">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -18,12 +25,12 @@
     <div class="container">
       <div class="logo">
         <a href="index.html">
-          <img src="images/logo.png" alt="NEXT Bridge">
+          <img src="images/logo.webp" alt="NEXT Bridge">
         </a>
       </div>
-      <input type="checkbox" id="menu-toggle" class="menu-toggle">
-      <label for="menu-toggle" class="menu-icon"><span></span></label>
-      <label for="menu-toggle" class="nav-overlay"></label>
+      <input type="checkbox" id="menu-toggle" class="menu-toggle" aria-hidden="true">
+      <label for="menu-toggle" class="menu-icon" role="button" aria-label="メニューを開閉する"><span></span></label>
+      <label for="menu-toggle" class="nav-overlay" aria-hidden="true"></label>
       <nav class="nav">
         <ul class="nav-list">
           <li><a href="index.html">ホーム</a></li>
@@ -52,21 +59,21 @@
       </div>
       <div class="card-grid">
         <div class="card">
-          <div class="card-icon"><img src="images/service-consulting.png" alt="情シスコンサルティング"></div>
+          <div class="card-icon"><img src="images/service-consulting.webp" alt="情シスコンサルティング"></div>
           <div class="card-body">
             <h3>情シスコンサルティング</h3>
             <p>情報システム部門の課題を可視化し、IT戦略の策定から運用改善まで、貴社の情シス機能を強化します。</p>
           </div>
         </div>
         <div class="card">
-          <div class="card-icon"><img src="images/service-product.png" alt="製品導入支援"></div>
+          <div class="card-icon"><img src="images/service-product.webp" alt="製品導入支援"></div>
           <div class="card-body">
             <h3>製品導入支援</h3>
             <p>業務に最適なIT製品の選定から導入・定着化まで、現場に根づく仕組みづくりをトータルでサポートします。</p>
           </div>
         </div>
         <div class="card">
-          <div class="card-icon"><img src="images/service-ai.png" alt="生成AI導入支援"></div>
+          <div class="card-icon"><img src="images/service-ai.webp" alt="生成AI導入支援"></div>
           <div class="card-body">
             <h3>生成AI導入支援</h3>
             <p>ChatGPTをはじめとした生成AIの業務活用を支援。導入計画の策定から社内展開・運用定着までお任せください。</p>
@@ -85,7 +92,7 @@
       </div>
 
       <div class="service-detail">
-        <div class="service-detail-image"><img src="images/service-consulting.png" alt="情シスコンサルティング"></div>
+        <div class="service-detail-image"><img src="images/service-consulting.webp" alt="情シスコンサルティング"></div>
         <div class="service-detail-text">
           <h3>情シスコンサルティング</h3>
           <p>情報システム部門が抱える課題を整理し、最適なIT戦略を策定。専任の情シス担当がいない企業でも、外部パートナーとしてIT環境の最適化を支援します。</p>
@@ -99,7 +106,7 @@
       </div>
 
       <div class="service-detail reverse">
-        <div class="service-detail-image"><img src="images/service-product.png" alt="製品導入支援"></div>
+        <div class="service-detail-image"><img src="images/service-product.webp" alt="製品導入支援"></div>
         <div class="service-detail-text">
           <h3>製品導入支援</h3>
           <p>業務課題に合ったIT製品を選定し、導入から定着まで一貫してサポート。「導入して終わり」ではなく、現場で使われ続ける仕組みを一緒に作ります。</p>
@@ -113,7 +120,7 @@
       </div>
 
       <div class="service-detail">
-        <div class="service-detail-image"><img src="images/service-ai.png" alt="生成AI導入支援"></div>
+        <div class="service-detail-image"><img src="images/service-ai.webp" alt="生成AI導入支援"></div>
         <div class="service-detail-text">
           <h3>生成AI導入支援</h3>
           <p>ChatGPTをはじめとした生成AIを業務に活用するための導入支援を行います。業務分析から活用シーン設計、社内ガイドライン策定、運用定着までをサポートします。</p>
