@@ -1,0 +1,173 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Cta from '../../components/Cta.astro';
+---
+<BaseLayout
+  title="生成AI・Claude Codeの社内統制支援 | 株式会社ネクストブリッジ"
+  description="Claude・Claude Codeを安全に社内展開するための統制支援です。利用ガイドライン策定、SSO・アカウント統制、managed settingsの設計、Intune/MDMでの配布、ISMSとの整合まで、情シスの視点で一貫して支援します。"
+  canonical="https://nextb.net/genai-governance/"
+  ogTitle="生成AI・Claude Codeの社内統制支援 | NEXT Bridge"
+  ogDescription="Claude・Claude Codeを安全に社内展開するための統制支援。ガイドライン策定からmanaged settings・MDM配布・ISMS整合まで。"
+>
+  <PageHeader title="生成AI・Claude Codeの社内統制支援" subtitle="AI Governance" />
+
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <h2>「使わせたい。でも、事故は起こせない。」<br>その間を埋めるのが、この支援です</h2>
+        <p>Overview</p>
+      </div>
+      <div class="statement">
+        <p>生成AIの導入は「契約して配れば終わり」ではありません。誰が・どの端末で・どんなデータを扱えるのかを決め、設定で強制し、監査で説明できる形で運用できる状態にする — この統制の設計が、導入の成否を大きく左右します。</p>
+        <p>NEXT Bridgeは、実際の企業導入で Claude・Claude Code の展開と統制の設計・実装に携わってきた経験をもとに、情シスの視点で「安全に使わせる仕組み」を作ります。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-gray">
+    <div class="container">
+      <div class="section-title">
+        <h2>こんな状況ではありませんか</h2>
+        <p>Pain Points</p>
+      </div>
+      <ul class="pain-list">
+        <li>経営から「AIを使え」と言われたが、安全な入れ方が分からない</li>
+        <li>社員が個人アカウントで生成AIを使い始めている（シャドーAI）</li>
+        <li>Claude Code を開発・業務に入れたいが、権限や設定を統制できる気がしない</li>
+        <li>利用ガイドラインは作ったが、技術的な強制力がなく形骸化している</li>
+        <li>ISMSを運用しており、生成AIの利用をリスクアセスメントにどう載せるか悩んでいる</li>
+        <li>全社導入したものの、利用が一部の人に偏り、定着していない</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <h2>提供内容 — 方針から技術統制、定着まで</h2>
+        <p>What We Do</p>
+      </div>
+      <div class="offer-grid">
+        <div class="offer-card">
+          <span class="offer-step">STEP 1</span>
+          <h3>現状診断・導入方針の設計</h3>
+          <p>利用実態（シャドーAI含む）と扱うデータを整理し、プラン選定と統制方針を決めます。</p>
+          <ul class="feature-list">
+            <li>利用実態・リスクの棚卸し</li>
+            <li>Team / Enterprise / API のプラン選定支援</li>
+            <li>機密データの取り扱い区分の設計</li>
+          </ul>
+        </div>
+        <div class="offer-card">
+          <span class="offer-step">STEP 2</span>
+          <h3>ガイドライン・ルール策定</h3>
+          <p>「守れるルール」を実務目線で作ります。ひな形の穴埋めではなく、業務実態に合わせます。</p>
+          <ul class="feature-list">
+            <li>生成AI利用ガイドラインの策定・改定</li>
+            <li>入力してよい情報・禁止事項の線引き</li>
+            <li>例外申請・承認フローの設計</li>
+          </ul>
+        </div>
+        <div class="offer-card">
+          <span class="offer-step">STEP 3</span>
+          <h3>技術統制の実装</h3>
+          <p>ルールを設定で強制します。ここが「ガイドラインだけ」の支援との最大の違いです。</p>
+          <ul class="feature-list">
+            <li>SSO・アカウント統制（個人アカウント利用の集約）</li>
+            <li>Claude Code の managed settings 設計</li>
+            <li>Intune / MDM による設定・アプリ配布</li>
+            <li>ログ・証跡・監査説明の設計、ISMSとの整合</li>
+          </ul>
+        </div>
+        <div class="offer-card">
+          <span class="offer-step">STEP 4</span>
+          <h3>定着支援</h3>
+          <p>統制は「使われてこそ」。ルールが守られたまま安全な利用が続く状態まで伴走します。</p>
+          <ul class="feature-list">
+            <li>社員向けセキュリティ勉強会・研修</li>
+            <li>利用実態の分析とフォロー施策</li>
+            <li>ルールを理解した社内推進担当の育成</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-gray">
+    <div class="container">
+      <div class="section-title">
+        <h2>NEXT Bridgeに頼む理由</h2>
+        <p>Why Us</p>
+      </div>
+      <ul class="why-list">
+        <li>
+          <strong>実際の企業導入で統制の設計・実装に携わってきた経験</strong>
+          Claude Enterprise の全社導入や、Claude Code の設定統制・MDM配布を実案件で担当しています。公開ドキュメントだけでは見えにくい、運用で起きるつまずきを踏まえて設計します。
+        </li>
+        <li>
+          <strong>情シスの実務とセキュリティ統制の両方が分かる</strong>
+          デバイス管理（Intune等）やID基盤、ISMS運用の支援を本業としているため、生成AI統制を既存のIT統制・認証運用と矛盾なく接続できます。
+        </li>
+        <li>
+          <strong>ツールを売らない中立の立場</strong>
+          特定製品の販売代理ではないため、貴社の環境と目的に合わせた選定・設計ができます。
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <h2>支援事例</h2>
+        <p>Case</p>
+      </div>
+      <div class="case-grid">
+        <div class="case-card">
+          <span class="case-tag">生成AI統制</span>
+          <h3>事業会社 ― Claude Enterprise の全社導入と利用統制・定着支援</h3>
+          <dl class="case-fields">
+            <div class="case-field">
+              <dt>課題</dt>
+              <dd>全社で生成AIを活用する方針が決まったものの、アカウント統制・機密情報の取り扱い・利用定着まで見通せる体制が社内にありませんでした。</dd>
+            </div>
+            <div class="case-field">
+              <dt>支援内容</dt>
+              <dd>支援チームの一員として、Claude Enterprise の導入設計、SSO・アカウント統制方針の整理、機密情報の取り扱いガイダンス策定、設定による統制方針（共通設定＋端末管理）の設計を担当。社員向けセキュリティ勉強会・個別ヒアリング・利用実態分析も実施しました。</dd>
+            </div>
+            <div class="case-field">
+              <dt>成果</dt>
+              <dd>導入から運用までの統制の枠組みと、勉強会・利用分析による定着サイクルを確立。役員から現場まで活用が広がる土台を整えました。</dd>
+            </div>
+          </dl>
+        </div>
+        <div class="case-card">
+          <span class="case-tag">生成AI統制</span>
+          <h3>コンサルティング会社 ― Claude Code の業務活用と配布統制</h3>
+          <dl class="case-fields">
+            <div class="case-field">
+              <dt>課題</dt>
+              <dd>コンサルタントの業務に Claude Code を導入するにあたり、設定の統一配布と、接続範囲・権限の統制方法が課題でした。</dd>
+            </div>
+            <div class="case-field">
+              <dt>支援内容</dt>
+              <dd>支援チームの一員として、Intune（MDM）による Claude Code の配布設計、管理側で強制する設定（managed settings）の方針、外部接続範囲の設計といった統制面を担当しました。</dd>
+            </div>
+            <div class="case-field">
+              <dt>成果</dt>
+              <dd>「個人任せの試行」から「会社として配布・統制された活用」へ移行する道筋を整備。AI利用ガイドラインの社内展開とあわせて運用に載せました。</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Cta
+    heading="生成AI統制の現状、一度整理してみませんか"
+    text="「何から手を付けるべきか」の整理からで構いません。現在の利用状況・環境をお聞きし、統制の全体像と優先順位をご提案します。"
+    buttonClass="btn btn-primary"
+    buttonLabel="相談してみる"
+  />
+</BaseLayout>

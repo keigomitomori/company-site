@@ -4,6 +4,6 @@ export default defineConfig({
   site: 'https://nextb.net',
   compressHTML: false,
   build: {
-    format: 'file',
+    format: 'preserve',
   },
 });

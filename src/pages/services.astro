@@ -15,44 +15,11 @@ import Cta from '../components/Cta.astro';
   <section class="section">
     <div class="container">
       <div class="section-title">
-        <h2>サービス一覧</h2>
-        <p>お客様の課題に合わせた最適なソリューションをご提供します</p>
-      </div>
-      <div class="card-grid">
-        <div class="card">
-          <div class="card-icon"><img src="images/service-consulting.webp" alt="情シスコンサルティング"></div>
-          <div class="card-body">
-            <h3>情シスコンサルティング</h3>
-            <p>情報システム部門の課題を可視化し、IT戦略の策定から運用改善まで、貴社の情シス機能を強化します。</p>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-icon"><img src="images/service-product.webp" alt="製品導入支援"></div>
-          <div class="card-body">
-            <h3>製品導入支援</h3>
-            <p>業務に最適なIT製品の選定から導入・定着化まで、現場に根づく仕組みづくりをトータルでサポートします。</p>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-icon"><img src="images/service-ai.webp" alt="生成AI導入支援"></div>
-          <div class="card-body">
-            <h3>生成AI導入支援</h3>
-            <p>ChatGPTをはじめとした生成AIの業務活用を支援。導入計画の策定から社内展開・運用定着までお任せください。</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section-gray">
-    <div class="container">
-      <div class="section-title">
         <h2>サービス詳細</h2>
-        <p>各サービスの特長をご紹介します</p>
+        <p>Service Details</p>
       </div>
 
       <div class="service-detail">
-        <div class="service-detail-image"><img src="images/service-consulting.webp" alt="情シスコンサルティング"></div>
         <div class="service-detail-text">
           <h3>情シスコンサルティング</h3>
           <p>情報システム部門が抱える課題を整理し、最適なIT戦略を策定。専任の情シス担当がいない企業でも、外部パートナーとしてIT環境の最適化を支援します。</p>
@@ -65,11 +32,10 @@ import Cta from '../components/Cta.astro';
         </div>
       </div>
 
-      <div class="service-detail reverse">
-        <div class="service-detail-image"><img src="images/service-product.webp" alt="製品導入支援"></div>
+      <div class="service-detail">
         <div class="service-detail-text">
           <h3>製品導入支援</h3>
-          <p>業務課題に合ったIT製品を選定し、導入から定着まで一貫してサポート。「導入して終わり」ではなく、現場で使われ続ける仕組みを一緒に作ります。</p>
+          <p>業務課題に合ったIT製品を選定し、導入から定着まで一貫してサポート。「導入して終わり」ではなく、現場で使われ続ける仕組みを一緒に作ります。Microsoft 365 / Entra ID / Intune / Google Workspace などのID・デバイス管理基盤を得意としています。</p>
           <ul class="feature-list">
             <li>業務要件に基づいた最適な製品選定</li>
             <li>導入計画の策定とプロジェクト管理</li>
@@ -80,10 +46,9 @@ import Cta from '../components/Cta.astro';
       </div>
 
       <div class="service-detail">
-        <div class="service-detail-image"><img src="images/service-ai.webp" alt="生成AI導入支援"></div>
         <div class="service-detail-text">
           <h3>生成AI導入支援</h3>
-          <p>ChatGPTをはじめとした生成AIを業務に活用するための導入支援を行います。業務分析から活用シーン設計、社内ガイドライン策定、運用定着までをサポートします。</p>
+          <p>生成AIを業務に活用するための導入支援を行います。業務分析から活用シーン設計、社内ガイドライン策定、利用統制、運用定着までをサポートします。</p>
           <ul class="feature-list">
             <li>生成AI活用に向けた業務プロセス分析</li>
             <li>ユースケースの設計とPoC実施</li>
@@ -92,14 +57,19 @@ import Cta from '../components/Cta.astro';
           </ul>
         </div>
       </div>
+
+      <div class="lp-banner">
+        <p>Claude や Claude Code の社内展開・統制は専用ページでご案内しています</p>
+        <a href="/genai-governance/" class="btn btn-text">生成AI・Claude Codeの社内統制支援 →</a>
+      </div>
     </div>
   </section>
 
-  <section class="section" id="cases">
+  <section class="section section-gray" id="cases">
     <div class="container">
       <div class="section-title">
         <h2>支援事例</h2>
-        <p>これまでのご支援の一部を、企業が特定されない形でご紹介します</p>
+        <p>Cases</p>
       </div>
       <div class="case-grid">
         <div class="case-card">
@@ -160,11 +130,11 @@ import Cta from '../components/Cta.astro';
     </div>
   </section>
 
-  <section class="section section-gray" id="flow">
+  <section class="section" id="flow">
     <div class="container">
       <div class="section-title">
         <h2>ご支援の流れ</h2>
-        <p>お問い合わせからご支援開始までの進み方です</p>
+        <p>Flow</p>
       </div>
       <ol class="flow-steps">
         <li class="flow-step">
