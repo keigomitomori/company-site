@@ -344,6 +344,49 @@ a.btn-outline::after {
   font-size: 2.4rem;
 }
 
+.hero--cover {
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.97) 0%, rgba(255, 255, 255, 0.9) 38%, rgba(246, 249, 253, 0.55) 64%, rgba(246, 249, 253, 0.1) 100%),
+    url("/images/hero-bg.webp") right center / cover no-repeat;
+  padding: 92px 0;
+}
+
+.hero--cover::before,
+.hero--cover::after {
+  display: none;
+}
+
+.hero--cover .hero-copy {
+  max-width: 580px;
+}
+
+.hero-badges {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 38px;
+}
+
+.hero-badges li {
+  background-color: rgba(255, 255, 255, 0.94);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  padding: 10px 18px;
+}
+
+.hero-badges strong {
+  display: block;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+.hero-badges span {
+  font-size: 0.74rem;
+  color: var(--muted);
+}
+
 .hero-grid {
   display: grid;
   grid-template-columns: 1.05fr 0.95fr;
@@ -1433,6 +1476,13 @@ a.btn-outline::after {
   .hero-visual {
     max-width: 320px;
     margin: 0 auto;
+  }
+
+  .hero--cover {
+    background:
+      linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.92)),
+      url("/images/hero-bg.webp") center / cover no-repeat;
+    padding: 56px 0 48px;
   }
 
   .highlight-inner {
