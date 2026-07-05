@@ -552,6 +552,13 @@ a.btn-outline::after {
   margin: 0;
 }
 
+.figure-panel {
+  background-color: #fbfcfe;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 22px;
+}
+
 .figure svg {
   width: 100%;
   height: auto;
