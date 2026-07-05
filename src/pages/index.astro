@@ -12,14 +12,21 @@ import Cta from '../components/Cta.astro';
   twitterDescription="情シスコンサルティング・製品導入支援・生成AI導入支援を行っています。"
   twitterImage="https://nextb.net/images/og-default.png"
 >
-  <section class="hero">
+  <section class="hero hero--illust">
     <div class="container">
-      <p class="hero-eyebrow">情シスコンサルティング / 製品導入支援 / 生成AI導入支援</p>
-      <h1>導入するだけのITから、<br>使われるITへ。</h1>
-      <p class="hero-lead">技術を届けるだけでなく、現場に根づくITを。<br>NEXT Bridgeが、その橋渡しをします。</p>
-      <div class="hero-actions">
-        <a href="/contact.html" class="btn btn-primary">相談してみる</a>
-        <a href="/services.html#cases" class="btn btn-outline">支援事例を見る</a>
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="hero-eyebrow">情シスコンサルティング / 製品導入支援 / 生成AI導入支援</p>
+          <h1>導入するだけのITから、<br>使われるITへ。</h1>
+          <p class="hero-lead">技術を届けるだけでなく、現場に根づくITを。<br>NEXT Bridgeが、その橋渡しをします。</p>
+          <div class="hero-actions">
+            <a href="/contact.html" class="btn btn-primary">相談してみる</a>
+            <a href="/services.html#cases" class="btn btn-outline">支援事例を見る</a>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <img src="/images/ill-hero.svg" alt="" width="455" height="365" fetchpriority="high">
+        </div>
       </div>
     </div>
   </section>
@@ -74,8 +81,8 @@ import Cta from '../components/Cta.astro';
       </div>
       <div class="card-grid">
         <div class="card">
-          <div class="card-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          <div class="card-illust">
+            <img src="/images/ill-consulting.svg" alt="" loading="lazy" width="409" height="301">
           </div>
           <div class="card-body">
             <h3>情シスコンサルティング</h3>
@@ -83,8 +90,8 @@ import Cta from '../components/Cta.astro';
           </div>
         </div>
         <div class="card">
-          <div class="card-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          <div class="card-illust">
+            <img src="/images/ill-device.svg" alt="" loading="lazy" width="409" height="301">
           </div>
           <div class="card-body">
             <h3>製品導入支援</h3>
@@ -92,8 +99,8 @@ import Cta from '../components/Cta.astro';
           </div>
         </div>
         <div class="card">
-          <div class="card-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v2M12 19v2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M3 12h2M19 12h2M5.6 18.4 7 17M17 7l1.4-1.4"/><circle cx="12" cy="12" r="4"/></svg>
+          <div class="card-illust">
+            <img src="/images/ill-ai.svg" alt="" loading="lazy" width="409" height="301">
           </div>
           <div class="card-body">
             <h3>生成AI導入支援</h3>
@@ -122,58 +129,32 @@ import Cta from '../components/Cta.astro';
           <a href="/about.html" class="btn btn-outline">会社概要を見る</a>
         </div>
         <figure class="figure">
-          <div class="figure-panel">
-          <svg viewBox="0 0 560 396" role="img" aria-label="支援体制のイメージ図。お客様チームと NEXT Bridge が定例と随時の相談でつながり、NEXT Bridge がデバイス管理・SaaSとアカウント・セキュリティとISMS・生成AI統制の4領域を受け持つ">
-            <defs>
-              <filter id="ds" x="-20%" y="-20%" width="140%" height="140%">
-                <feDropShadow dx="0" dy="1.5" stdDeviation="2.5" flood-color="#0f1b33" flood-opacity="0.08"/>
-              </filter>
-              <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-                <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#2563eb"/>
-              </marker>
-              <marker id="ah-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-                <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#9aa5b8"/>
-              </marker>
-            </defs>
-
-            <rect x="16" y="44" width="210" height="112" rx="10" fill="#ffffff" stroke="#dfe5ee" filter="url(#ds)"/>
-            <rect x="36" y="64" width="40" height="40" rx="9" fill="#e9f0fd"/>
-            <g stroke="#2563eb" stroke-width="1.7" fill="none" stroke-linecap="round">
-              <circle cx="52" cy="79" r="4.2"/>
-              <path d="M 44.5 94 C 44.5 88.5 47.5 86 52 86 C 56.5 86 59.5 88.5 59.5 94"/>
-              <circle cx="63" cy="80.5" r="3.2"/>
-              <path d="M 60 93.5 C 61 89.5 63.5 88 66 88.5 C 68 89 69.5 91 69.5 93.5"/>
-            </g>
-            <text x="92" y="83" font-size="15" font-weight="700" fill="#0f1b33">お客様チーム</text>
-            <text x="92" y="104" font-size="11" fill="#5b6474">経営・現場・IT兼務担当</text>
-
-            <rect x="334" y="44" width="210" height="112" rx="10" fill="#0f1b33" filter="url(#ds)"/>
-            <rect x="334" y="44" width="210" height="4" rx="2" fill="#2563eb"/>
-            <rect x="354" y="64" width="40" height="40" rx="9" fill="#24314d"/>
-            <g stroke="#7ea6f4" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M 374 70 L 376.4 76.6 L 383 79 L 376.4 81.4 L 374 88 L 371.6 81.4 L 365 79 L 371.6 76.6 Z"/>
-              <path d="M 382 86 L 383.2 89 L 386 90 L 383.2 91 L 382 94 L 380.8 91 L 378 90 L 380.8 89 Z"/>
-            </g>
-            <text x="410" y="83" font-size="15" font-weight="700" fill="#ffffff">NEXT Bridge</text>
-            <text x="410" y="104" font-size="11" fill="#7ea6f4">もうひとりの情シス</text>
-
-            <line x1="226" y1="112" x2="334" y2="112" stroke="#2563eb" stroke-width="1.8" marker-start="url(#ah)" marker-end="url(#ah)"/>
-            <rect x="228" y="60" width="104" height="26" rx="13" fill="#e9f0fd"/>
-            <text x="280" y="77" text-anchor="middle" font-size="11" font-weight="500" fill="#1d4fd7">定例・随時相談</text>
-
-            <line x1="439" y1="156" x2="439" y2="196" stroke="#9aa5b8" stroke-width="1.6" marker-end="url(#ah-gray)"/>
-
-            <rect x="16" y="204" width="528" height="176" rx="10" fill="#ffffff" stroke="#dfe5ee" filter="url(#ds)"/>
-            <text x="40" y="236" font-size="11" font-weight="700" fill="#2563eb" letter-spacing="1.5">受け持つ領域</text>
-            <rect x="40" y="252" width="234" height="48" rx="8" fill="#f5f7fa"/>
-            <text x="157" y="281" text-anchor="middle" font-size="13" font-weight="500" fill="#0f1b33">デバイス管理</text>
-            <rect x="286" y="252" width="234" height="48" rx="8" fill="#f5f7fa"/>
-            <text x="403" y="281" text-anchor="middle" font-size="13" font-weight="500" fill="#0f1b33">SaaS・アカウント</text>
-            <rect x="40" y="312" width="234" height="48" rx="8" fill="#f5f7fa"/>
-            <text x="157" y="341" text-anchor="middle" font-size="13" font-weight="500" fill="#0f1b33">セキュリティ・ISMS</text>
-            <rect x="286" y="312" width="234" height="48" rx="8" fill="#f5f7fa"/>
-            <text x="403" y="341" text-anchor="middle" font-size="13" font-weight="500" fill="#0f1b33">生成AI統制</text>
-          </svg>
+          <div class="orgfig">
+            <div class="orgfig-top">
+              <div class="orgfig-node">
+                <img src="/images/ill-team.svg" alt="" loading="lazy" width="455" height="365">
+                <strong>お客様チーム</strong>
+                <span>経営・現場・IT兼務</span>
+              </div>
+              <div class="orgfig-link">
+                <span class="orgfig-pill">定例・随時相談</span>
+                <svg class="orgfig-arrow" viewBox="0 0 64 12" aria-hidden="true"><path d="M 8 6 H 56 M 8 6 L 14 2 M 8 6 L 14 10 M 56 6 L 50 2 M 56 6 L 50 10" stroke="#2563eb" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div class="orgfig-node orgfig-node--nb">
+                <img src="/images/ill-consultant.svg" alt="" loading="lazy" width="455" height="365">
+                <strong>NEXT Bridge</strong>
+                <span>もうひとりの情シス</span>
+              </div>
+            </div>
+            <div class="orgfig-domains">
+              <span class="orgfig-domains-label">受け持つ領域</span>
+              <ul>
+                <li>デバイス管理</li>
+                <li>SaaS・アカウント</li>
+                <li>セキュリティ・ISMS</li>
+                <li>生成AI統制</li>
+              </ul>
+            </div>
           </div>
           <figcaption>ご支援のイメージ: チームの一員として、社内ITの実務を広く受け持ちます</figcaption>
         </figure>

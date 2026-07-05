@@ -330,6 +330,33 @@ a.btn-outline::after {
   position: relative;
 }
 
+.hero--illust {
+  background: linear-gradient(180deg, #f3f7fd 0%, #ffffff 100%);
+  padding: 72px 0 64px;
+}
+
+.hero--illust::before,
+.hero--illust::after {
+  display: none;
+}
+
+.hero.hero--illust h1 {
+  font-size: 2.4rem;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.hero-visual img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 .hero-eyebrow {
   font-size: 0.85rem;
   font-weight: 500;
@@ -477,6 +504,19 @@ a.btn-outline::after {
   height: 30px;
 }
 
+.card-illust {
+  height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.card-illust img {
+  max-height: 100%;
+  width: auto;
+}
+
 .card-body h3 {
   font-size: 1.1rem;
   font-weight: 700;
@@ -559,11 +599,116 @@ a.btn-outline::after {
   padding: 22px;
 }
 
-.figure svg {
+.figure-panel svg {
   width: 100%;
   height: auto;
   display: block;
   font-family: var(--font);
+}
+
+/* Org figure (illustrated) */
+.orgfig {
+  background-color: #fbfcfe;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 22px;
+}
+
+.orgfig-top {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 12px;
+  align-items: stretch;
+  margin-bottom: 14px;
+}
+
+.orgfig-node {
+  background-color: var(--white);
+  border: 1px solid #dfe5ee;
+  border-radius: 10px;
+  padding: 18px 12px 14px;
+  text-align: center;
+  box-shadow: 0 1.5px 4px rgba(15, 27, 51, 0.06);
+}
+
+.orgfig-node img {
+  height: 84px;
+  width: auto;
+  margin: 0 auto 10px;
+}
+
+.orgfig-node strong {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+.orgfig-node span {
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.orgfig-node--nb {
+  border-top: 3px solid var(--accent);
+}
+
+.orgfig-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 0 2px;
+}
+
+.orgfig-pill {
+  background-color: #e9f0fd;
+  color: var(--accent-dark);
+  font-size: 0.7rem;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.orgfig-arrow {
+  width: 60px;
+  height: 12px;
+}
+
+.orgfig-domains {
+  background-color: var(--white);
+  border: 1px solid #dfe5ee;
+  border-radius: 10px;
+  padding: 16px 18px;
+  box-shadow: 0 1.5px 4px rgba(15, 27, 51, 0.06);
+}
+
+.orgfig-domains-label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  margin-bottom: 10px;
+}
+
+.orgfig-domains ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.orgfig-domains li {
+  background-color: var(--bg-soft);
+  border-radius: 6px;
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--ink);
+  padding: 9px 4px;
 }
 
 .figure figcaption {
@@ -1265,7 +1410,8 @@ a.btn-outline::after {
     padding: 56px 0 48px;
   }
 
-  .hero h1 {
+  .hero h1,
+  .hero.hero--illust h1 {
     font-size: 1.55rem;
   }
 
@@ -1278,6 +1424,20 @@ a.btn-outline::after {
     display: none;
   }
 
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .hero-visual {
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  .highlight-inner {
+    padding: 28px 24px;
+  }
+
   .split {
     grid-template-columns: 1fr;
     gap: 36px;
@@ -1285,6 +1445,19 @@ a.btn-outline::after {
 
   .features-grid {
     grid-template-columns: 1fr;
+  }
+
+  .orgfig-top {
+    grid-template-columns: 1fr;
+  }
+
+  .orgfig-arrow {
+    transform: rotate(90deg);
+    height: 26px;
+  }
+
+  .orgfig-link {
+    flex-direction: column-reverse;
   }
 
   .page-header {
