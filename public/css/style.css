@@ -359,39 +359,42 @@ a.btn-outline::after {
 }
 
 /* ========================================
-   Proof bar
+   Features (strengths)
    ======================================== */
-.proof {
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-}
-
-.proof-grid {
+.features-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
 }
 
-.proof-item {
-  padding: 26px 28px;
-  border-left: 1px solid var(--line);
+.feature-item {
+  background-color: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 30px 28px;
 }
 
-.proof-item:first-child {
-  border-left: none;
-  padding-left: 0;
-}
-
-.proof-item strong {
+.feature-num {
   display: block;
-  font-size: 1.5rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  margin-bottom: 12px;
+}
+
+.feature-item h3 {
+  font-size: 1.05rem;
   font-weight: 700;
   color: var(--ink);
-  line-height: 1.4;
+  margin-bottom: 10px;
+  line-height: 1.7;
 }
 
-.proof-item span {
-  font-size: 0.85rem;
+.feature-item p {
+  font-size: 0.9rem;
   color: var(--muted);
+  line-height: 1.9;
 }
 
 /* ========================================
@@ -1273,18 +1276,8 @@ a.btn-outline::after {
     gap: 36px;
   }
 
-  .proof-grid {
+  .features-grid {
     grid-template-columns: 1fr;
-  }
-
-  .proof-item {
-    border-left: none;
-    border-top: 1px solid var(--line);
-    padding: 16px 0;
-  }
-
-  .proof-item:first-child {
-    border-top: none;
   }
 
   .page-header {
