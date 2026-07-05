@@ -1,56 +1,17 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="NEXT Bridgeのサービス紹介ページです。情シスコンサルティング・製品導入支援・生成AI導入支援をご提供しています。">
-  <title>サービス | 株式会社ネクストブリッジ</title>
-  <link rel="canonical" href="https://nextb.net/services.html">
-  <!-- OGP -->
-  <meta property="og:title" content="サービス | NEXT Bridge">
-  <meta property="og:description" content="情シスコンサルティング・製品導入支援・生成AI導入支援をご提供しています。">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://nextb.net/services.html">
-  <meta property="og:image" content="https://nextb.net/images/hero-bg.webp">
-  <meta property="og:site_name" content="NEXT Bridge">
-  <meta property="og:locale" content="ja_JP">
-  <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" href="images/favicon.webp" type="image/webp">
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Cta from '../components/Cta.astro';
+---
+<BaseLayout
+  title="サービス | 株式会社ネクストブリッジ"
+  description="NEXT Bridgeのサービス紹介ページです。情シスコンサルティング・製品導入支援・生成AI導入支援をご提供しています。"
+  canonical="https://nextb.net/services.html"
+  ogTitle="サービス | NEXT Bridge"
+  ogDescription="情シスコンサルティング・製品導入支援・生成AI導入支援をご提供しています。"
+>
+  <PageHeader title="サービス" subtitle="Services" />
 
-  <!-- Header -->
-  <header class="header">
-    <div class="container">
-      <div class="logo">
-        <a href="./">
-          <img src="images/logo.webp" alt="NEXT Bridge">
-        </a>
-      </div>
-      <input type="checkbox" id="menu-toggle" class="menu-toggle" aria-hidden="true">
-      <label for="menu-toggle" class="menu-icon" role="button" aria-label="メニューを開閉する"><span></span></label>
-      <label for="menu-toggle" class="nav-overlay" aria-hidden="true"></label>
-      <nav class="nav">
-        <ul class="nav-list">
-          <li><a href="./">ホーム</a></li>
-          <li><a href="about.html">会社概要</a></li>
-          <li><a href="services.html">サービス</a></li>
-          <li><a href="contact.html" class="nav-contact">お問い合わせ</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
-  <!-- Page Header -->
-  <section class="page-header">
-    <div class="container">
-      <h1>サービス</h1>
-      <p>Services</p>
-    </div>
-  </section>
-
-  <!-- Service Cards -->
   <section class="section">
     <div class="container">
       <div class="section-title">
@@ -83,7 +44,6 @@
     </div>
   </section>
 
-  <!-- Service Details -->
   <section class="section section-gray">
     <div class="container">
       <div class="section-title">
@@ -135,7 +95,6 @@
     </div>
   </section>
 
-  <!-- Case Studies -->
   <section class="section" id="cases">
     <div class="container">
       <div class="section-title">
@@ -201,7 +160,6 @@
     </div>
   </section>
 
-  <!-- Support Flow -->
   <section class="section section-gray" id="flow">
     <div class="container">
       <div class="section-title">
@@ -251,43 +209,8 @@
     </div>
   </section>
 
-  <!-- CTA -->
-  <section class="cta">
-    <div class="container">
-      <h2>サービスに関するご相談はこちら</h2>
-      <p>お客様のご要望に合わせた最適なプランをご提案いたします。まずはお気軽にお問い合わせください。</p>
-      <a href="contact.html" class="btn btn-outline">お問い合わせ</a>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-inner">
-        <div class="footer-company">
-          <div class="footer-logo">NEXT Bridge</div>
-          <p>〒104-0061<br>東京都中央区銀座1-12-4<br>N&amp;E BLD.7階</p>
-        </div>
-        <div class="footer-nav">
-          <h4>メニュー</h4>
-          <ul>
-            <li><a href="./">ホーム</a></li>
-            <li><a href="about.html">会社概要</a></li>
-            <li><a href="services.html">サービス</a></li>
-            <li><a href="contact.html">お問い合わせ</a></li>
-            <li><a href="privacy.html">プライバシーポリシー</a></li>
-          </ul>
-        </div>
-        <div class="footer-contact">
-          <h4>お問い合わせ</h4>
-          <p>Mail: <a href="mailto:contact@nextb.net">contact@nextb.net</a></p>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 NEXT Bridge All Rights Reserved.</p>
-      </div>
-    </div>
-  </footer>
-
-</body>
-</html>
+  <Cta
+    heading="サービスに関するご相談はこちら"
+    text="お客様のご要望に合わせた最適なプランをご提案いたします。まずはお気軽にお問い合わせください。"
+  />
+</BaseLayout>

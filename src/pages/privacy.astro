@@ -1,56 +1,16 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="株式会社ネクストブリッジのプライバシーポリシーです。個人情報の取得・利用目的・第三者提供・お問い合わせ窓口についてご案内します。">
-  <title>プライバシーポリシー | 株式会社ネクストブリッジ</title>
-  <link rel="canonical" href="https://nextb.net/privacy.html">
-  <!-- OGP -->
-  <meta property="og:title" content="プライバシーポリシー | NEXT Bridge">
-  <meta property="og:description" content="株式会社ネクストブリッジの個人情報の取り扱いについてご案内します。">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://nextb.net/privacy.html">
-  <meta property="og:image" content="https://nextb.net/images/hero-bg.webp">
-  <meta property="og:site_name" content="NEXT Bridge">
-  <meta property="og:locale" content="ja_JP">
-  <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" href="images/favicon.webp" type="image/webp">
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+---
+<BaseLayout
+  title="プライバシーポリシー | 株式会社ネクストブリッジ"
+  description="株式会社ネクストブリッジのプライバシーポリシーです。個人情報の取得・利用目的・第三者提供・お問い合わせ窓口についてご案内します。"
+  canonical="https://nextb.net/privacy.html"
+  ogTitle="プライバシーポリシー | NEXT Bridge"
+  ogDescription="株式会社ネクストブリッジの個人情報の取り扱いについてご案内します。"
+>
+  <PageHeader title="プライバシーポリシー" subtitle="Privacy Policy" />
 
-  <!-- Header -->
-  <header class="header">
-    <div class="container">
-      <div class="logo">
-        <a href="./">
-          <img src="images/logo.webp" alt="NEXT Bridge">
-        </a>
-      </div>
-      <input type="checkbox" id="menu-toggle" class="menu-toggle" aria-hidden="true">
-      <label for="menu-toggle" class="menu-icon" role="button" aria-label="メニューを開閉する"><span></span></label>
-      <label for="menu-toggle" class="nav-overlay" aria-hidden="true"></label>
-      <nav class="nav">
-        <ul class="nav-list">
-          <li><a href="./">ホーム</a></li>
-          <li><a href="about.html">会社概要</a></li>
-          <li><a href="services.html">サービス</a></li>
-          <li><a href="contact.html" class="nav-contact">お問い合わせ</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
-  <!-- Page Header -->
-  <section class="page-header">
-    <div class="container">
-      <h1>プライバシーポリシー</h1>
-      <p>Privacy Policy</p>
-    </div>
-  </section>
-
-  <!-- Privacy Policy -->
   <section class="section">
     <div class="container">
       <div class="legal">
@@ -103,35 +63,4 @@
       </div>
     </div>
   </section>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-inner">
-        <div class="footer-company">
-          <div class="footer-logo">NEXT Bridge</div>
-          <p>〒104-0061<br>東京都中央区銀座1-12-4<br>N&amp;E BLD.7階</p>
-        </div>
-        <div class="footer-nav">
-          <h4>メニュー</h4>
-          <ul>
-            <li><a href="./">ホーム</a></li>
-            <li><a href="about.html">会社概要</a></li>
-            <li><a href="services.html">サービス</a></li>
-            <li><a href="contact.html">お問い合わせ</a></li>
-            <li><a href="privacy.html">プライバシーポリシー</a></li>
-          </ul>
-        </div>
-        <div class="footer-contact">
-          <h4>お問い合わせ</h4>
-          <p>Mail: <a href="mailto:contact@nextb.net">contact@nextb.net</a></p>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 NEXT Bridge All Rights Reserved.</p>
-      </div>
-    </div>
-  </footer>
-
-</body>
-</html>
+</BaseLayout>

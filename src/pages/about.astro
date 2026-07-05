@@ -1,0 +1,69 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Cta from '../components/Cta.astro';
+---
+<BaseLayout
+  title="会社概要 | 株式会社ネクストブリッジ"
+  description="株式会社ネクストブリッジの会社概要ページです。企業理念・会社情報をご紹介します。"
+  canonical="https://nextb.net/about.html"
+  ogTitle="会社概要 | NEXT Bridge"
+  ogDescription="株式会社ネクストブリッジの企業理念・会社情報をご紹介します。"
+>
+  <PageHeader title="会社概要" subtitle="Company" />
+
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <h2>企業理念</h2>
+        <p>Philosophy</p>
+      </div>
+      <div class="philosophy">
+        <h3>あなたのチームに、<br>もうひとりの情シスを。</h3>
+        <p>ITの困りごとは、社内では相談しづらいものです。<br>人数が限られた情報システム部門であればなおさら、<br>判断に迷う場面や、手が回らない業務が増えていきます。</p>
+        <p>私たちは、そうした現場に外からチームの一員として加わり、<br>戦略の立案から日々の運用まで一緒に取り組みます。</p>
+        <p>必要なのは、一時的なアドバイスではなく、継続的に頼れる存在。<br>御社の情シスの「もうひとり」として、技術と経験でお力になります。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-gray">
+    <div class="container">
+      <div class="section-title">
+        <h2>会社情報</h2>
+        <p>Company Information</p>
+      </div>
+      <table class="info-table">
+        <tr>
+          <th>会社名</th>
+          <td>株式会社ネクストブリッジ</td>
+        </tr>
+        <tr>
+          <th>設立</th>
+          <td>2023年6月1日</td>
+        </tr>
+        <tr>
+          <th>代表者</th>
+          <td>代表取締役 水戸守 桂吾</td>
+        </tr>
+        <tr>
+          <th>所在地</th>
+          <td>〒104-0061 東京都中央区銀座1-12-4 N&amp;E BLD.7階</td>
+        </tr>
+        <tr>
+          <th>資本金</th>
+          <td>1,000,000円</td>
+        </tr>
+        <tr>
+          <th>事業内容</th>
+          <td>
+            情報システム部門へのコンサルティング業務<br>
+            コンピューター用品およびOA機器の売買、レンタル、修理及び保守業務
+          </td>
+        </tr>
+      </table>
+    </div>
+  </section>
+
+  <Cta />
+</BaseLayout>

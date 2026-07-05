@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+---
+<BaseLayout
+  title="お問い合わせ | 株式会社ネクストブリッジ"
+  description="NEXT Bridgeへのお問い合わせページです。サービスに関するご質問やお見積もりのご依頼はこちらからどうぞ。"
+  canonical="https://nextb.net/contact.html"
+  ogTitle="お問い合わせ | NEXT Bridge"
+  ogDescription="サービスに関するご質問やお見積もりのご依頼はこちらからどうぞ。"
+>
+  <PageHeader title="お問い合わせ" subtitle="Contact" />
+
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <h2>お問い合わせフォーム</h2>
+        <p>下記フォームにご記入のうえ、送信ボタンを押してください</p>
+      </div>
+
+      <form class="contact-form" action="https://formspree.io/f/myknjqar" method="POST">
+        <div class="form-group">
+          <label for="company">会社名</label>
+          <input type="text" id="company" name="company" autocomplete="organization" placeholder="例：株式会社サンプル">
+        </div>
+
+        <div class="form-group">
+          <label for="name">お名前 <span class="required">※必須</span></label>
+          <input type="text" id="name" name="name" required aria-required="true" autocomplete="name" placeholder="例：山田 太郎">
+        </div>
+
+        <div class="form-group">
+          <label for="email">メールアドレス <span class="required">※必須</span></label>
+          <input type="email" id="email" name="email" required aria-required="true" autocomplete="email" placeholder="例：info@example.com">
+        </div>
+
+        <div class="form-group">
+          <label for="phone">電話番号</label>
+          <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="例：03-1234-5678">
+        </div>
+
+        <div class="form-group">
+          <label for="subject">お問い合わせ種別 <span class="required">※必須</span></label>
+          <select id="subject" name="subject" required aria-required="true">
+            <option value="" disabled selected>選択してください</option>
+            <option value="サービスに関するご質問">サービスに関するご質問</option>
+            <option value="お見積もりのご依頼">お見積もりのご依頼</option>
+            <option value="採用に関するお問い合わせ">採用に関するお問い合わせ</option>
+            <option value="その他">その他</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="message">お問い合わせ内容 <span class="required">※必須</span></label>
+          <textarea id="message" name="message" required aria-required="true" placeholder="お問い合わせ内容をご記入ください"></textarea>
+        </div>
+
+        <div class="form-group form-consent">
+          <label class="consent-label">
+            <input type="checkbox" name="privacy-consent" value="同意する" required aria-required="true">
+            <span><a href="privacy.html" target="_blank" rel="noopener">プライバシーポリシー</a>に同意する <span class="required">※必須</span></span>
+          </label>
+          <p class="consent-note">ご入力いただいた内容は、お問い合わせへの回答および関連するご提案・お見積もりのご案内のみに利用します。</p>
+        </div>
+
+        <div class="form-submit">
+          <button type="submit" class="btn btn-primary">送信する</button>
+        </div>
+      </form>
+
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,19 @@
+---
+interface Props {
+  heading?: string;
+  text?: string;
+  buttonClass?: string;
+}
+const {
+  heading = 'お気軽にご相談ください',
+  text = 'サービスに関するご質問やお見積もりなど、まずはお気軽にお問い合わせください。',
+  buttonClass = 'btn btn-outline',
+} = Astro.props;
+---
+<section class="cta">
+  <div class="container">
+    <h2>{heading}</h2>
+    <p>{text}</p>
+    <a href="contact.html" class={buttonClass}>お問い合わせ</a>
+  </div>
+</section>
