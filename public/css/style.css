@@ -117,6 +117,65 @@ img {
   color: var(--accent-dark);
 }
 
+a.btn-primary::after,
+a.btn-outline::after {
+  content: "\2192";
+  margin-left: 10px;
+  font-weight: 400;
+}
+
+/* ========================================
+   News bar
+   ======================================== */
+.news-bar {
+  border-bottom: 1px solid var(--line);
+  padding: 20px 0;
+}
+
+.news-bar .container {
+  display: flex;
+  gap: 28px;
+  align-items: flex-start;
+}
+
+.news-bar h2 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--ink);
+  flex: 0 0 auto;
+  padding-top: 4px;
+}
+
+.news-list {
+  flex: 1;
+}
+
+.news-list li {
+  display: flex;
+  gap: 16px;
+  align-items: baseline;
+  padding: 4px 0;
+  font-size: 0.9rem;
+}
+
+.news-list time {
+  color: var(--muted);
+  font-size: 0.85rem;
+  flex: 0 0 auto;
+}
+
+.news-list a {
+  color: var(--text);
+}
+
+.news-list a:hover {
+  color: var(--accent);
+}
+
+.news-list .news-plain {
+  color: var(--text);
+}
+
 /* ========================================
    Header
    ======================================== */
@@ -347,9 +406,8 @@ img {
 }
 
 .section-title {
-  margin-bottom: 48px;
-  display: flex;
-  flex-direction: column;
+  margin-bottom: 52px;
+  text-align: center;
 }
 
 .section-title h2 {
@@ -361,12 +419,28 @@ img {
 
 .section-title p {
   color: var(--accent);
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 500;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  order: -1;
-  margin-bottom: 8px;
+  margin-top: 10px;
+}
+
+.section-title::after {
+  content: "";
+  display: block;
+  width: 44px;
+  height: 2px;
+  background-color: var(--accent);
+  margin: 20px auto 0;
+}
+
+.statement .section-title {
+  text-align: left;
+}
+
+.statement .section-title::after {
+  margin-left: 0;
 }
 
 /* ========================================
@@ -493,26 +567,27 @@ img {
    Dark highlight strip
    ======================================== */
 .highlight-dark {
+  padding: 0 0 88px;
+}
+
+.highlight-inner {
   background-color: var(--ink);
-  padding: 56px 0;
+  border-radius: 10px;
+  padding: 44px 52px;
   position: relative;
   overflow: hidden;
 }
 
-.highlight-dark::before {
+.highlight-inner::before {
   content: "";
   position: absolute;
-  width: 420px;
-  height: 420px;
-  right: -130px;
-  bottom: -230px;
+  width: 380px;
+  height: 380px;
+  right: -110px;
+  bottom: -210px;
   border: 1px solid rgba(126, 166, 244, 0.22);
   border-radius: 50%;
   pointer-events: none;
-}
-
-.highlight-dark .container {
-  position: relative;
 }
 
 .highlight-inner {
