@@ -544,6 +544,187 @@ img {
 }
 
 /* ========================================
+   Case Studies
+   ======================================== */
+.case-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.case-card {
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 28px 32px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.case-tag {
+  display: inline-block;
+  background-color: #e3f2fd;
+  color: #1976d2;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 4px 14px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+}
+
+.case-card h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1a2b5e;
+  margin-bottom: 18px;
+  line-height: 1.6;
+}
+
+.case-fields {
+  display: grid;
+  gap: 12px;
+}
+
+.case-field {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 16px;
+}
+
+.case-field dt {
+  font-weight: 600;
+  color: #1a2b5e;
+  font-size: 0.85rem;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  text-align: center;
+  padding: 4px 0;
+  height: fit-content;
+}
+
+.case-field dd {
+  color: #555;
+  font-size: 0.9rem;
+  line-height: 1.8;
+}
+
+/* ========================================
+   Support Flow
+   ======================================== */
+.flow-steps {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.flow-step {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  padding: 20px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.flow-step:last-child {
+  border-bottom: none;
+}
+
+.flow-step-number {
+  flex: 0 0 40px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #2196f3;
+  color: #fff;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flow-step-body h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #1a2b5e;
+  margin-bottom: 4px;
+}
+
+.flow-step-body p {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.contract-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  max-width: 800px;
+  margin: 40px auto 0;
+}
+
+.contract-card {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 24px 28px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.contract-card h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #1a2b5e;
+  margin-bottom: 8px;
+}
+
+.contract-card p {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* ========================================
+   Legal (Privacy Policy)
+   ======================================== */
+.legal {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.legal h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1a2b5e;
+  margin: 36px 0 10px;
+}
+
+.legal p {
+  color: #555;
+  font-size: 0.95rem;
+}
+
+.legal ul {
+  list-style: disc;
+  padding-left: 1.5em;
+  margin-top: 8px;
+}
+
+.legal li {
+  color: #555;
+  font-size: 0.95rem;
+  padding: 2px 0;
+}
+
+.legal a {
+  color: #2196f3;
+}
+
+.legal .legal-date {
+  margin-top: 40px;
+  text-align: right;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* ========================================
    CTA Section
    ======================================== */
 .cta {
@@ -613,6 +794,40 @@ img {
 .form-group textarea {
   height: 180px;
   resize: vertical;
+}
+
+.form-consent {
+  text-align: center;
+  margin-top: 32px;
+}
+
+.form-consent .consent-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 400;
+  font-size: 0.95rem;
+  color: #333;
+  cursor: pointer;
+  margin-bottom: 0;
+}
+
+.consent-label input {
+  width: 18px;
+  height: 18px;
+  accent-color: #2196f3;
+  cursor: pointer;
+}
+
+.consent-label a {
+  color: #2196f3;
+  text-decoration: underline;
+}
+
+.consent-note {
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: 10px;
 }
 
 .form-submit {
@@ -839,6 +1054,25 @@ img {
 
   .service-detail.reverse {
     direction: ltr;
+  }
+
+  /* Case Studies */
+  .case-card {
+    padding: 20px;
+  }
+
+  .case-field {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .case-field dt {
+    width: 90px;
+  }
+
+  /* Support Flow */
+  .contract-grid {
+    grid-template-columns: 1fr;
   }
 
   /* CTA */
