@@ -347,7 +347,7 @@ a.btn-outline::after {
 .hero--cover {
   background:
     linear-gradient(90deg, rgba(255, 255, 255, 0.97) 0%, rgba(255, 255, 255, 0.9) 38%, rgba(246, 249, 253, 0.55) 64%, rgba(246, 249, 253, 0.1) 100%),
-    url("/images/hero-bg.webp") right center / cover no-repeat;
+    url("/images/hero-photo.webp") right center / cover no-repeat;
   padding: 92px 0;
 }
 
@@ -1481,7 +1481,7 @@ a.btn-outline::after {
   .hero--cover {
     background:
       linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.92)),
-      url("/images/hero-bg.webp") center / cover no-repeat;
+      url("/images/hero-photo.webp") center / cover no-repeat;
     padding: 56px 0 48px;
   }
 
