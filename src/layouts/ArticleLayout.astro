@@ -1,0 +1,81 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Cta from '../components/Cta.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  slug: string;
+  pubDate: Date;
+  updatedDate?: Date;
+  category: string;
+}
+const { title, description, slug, pubDate, updatedDate, category } = Astro.props;
+
+const fmt = (d: Date) =>
+  `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
+const iso = (d: Date) => d.toISOString().split('T')[0];
+const canonical = `https://nextb.net/articles/${slug}/`;
+
+const jsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: iso(pubDate),
+  dateModified: iso(updatedDate ?? pubDate),
+  author: {
+    '@type': 'Person',
+    name: '水戸守 桂吾',
+    jobTitle: '代表取締役',
+    worksFor: { '@type': 'Organization', name: '株式会社ネクストブリッジ', url: 'https://nextb.net/' },
+  },
+  publisher: { '@type': 'Organization', name: '株式会社ネクストブリッジ', url: 'https://nextb.net/' },
+  mainEntityOfPage: canonical,
+});
+---
+<BaseLayout
+  title={`${title} | 株式会社ネクストブリッジ`}
+  description={description}
+  canonical={canonical}
+  ogTitle={title}
+  ogDescription={description}
+>
+  <script type="application/ld+json" set:html={jsonLd} />
+
+  <article class="article">
+    <header class="article-header">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="パンくず">
+          <a href="/">ホーム</a><span>/</span><a href="/articles/">コラム</a><span>/</span><span aria-current="page">{title}</span>
+        </nav>
+        <span class="article-category">{category}</span>
+        <h1>{title}</h1>
+        <p class="article-meta">
+          <time datetime={iso(pubDate)}>{fmt(pubDate)} 公開</time>
+          {updatedDate && <time datetime={iso(updatedDate)}>（{fmt(updatedDate)} 更新）</time>}
+          <span class="article-author-line">執筆: 水戸守 桂吾（株式会社ネクストブリッジ 代表取締役）</span>
+        </p>
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="article-body">
+        <slot />
+      </div>
+
+      <aside class="author-box">
+        <p class="author-box-title">この記事を書いた人</p>
+        <p class="author-box-name">水戸守 桂吾<span>株式会社ネクストブリッジ 代表取締役</span></p>
+        <p class="author-box-bio">情シスコンサルタント。中堅・中小企業のIT顧問、Microsoft 365 / Entra ID / Intune の導入、ISMS運用、生成AI（Claude・Claude Code）の企業導入と統制設計を実務で支援している。</p>
+      </aside>
+    </div>
+  </article>
+
+  <Cta
+    heading="生成AI統制の現状、一度整理してみませんか"
+    text="「何から手を付けるべきか」の整理からで構いません。現在の利用状況・環境をお聞きし、統制の全体像と優先順位をご提案します。"
+    buttonClass="btn btn-primary"
+    buttonLabel="相談してみる"
+  />
+</BaseLayout>

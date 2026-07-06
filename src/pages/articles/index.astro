@@ -1,0 +1,42 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Cta from '../../components/Cta.astro';
+
+const articles = (await getCollection('articles', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
+);
+const fmt = (d: Date) =>
+  `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
+---
+<BaseLayout
+  title="コラム | 株式会社ネクストブリッジ"
+  description="情シス・生成AI統制・デバイス管理の実務コラム。企業導入の現場経験に基づいて、情報システム部門の実務に役立つ知見を発信します。"
+  canonical="https://nextb.net/articles/"
+  ogTitle="コラム | NEXT Bridge"
+  ogDescription="情シス・生成AI統制・デバイス管理の実務コラム。"
+>
+  <PageHeader title="コラム" subtitle="Articles" />
+
+  <section class="section">
+    <div class="container">
+      <ul class="article-list">
+        {articles.map((article) => (
+          <li class="article-list-item">
+            <a href={`/articles/${article.id}/`}>
+              <div class="article-list-meta">
+                <time datetime={article.data.pubDate.toISOString().split('T')[0]}>{fmt(article.data.pubDate)}</time>
+                <span class="article-category">{article.data.category}</span>
+              </div>
+              <h2>{article.data.title}</h2>
+              <p>{article.data.description}</p>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <Cta />
+</BaseLayout>
