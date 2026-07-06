@@ -1,7 +1,7 @@
 ---
 title: Claude Code managed settings の実務設計 — 管理画面かMDMか、何をどこまで強制するか
 description: Claude Codeの設定を組織として強制するmanaged settingsの実務設計を解説。サーバー管理設定（Claude管理画面）とMDM配布の使い分け、最初に入れるべき3つの設定、権限バイパスの封じ方、fail-closedの考え方まで、企業導入を支援してきた経験からまとめました。
-pubDate: 2026-07-06
+pubDate: 2026-07-07
 category: 生成AI統制
 ---
 
