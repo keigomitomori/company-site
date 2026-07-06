@@ -347,7 +347,7 @@ a.btn-outline::after {
 .hero--cover {
   background:
     linear-gradient(90deg, rgba(255, 255, 255, 0.97) 0%, rgba(255, 255, 255, 0.88) 38%, rgba(246, 249, 253, 0.4) 62%, rgba(246, 249, 253, 0.05) 100%),
-    url("/images/hero-photo.webp") right center / auto 100% no-repeat;
+    url("/images/hero-photo.webp") right center / auto 115% no-repeat;
   background-color: #f4f8fd;
   padding: 92px 0;
 }
