@@ -869,6 +869,8 @@ a.btn-outline::after {
    ======================================== */
 .philosophy {
   max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .philosophy h3 {
@@ -1701,6 +1703,14 @@ a.btn-outline::after {
 
   .hero-badges span {
     margin-top: 0;
+  }
+
+  .philosophy p br {
+    display: none;
+  }
+
+  .philosophy p {
+    text-align: left;
   }
 
   .highlight-inner {
