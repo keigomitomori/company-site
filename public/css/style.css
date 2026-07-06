@@ -362,9 +362,9 @@ a.btn-outline::after {
 }
 
 .hero-badges {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 12px;
-  flex-wrap: wrap;
   margin-top: 38px;
 }
 
@@ -372,20 +372,24 @@ a.btn-outline::after {
   background-color: rgba(255, 255, 255, 0.94);
   border: 1px solid var(--line);
   border-left: 3px solid var(--accent);
-  padding: 10px 18px;
+  padding: 12px 14px;
 }
 
 .hero-badges strong {
   display: block;
-  font-size: 0.92rem;
+  font-size: 0.88rem;
   font-weight: 700;
   color: var(--ink);
   line-height: 1.5;
+  white-space: nowrap;
 }
 
 .hero-badges span {
-  font-size: 0.74rem;
+  display: block;
+  margin-top: 2px;
+  font-size: 0.72rem;
   color: var(--muted);
+  line-height: 1.5;
 }
 
 .hero-grid {
@@ -1680,6 +1684,23 @@ a.btn-outline::after {
       linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.92)),
       url("/images/hero-photo.webp") center / cover no-repeat;
     padding: 56px 0 48px;
+  }
+
+  .hero-badges {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin-top: 28px;
+  }
+
+  .hero-badges li {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 10px 14px;
+  }
+
+  .hero-badges span {
+    margin-top: 0;
   }
 
   .highlight-inner {
