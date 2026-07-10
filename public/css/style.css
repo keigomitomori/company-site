@@ -1482,9 +1482,24 @@ a.btn-outline::after {
 }
 
 .article-list-item a {
-  display: block;
+  display: flex;
+  gap: 26px;
+  align-items: flex-start;
   padding: 28px 6px;
   transition: background-color 0.2s;
+}
+
+.article-list-thumb {
+  flex-shrink: 0;
+  width: 232px;
+  height: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  display: block;
+}
+
+.article-list-body {
+  min-width: 0;
 }
 
 .article-list-item a:hover {
@@ -1711,6 +1726,15 @@ a.btn-outline::after {
 
   .philosophy p {
     text-align: left;
+  }
+
+  .article-list-item a {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .article-list-thumb {
+    width: 100%;
   }
 
   .highlight-inner {

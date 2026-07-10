@@ -25,12 +25,15 @@ const fmt = (d: Date) =>
         {articles.map((article) => (
           <li class="article-list-item">
             <a href={`/articles/${article.id}/`}>
-              <div class="article-list-meta">
-                <time datetime={article.data.pubDate.toISOString().split('T')[0]}>{fmt(article.data.pubDate)}</time>
-                <span class="article-category">{article.data.category}</span>
+              <img class="article-list-thumb" src={`/images/og/${article.id}.png`} alt="" loading="lazy" width="1200" height="630">
+              <div class="article-list-body">
+                <div class="article-list-meta">
+                  <time datetime={article.data.pubDate.toISOString().split('T')[0]}>{fmt(article.data.pubDate)}</time>
+                  <span class="article-category">{article.data.category}</span>
+                </div>
+                <h2>{article.data.title}</h2>
+                <p>{article.data.description}</p>
               </div>
-              <h2>{article.data.title}</h2>
-              <p>{article.data.description}</p>
             </a>
           </li>
         ))}
