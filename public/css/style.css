@@ -1530,21 +1530,10 @@ a.btn-outline::after {
   font-weight: 700;
   color: var(--ink);
   line-height: 1.7;
-  margin-bottom: 8px;
 }
 
 .article-list-item a:hover h2 {
   color: var(--accent);
-}
-
-.article-list-item p {
-  font-size: 0.85rem;
-  color: var(--muted);
-  line-height: 1.85;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 
 /* ========================================
