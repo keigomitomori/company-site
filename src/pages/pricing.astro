@@ -5,10 +5,10 @@ import Cta from '../components/Cta.astro';
 ---
 <BaseLayout
   title="料金 | 株式会社ネクストブリッジ"
-  description="NEXT Bridgeの料金のご案内。月額の顧問契約は月10万円〜、構築・導入のプロジェクト契約は30万円〜が目安です。初回相談とお見積もりは無料。支援範囲に合わせて個別にお見積もりします。"
+  description="NEXT Bridgeの料金のご案内。月額の顧問契約は月10万円〜、期間を定めたプロジェクト型支援は30万円〜が目安です。ご契約はいずれも準委任です。初回相談とお見積もりは無料。支援範囲に合わせて個別にお見積もりします。"
   canonical="https://nextb.net/pricing.html"
   ogTitle="料金 | NEXT Bridge"
-  ogDescription="顧問契約は月10万円〜、プロジェクト契約は30万円〜が目安。初回相談とお見積もりは無料です。"
+  ogDescription="顧問契約は月10万円〜、プロジェクト型支援は30万円〜が目安（いずれも準委任）。初回相談とお見積もりは無料です。"
 >
   <PageHeader title="料金" subtitle="Pricing" />
 
@@ -37,9 +37,9 @@ import Cta from '../components/Cta.astro';
           <div class="price-ill" aria-hidden="true">
             <img src="/images/ill-document.svg" alt="" loading="lazy" width="215" height="199">
           </div>
-          <h3>プロジェクト契約（一括）</h3>
+          <h3>プロジェクト型支援（準委任）</h3>
           <p class="price-amount">30万円<span>〜（税別）</span></p>
-          <p class="price-note">範囲と成果物を決めて進めるご支援</p>
+          <p class="price-note">期間と支援範囲を決めて進めるご支援</p>
           <ul class="feature-list">
             <li>デバイス管理基盤の設計・構築</li>
             <li>生成AIの導入・活用支援</li>
@@ -75,19 +75,19 @@ import Cta from '../components/Cta.astro';
             </tr>
             <tr>
               <th><a href="/device-management/">デバイス管理導入支援</a></th>
-              <td>プロジェクト契約</td>
+              <td>プロジェクト型</td>
               <td>30万円〜</td>
               <td>台数・構成の複雑さ</td>
             </tr>
             <tr>
               <th><a href="/genai-adoption/">生成AI活用支援</a></th>
-              <td>プロジェクト契約</td>
+              <td>プロジェクト型</td>
               <td>30万円〜</td>
               <td>対象業務の数・期間</td>
             </tr>
             <tr>
               <th><a href="/genai-governance/">生成AI・Claude Code統制支援</a></th>
-              <td>顧問／プロジェクト</td>
+              <td>顧問／プロジェクト型</td>
               <td>30万円〜</td>
               <td>統制範囲・端末数</td>
             </tr>
@@ -95,9 +95,10 @@ import Cta from '../components/Cta.astro';
         </table>
       </div>
       <ul class="price-notes">
+        <li>※ ご契約はいずれも準委任契約です。業務の遂行に対して対価をいただく形で、成果物の完成をお約束する請負契約は承っていません。</li>
         <li>※ 金額はいずれも税別の目安です。正式なお見積もりは、無料相談で状況を伺ったうえでご提示します。</li>
         <li>※ 統制支援を顧問契約で継続運用する場合は、月10万円〜が目安です。</li>
-        <li>※ 構築はプロジェクト契約、その後の運用は顧問契約、という組み合わせもできます。</li>
+        <li>※ 構築はプロジェクト型、その後の運用は顧問契約、という組み合わせもできます。</li>
       </ul>
     </div>
   </section>
@@ -173,8 +174,12 @@ import Cta from '../components/Cta.astro';
           <p>はい。優先順位を付けて、ご予算に収まる範囲からのご提案もできます。</p>
         </details>
         <details>
-          <summary>顧問契約とプロジェクト契約は併用できますか？</summary>
-          <p>はい。構築はプロジェクト契約で、その後の運用は顧問契約で、という組み合わせが多いです。</p>
+          <summary>契約形態は請負ですか？準委任ですか？</summary>
+          <p>いずれのご支援も準委任契約です。業務の遂行に対して対価をいただく形で、成果物の完成をお約束する請負契約は承っていません。</p>
+        </details>
+        <details>
+          <summary>顧問契約とプロジェクト型支援は併用できますか？</summary>
+          <p>はい。構築はプロジェクト型で、その後の運用は顧問契約で、という組み合わせが多いです。</p>
         </details>
         <details>
           <summary>支援の範囲は途中で変えられますか？</summary>
