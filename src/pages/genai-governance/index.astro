@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import PageHeader from '../../components/PageHeader.astro';
 import Cta from '../../components/Cta.astro';
 ---
 <BaseLayout
@@ -11,212 +10,295 @@ import Cta from '../../components/Cta.astro';
   ogDescription="Claude・Claude Codeを安全に社内展開するための統制支援。ガイドライン策定からmanaged settings・MDM配布・ISMS整合まで。"
   ogImage="https://nextb.net/images/og-genai-governance.png"
 >
-  <PageHeader title="生成AI・Claude Codeの社内統制支援" subtitle="AI Governance" />
+  <!-- イラスト素材: ソコスト https://soco-st.com（商用利用可・クレジット不要）。ブランドカラーに合わせて一部の色を変更 -->
 
-  <section class="section">
-    <div class="container">
-      <div class="section-title">
-        <h2>「使わせたい。でも、事故は起こせない。」<br>その間を埋めるのが、この支援です</h2>
-        <p>Overview</p>
-      </div>
-      <div class="split">
-        <div class="statement">
-          <p>生成AIの導入は「契約して配れば終わり」ではありません。誰が・どの端末で・どんなデータを扱えるのかを決め、設定で強制し、監査で説明できる形で運用できる状態にする — この統制の設計が、導入の成否を大きく左右します。</p>
-          <p>NEXT Bridgeは、実際の企業導入で Claude・Claude Code の展開と統制の設計・実装に携わってきた経験をもとに、情シスの視点で「安全に使わせる仕組み」を作ります。</p>
+  <section class="lp-hero">
+    <div class="container lp-hero-inner">
+      <div class="lp-hero-copy">
+        <p class="lp-hero-label">生成AI・Claude Code 社内統制支援</p>
+        <h1>生成AIを、<br>安心して全社へ。</h1>
+        <p class="lp-hero-sub">Claude・Claude Code の導入設計からルールづくり、設定による統制、社内定着まで。情シスの実務がわかるコンサルタントが伴走します。</p>
+        <div class="lp-hero-cta">
+          <a href="/contact.html" class="btn btn-primary btn-lg">無料で相談する</a>
         </div>
-        <figure class="figure">
-          <div class="figure-panel">
-          <svg viewBox="0 0 600 424" role="img" aria-label="生成AI統制の全体像。方針、ルール、技術統制、定着の4層を上から順に固め、全体を監査とISMSに整合させる">
-            <defs>
-              <filter id="ds2" x="-20%" y="-20%" width="140%" height="140%">
-                <feDropShadow dx="0" dy="1.5" stdDeviation="2.5" flood-color="#0f1b33" flood-opacity="0.08"/>
-              </filter>
-            </defs>
+        <ul class="lp-hero-points">
+          <li>実案件にもとづく支援</li>
+          <li>導入から定着まで一気通貫</li>
+          <li>ツールを売らない中立の立場</li>
+        </ul>
+      </div>
+      <div class="lp-hero-visual">
+        <img src="/images/ill-meeting.svg" alt="" width="398" height="247">
+      </div>
+    </div>
+  </section>
 
-            <rect x="76" y="16" width="452" height="72" rx="10" fill="#ffffff" stroke="#dfe5ee" filter="url(#ds2)"/>
-            <rect x="24" y="36" width="32" height="32" rx="8" fill="#e9f0fd"/>
-            <text x="40" y="57" text-anchor="middle" font-size="13" font-weight="700" fill="#1d4fd7">1</text>
-            <text x="100" y="47" font-size="14.5" font-weight="700" fill="#0f1b33">方針</text>
-            <text x="100" y="70" font-size="11.5" fill="#5b6474">何を・誰に・どこまで許すかを決める</text>
-
-            <path d="M 296 96 L 302 103 L 308 96" stroke="#b9c3d4" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-
-            <rect x="76" y="112" width="452" height="72" rx="10" fill="#ffffff" stroke="#dfe5ee" filter="url(#ds2)"/>
-            <rect x="24" y="132" width="32" height="32" rx="8" fill="#e9f0fd"/>
-            <text x="40" y="153" text-anchor="middle" font-size="13" font-weight="700" fill="#1d4fd7">2</text>
-            <text x="100" y="143" font-size="14.5" font-weight="700" fill="#0f1b33">ルール</text>
-            <text x="100" y="166" font-size="11.5" fill="#5b6474">ガイドライン・例外承認フロー</text>
-
-            <path d="M 296 192 L 302 199 L 308 192" stroke="#b9c3d4" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-
-            <rect x="76" y="208" width="452" height="72" rx="10" fill="#eef4fe" stroke="#2563eb" stroke-width="1.5" filter="url(#ds2)"/>
-            <rect x="24" y="228" width="32" height="32" rx="8" fill="#2563eb"/>
-            <text x="40" y="249" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">3</text>
-            <text x="100" y="239" font-size="14.5" font-weight="700" fill="#0f1b33">技術統制</text>
-            <text x="100" y="262" font-size="11.5" fill="#24314d">SSO / managed settings / MDM配布 / ログ・証跡</text>
-            <rect x="428" y="228" width="80" height="22" rx="11" fill="#2563eb"/>
-            <text x="468" y="243" text-anchor="middle" font-size="10.5" font-weight="500" fill="#ffffff">最重要レイヤ</text>
-
-            <path d="M 296 288 L 302 295 L 308 288" stroke="#b9c3d4" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-
-            <rect x="76" y="304" width="452" height="72" rx="10" fill="#ffffff" stroke="#dfe5ee" filter="url(#ds2)"/>
-            <rect x="24" y="324" width="32" height="32" rx="8" fill="#e9f0fd"/>
-            <text x="40" y="345" text-anchor="middle" font-size="13" font-weight="700" fill="#1d4fd7">4</text>
-            <text x="100" y="335" font-size="14.5" font-weight="700" fill="#0f1b33">定着</text>
-            <text x="100" y="358" font-size="11.5" fill="#5b6474">教育・利用分析・フォロー</text>
-
-            <path d="M 548 16 L 556 16 L 556 376 L 548 376" stroke="#c3cad6" stroke-width="1.5" fill="none"/>
-            <text x="580" y="196" text-anchor="middle" font-size="11" fill="#5b6474" transform="rotate(90 580 196)">監査・ISMSとの整合</text>
-          </svg>
-          </div>
-          <figcaption>統制の全体像: ルールで終わらせず、設定による強制と定着まで積み上げます</figcaption>
+  <section class="section section-gray">
+    <div class="container">
+      <div class="lp-title">
+        <p class="lp-eyebrow">PROBLEM</p>
+        <h2>生成AIの導入で、<br class="pc-br">こんなお悩みはありませんか？</h2>
+      </div>
+      <div class="lp-worry">
+        <figure class="lp-worry-ill">
+          <img src="/images/ill-worry.svg" alt="" loading="lazy" width="416" height="291">
         </figure>
+        <ul class="lp-checklist">
+          <li>安全な導入の進め方がわからない</li>
+          <li>社員が個人アカウントで使い始めている</li>
+          <li>Claude Code の設定や権限を管理しきれない</li>
+          <li>ガイドラインを作ったのに守られていない</li>
+          <li>ISMSのリスクアセスメントにどう載せるか悩ましい</li>
+          <li>導入したのに一部の社員しか使っていない</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="lp-band">
+    <div class="container">
+      <p class="lp-band-label">NEXT Bridge の生成AI統制支援</p>
+      <p class="lp-band-copy">ルールで縛るのではなく、<br class="pc-br">仕組みで守る。</p>
+      <p class="lp-band-sub">ガイドラインを設定に落とし込み、全端末へ配布。「守ってください」で終わらせません。</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="lp-title">
+        <p class="lp-eyebrow">FEATURE</p>
+        <h2>この支援の、3つの特長</h2>
+      </div>
+      <div class="lp-features">
+
+        <div class="lp-feature">
+          <div class="lp-feature-text">
+            <span class="lp-feature-num">01</span>
+            <h3>ルールを、設定として全端末に配布</h3>
+            <p>ガイドラインを managed settings に落とし込み、Intune / MDM で一括配布。設定は個人では変えられないため、ルールが形骸化しません。</p>
+          </div>
+          <div class="lp-flowfig" role="img" aria-label="ルールを決め、managed settings として設定に落とし込み、Intune / MDM で全端末に配布して強制する。証跡が残り、監査・ISMSで説明できる">
+            <div class="lp-flowfig-node">
+              <strong>ルールを決める</strong>
+              <span>ガイドライン</span>
+            </div>
+            <div class="lp-flowfig-arrow" aria-hidden="true"></div>
+            <div class="lp-flowfig-node">
+              <strong>設定に落とし込む</strong>
+              <span>managed settings</span>
+            </div>
+            <div class="lp-flowfig-arrow" aria-hidden="true"></div>
+            <div class="lp-flowfig-node lp-flowfig-node--accent">
+              <strong>全端末に配布して強制</strong>
+              <span>Intune / MDM</span>
+            </div>
+            <div class="lp-flowfig-arrow" aria-hidden="true"></div>
+            <div class="lp-flowfig-result">
+              <span>証跡が残る</span>
+              <span class="lp-flowfig-result-arrow" aria-hidden="true"></span>
+              <span>監査・ISMSで説明できる</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="lp-feature lp-feature--reverse">
+          <div class="lp-feature-text">
+            <span class="lp-feature-num">02</span>
+            <h3>導入から定着まで、ひとつの窓口で</h3>
+            <p>プラン選定、ルールづくり、技術設定、社員向けの研修まで。窓口を分けずに進められるため、抜け漏れも手戻りも起きにくくなります。</p>
+          </div>
+          <figure class="lp-feature-ill">
+            <img src="/images/ill-training.svg" alt="" loading="lazy" width="456" height="309">
+          </figure>
+        </div>
+
+        <div class="lp-feature">
+          <div class="lp-feature-text">
+            <span class="lp-feature-num">03</span>
+            <h3>ISMSや既存のIT統制と、無理なく整合</h3>
+            <p>ISMS運用やデバイス管理の支援が本業です。生成AIの統制を、いまある規程や認証運用と矛盾なく組み込みます。</p>
+          </div>
+          <figure class="lp-feature-ill">
+            <img src="/images/ill-lockpc.svg" alt="" loading="lazy" width="272" height="190">
+          </figure>
+        </div>
+
       </div>
     </div>
   </section>
 
   <section class="section section-gray">
     <div class="container">
-      <div class="section-title">
-        <h2>こんな状況ではありませんか</h2>
-        <p>Pain Points</p>
+      <div class="lp-title">
+        <p class="lp-eyebrow">BEFORE / AFTER</p>
+        <h2>統制が効くと、ここまで変わります</h2>
       </div>
-      <ul class="pain-list">
-        <li>経営から「AIを使え」と言われたが、安全な入れ方が分からない</li>
-        <li>社員が個人アカウントで生成AIを使い始めている（シャドーAI）</li>
-        <li>Claude Code を開発・業務に入れたいが、権限や設定を統制できる気がしない</li>
-        <li>利用ガイドラインは作ったが、技術的な強制力がなく形骸化している</li>
-        <li>ISMSを運用しており、生成AIの利用をリスクアセスメントにどう載せるか悩んでいる</li>
-        <li>全社導入したものの、利用が一部の人に偏り、定着していない</li>
-      </ul>
+      <div class="lp-ba" role="img" aria-label="統制前は利用が個人任せでバラバラ、会社から見えない。統制後は会社の枠組みに集約され、見える・説明できる状態になる">
+        <div class="lp-ba-panel lp-ba-panel--before">
+          <span class="lp-ba-chip">統制前</span>
+          <div class="lp-ba-scatter" aria-hidden="true">
+            <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+          </div>
+          <p>個人任せで、見えない</p>
+        </div>
+        <div class="lp-ba-arrow" aria-hidden="true"></div>
+        <div class="lp-ba-panel lp-ba-panel--after">
+          <span class="lp-ba-chip lp-ba-chip--accent">統制後</span>
+          <div class="lp-ba-grid" aria-hidden="true">
+            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+          </div>
+          <p>会社として、見える・説明できる</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="lp-consult">
+    <div class="container lp-consult-inner">
+      <p>「うちの場合はどう進める？」 — まずは現状をお聞かせください。</p>
+      <a href="/contact.html" class="btn btn-primary">無料で相談する</a>
     </div>
   </section>
 
   <section class="section">
     <div class="container">
-      <div class="section-title">
-        <h2>提供内容 — 方針から技術統制、定着まで</h2>
-        <p>What We Do</p>
+      <div class="lp-title">
+        <p class="lp-eyebrow">FLOW</p>
+        <h2>支援の流れ</h2>
       </div>
-      <div class="offer-grid">
-        <div class="offer-card">
-          <span class="offer-step">STEP 1</span>
-          <h3>現状診断・導入方針の設計</h3>
-          <p>利用実態（シャドーAI含む）と扱うデータを整理し、プラン選定と統制方針を決めます。</p>
+      <ol class="lp-steps">
+        <li class="lp-step">
+          <div class="lp-step-ill">
+            <img src="/images/ill-magnifier.svg" alt="" loading="lazy" width="142" height="285">
+          </div>
+          <span class="lp-step-num">STEP 01</span>
+          <h3>現状診断</h3>
           <ul class="feature-list">
-            <li>利用実態・リスクの棚卸し</li>
-            <li>Team / Enterprise / API のプラン選定支援</li>
-            <li>機密データの取り扱い区分の設計</li>
+            <li>利用実態の棚卸し</li>
+            <li>プラン選定の支援</li>
+            <li>機密データの区分整理</li>
           </ul>
-        </div>
-        <div class="offer-card">
-          <span class="offer-step">STEP 2</span>
-          <h3>ガイドライン・ルール策定</h3>
-          <p>「守れるルール」を実務目線で作ります。ひな形の穴埋めではなく、業務実態に合わせます。</p>
+        </li>
+        <li class="lp-step">
+          <div class="lp-step-ill">
+            <img src="/images/ill-document.svg" alt="" loading="lazy" width="215" height="199">
+          </div>
+          <span class="lp-step-num">STEP 02</span>
+          <h3>ルール策定</h3>
           <ul class="feature-list">
-            <li>生成AI利用ガイドラインの策定・改定</li>
-            <li>入力してよい情報・禁止事項の線引き</li>
-            <li>例外申請・承認フローの設計</li>
+            <li>利用ガイドライン作成</li>
+            <li>入力してよい情報の線引き</li>
+            <li>例外承認フローの設計</li>
           </ul>
-        </div>
-        <div class="offer-card">
-          <span class="offer-step">STEP 3</span>
-          <h3>技術統制の実装</h3>
-          <p>ルールを設定で強制します。ここが「ガイドラインだけ」の支援との最大の違いです。</p>
+        </li>
+        <li class="lp-step">
+          <div class="lp-step-ill">
+            <img src="/images/ill-shieldpc.svg" alt="" loading="lazy" width="255" height="282">
+          </div>
+          <span class="lp-step-num">STEP 03</span>
+          <h3>技術統制</h3>
           <ul class="feature-list">
-            <li>SSO・アカウント統制（個人アカウント利用の集約）</li>
-            <li>Claude Code の managed settings 設計</li>
-            <li>Intune / MDM による設定・アプリ配布</li>
-            <li>ログ・証跡・監査説明の設計、ISMSとの整合</li>
+            <li>SSO・アカウント統制</li>
+            <li>managed settings 設計</li>
+            <li>Intune / MDM 配布</li>
           </ul>
-        </div>
-        <div class="offer-card">
-          <span class="offer-step">STEP 4</span>
+        </li>
+        <li class="lp-step">
+          <div class="lp-step-ill">
+            <img src="/images/ill-growth.svg" alt="" loading="lazy" width="458" height="345">
+          </div>
+          <span class="lp-step-num">STEP 04</span>
           <h3>定着支援</h3>
-          <p>統制は「使われてこそ」。ルールが守られたまま安全な利用が続く状態まで伴走します。</p>
           <ul class="feature-list">
-            <li>社員向けセキュリティ勉強会・研修</li>
-            <li>利用実態の分析とフォロー施策</li>
-            <li>ルールを理解した社内推進担当の育成</li>
+            <li>社内勉強会・研修</li>
+            <li>利用状況の分析</li>
+            <li>推進担当の育成</li>
           </ul>
-        </div>
-      </div>
+        </li>
+      </ol>
     </div>
   </section>
 
   <section class="section section-gray">
     <div class="container">
-      <div class="section-title">
-        <h2>NEXT Bridgeに頼む理由</h2>
-        <p>Why Us</p>
-      </div>
-      <ul class="why-list">
-        <li>
-          <strong>実際の企業導入で統制の設計・実装に携わってきた経験</strong>
-          Claude Enterprise の全社導入や、Claude Code の設定統制・MDM配布を実案件で担当しています。公開ドキュメントだけでは見えにくい、運用で起きるつまずきを踏まえて設計します。
-        </li>
-        <li>
-          <strong>情シスの実務とセキュリティ統制の両方が分かる</strong>
-          デバイス管理（Intune等）やID基盤、ISMS運用の支援を本業としているため、生成AI統制を既存のIT統制・認証運用と矛盾なく接続できます。
-        </li>
-        <li>
-          <strong>ツールを売らない中立の立場</strong>
-          特定製品の販売代理ではないため、貴社の環境と目的に合わせた選定・設計ができます。
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <div class="section-title">
+      <div class="lp-title">
+        <p class="lp-eyebrow">CASE</p>
         <h2>支援事例</h2>
-        <p>Case</p>
+      </div>
+      <div class="ill ill--center">
+        <img src="/images/ill-handshake.svg" alt="" loading="lazy" width="365" height="239">
       </div>
       <div class="case-grid">
         <div class="case-card">
           <span class="case-tag">生成AI統制</span>
-          <h3>事業会社 ― Claude Enterprise の全社導入と利用統制・定着支援</h3>
+          <h3>事業会社 ― Claude Enterprise の全社導入</h3>
           <dl class="case-fields">
             <div class="case-field">
               <dt>課題</dt>
-              <dd>全社で生成AIを活用する方針が決まったものの、アカウント統制・機密情報の取り扱い・利用定着まで見通せる体制が社内にありませんでした。</dd>
+              <dd>全社導入の方針は決まったが、統制も定着も見通せる体制がなかった。</dd>
             </div>
             <div class="case-field">
               <dt>支援内容</dt>
-              <dd>支援チームの一員として、Claude Enterprise の導入設計、SSO・アカウント統制方針の整理、機密情報の取り扱いガイダンス策定、設定による統制方針（共通設定＋端末管理）の設計を担当。社員向けセキュリティ勉強会・個別ヒアリング・利用実態分析も実施しました。</dd>
+              <dd>導入設計、SSO・アカウント統制、ガイダンス策定、勉強会・利用分析を担当。</dd>
             </div>
             <div class="case-field">
               <dt>成果</dt>
-              <dd>導入から運用までの統制の枠組みと、勉強会・利用分析による定着サイクルを確立。役員から現場まで活用が広がる土台を整えました。</dd>
+              <dd>統制の枠組みと定着サイクルを確立。役員から現場まで活用が拡大。</dd>
             </div>
           </dl>
         </div>
         <div class="case-card">
           <span class="case-tag">生成AI統制</span>
-          <h3>コンサルティング会社 ― Claude Code の業務活用と配布統制</h3>
+          <h3>コンサルティング会社 ― Claude Code の配布統制</h3>
           <dl class="case-fields">
             <div class="case-field">
               <dt>課題</dt>
-              <dd>コンサルタントの業務に Claude Code を導入するにあたり、設定の統一配布と、接続範囲・権限の統制方法が課題でした。</dd>
+              <dd>Claude Code の統一配布と、権限・接続範囲の統制が課題だった。</dd>
             </div>
             <div class="case-field">
               <dt>支援内容</dt>
-              <dd>支援チームの一員として、Intune（MDM）による Claude Code の配布設計、管理側で強制する設定（managed settings）の方針、外部接続範囲の設計といった統制面を担当しました。</dd>
+              <dd>Intune による配布設計、managed settings の方針、接続範囲の設計を担当。</dd>
             </div>
             <div class="case-field">
               <dt>成果</dt>
-              <dd>「個人任せの試行」から「会社として配布・統制された活用」へ移行する道筋を整備。AI利用ガイドラインの社内展開とあわせて運用に載せました。</dd>
+              <dd>「個人任せの試行」から「会社として統制された活用」へ移行。</dd>
             </div>
           </dl>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="lp-title">
+        <p class="lp-eyebrow">FAQ</p>
+        <h2>よくあるご質問</h2>
+      </div>
+      <div class="lp-faq">
+        <details>
+          <summary>何から相談すればいいですか？</summary>
+          <p>現状の共有だけで大丈夫です。利用状況やお使いの環境（Microsoft 365 など）をお聞きして、進め方をご提案します。</p>
+        </details>
+        <details>
+          <summary>ガイドラインはすでにあります。途中からでも頼めますか？</summary>
+          <p>はい。設定による統制だけ、定着支援だけなど、必要な部分からお手伝いできます。</p>
+        </details>
+        <details>
+          <summary>ISMS認証を運用中です。整合できますか？</summary>
+          <p>はい。リスクアセスメントへの載せ方から規程との整合まで、ISMSの運用に沿った形で進めます。</p>
+        </details>
+        <details>
+          <summary>Claude 以外の生成AIにも対応できますか？</summary>
+          <p>Claude・Claude Code を中心としつつ、他の生成AIを含めた利用ルールづくりもご相談いただけます。</p>
+        </details>
       </div>
     </div>
   </section>
 
   <Cta
-    heading="生成AI統制の現状、一度整理してみませんか"
-    text="「何から手を付けるべきか」の整理からで構いません。現在の利用状況・環境をお聞きし、統制の全体像と優先順位をご提案します。"
+    heading="まずはお気軽にご相談ください"
+    text="「何から始めればいいか」の整理からお手伝いします。現状の共有だけで大丈夫です。"
     buttonClass="btn btn-primary"
     buttonLabel="相談してみる"
   />
