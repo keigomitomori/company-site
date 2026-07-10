@@ -1229,6 +1229,16 @@ a.btn-outline::after {
   margin-right: 10px;
 }
 
+.lp-checklist--check li::before {
+  content: "\2713";
+}
+
+.lp-checklist--cols2 {
+  grid-template-columns: 1fr 1fr;
+  max-width: 880px;
+  margin: 0 auto;
+}
+
 .lp-band {
   background-color: var(--ink);
   text-align: center;
@@ -2304,6 +2314,10 @@ a.btn-outline::after {
   .lp-ba {
     grid-template-columns: 1fr;
     gap: 16px;
+  }
+
+  .lp-checklist--cols2 {
+    grid-template-columns: 1fr;
   }
 
   .lp-ba-arrow {
