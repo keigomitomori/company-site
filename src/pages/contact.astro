@@ -70,4 +70,29 @@ import PageHeader from '../components/PageHeader.astro';
 
     </div>
   </section>
+
+  <script is:inline>
+    (function () {
+      var form = document.querySelector('.contact-form');
+      if (!form || !window.fetch) return;
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var btn = form.querySelector('button[type="submit"]');
+        btn.disabled = true;
+        btn.textContent = '送信中…';
+        fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        }).then(function (res) {
+          if (!res.ok) throw new Error('submit failed');
+          window.location.href = '/thanks.html';
+        }).catch(function () {
+          btn.disabled = false;
+          btn.textContent = '送信する';
+          alert('送信に失敗しました。時間をおいて再度お試しいただくか、contact@nextb.net まで直接ご連絡ください。');
+        });
+      });
+    })();
+  </script>
 </BaseLayout>

@@ -12,6 +12,7 @@ interface Props {
   twitterTitle?: string;
   twitterDescription?: string;
   twitterImage?: string;
+  noindex?: boolean;
 }
 const {
   title,
@@ -23,6 +24,7 @@ const {
   twitterTitle,
   twitterDescription,
   twitterImage,
+  noindex = false,
 } = Astro.props;
 ---
 <!DOCTYPE html>
@@ -40,6 +42,7 @@ const {
     gtag('config', 'G-YJH7LLFYJQ');
   </script>
   <meta name="description" content={description}>
+  {noindex && <meta name="robots" content="noindex">}
   <title>{title}</title>
   <link rel="canonical" href={canonical}>
   <meta property="og:title" content={ogTitle}>

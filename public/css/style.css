@@ -543,6 +543,29 @@ a.btn-outline::after {
   border-color: #b9c3d4;
 }
 
+.card-grid--lp {
+  grid-template-columns: 1fr 1fr;
+}
+
+.card--link {
+  display: block;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+
+.card--link:hover {
+  border-color: var(--accent);
+  box-shadow: 0 6px 18px rgba(15, 27, 51, 0.08);
+  transform: translateY(-2px);
+}
+
+.card-more {
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
 .card-icon {
   color: var(--accent);
   margin-bottom: 16px;
@@ -1586,6 +1609,51 @@ a.btn-outline::after {
 
 .lp-step .feature-list li {
   font-size: 0.85rem;
+}
+
+/* 送信完了ページ */
+.thanks-box {
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.thanks-box h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 18px;
+}
+
+.thanks-box > p {
+  font-size: 0.95rem;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+.thanks-links {
+  background-color: var(--bg-soft);
+  border-radius: 10px;
+  padding: 22px 26px;
+  margin: 28px 0;
+  text-align: left;
+}
+
+.thanks-links p {
+  font-weight: 700;
+  color: var(--ink);
+  font-size: 0.92rem;
+  margin-bottom: 10px;
+}
+
+.thanks-links a {
+  color: var(--accent-dark);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.thanks-box .btn {
+  margin-top: 10px;
 }
 
 /* 料金ページ */

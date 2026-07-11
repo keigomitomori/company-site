@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+---
+<BaseLayout
+  title="送信完了 | 株式会社ネクストブリッジ"
+  description="お問い合わせありがとうございました。担当者より折り返しご連絡いたします。"
+  canonical="https://nextb.net/thanks.html"
+  ogTitle="送信完了 | NEXT Bridge"
+  ogDescription="お問い合わせありがとうございました。"
+  noindex={true}
+>
+  <PageHeader title="送信完了" subtitle="Thanks" />
+
+  <section class="section">
+    <div class="container">
+      <div class="thanks-box">
+        <h2>お問い合わせありがとうございました</h2>
+        <p>内容を確認のうえ、通常2〜3営業日以内にご入力いただいたメールアドレスへご返信します。</p>
+        <p>お急ぎの場合は <a href="mailto:contact@nextb.net">contact@nextb.net</a> まで直接ご連絡ください。</p>
+        <div class="thanks-links">
+          <p>ご返信をお待ちいただく間に、こちらもどうぞ。</p>
+          <ul class="feature-list">
+            <li><a href="/services.html#cases">支援事例</a> — これまでのご支援の内容と成果</li>
+            <li><a href="/pricing.html">料金</a> — 契約形態と目安</li>
+            <li><a href="/articles/">コラム</a> — 情シス・生成AI統制の実務記事</li>
+          </ul>
+        </div>
+        <a href="/" class="btn btn-primary">トップページへ戻る</a>
+      </div>
+    </div>
+  </section>
+
+  <script is:inline>
+    if (typeof gtag === 'function') {
+      gtag('event', 'generate_lead', { event_category: 'contact', event_label: 'contact_form' });
+    }
+  </script>
+</BaseLayout>
