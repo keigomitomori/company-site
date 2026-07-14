@@ -1432,25 +1432,6 @@ a.btn-outline::after {
   border-bottom: 5px solid transparent;
 }
 
-/* 図解: Napkin生成画像はPCのみ表示し、SPでは可読性のため .lp-flowfig--sp を表示する */
-.lp-fig-img {
-  display: none;
-}
-
-@media (min-width: 769px) {
-  .lp-fig-img {
-    display: block;
-    width: 100%;
-    height: auto;
-    border: 1px solid var(--line);
-    border-radius: 14px;
-  }
-
-  .lp-flowfig--sp {
-    display: none;
-  }
-}
-
 /* 図解: 統制前後の対比 */
 .lp-ba {
   display: grid;

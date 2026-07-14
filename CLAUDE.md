@@ -20,14 +20,11 @@
 - **イラストはソコストから調達する**（https://soco-st.com、商用利用可・クレジット不要）
   - SVG直リンク: `https://soco-st.com/wp-content/themes/socost/upload/<ID>_color.svg`
   - オレンジ系（#febe69・#ffda71 等）はブランド青 #8fb0f0 に置換してから `public/images/ill-*.svg` に配置する
-- **フロー図は Napkin 画像と HTML/CSS 図の出し分けで作る**（ユーザー決定 2026-07-12。it-support / genai-adoption / genai-governance で適用中）
-  - **PC（769px 以上）** = Napkin AI 生成画像（自社スタイル `nextb-soft`・`public/images/fig/` に配置）
-  - **SP（768px 以下）** = 既存の HTML/CSS 図（`.lp-flowfig`）。固定レイアウト画像は狭幅で文字が縮むため、モバイルは HTML/CSS を正とする
-  - マークアップ: `<img class="lp-fig-img" …>` を置き、既存図に `lp-flowfig--sp` を付与（出し分け規則は style.css の `.lp-fig-img`）
-  - 生成の要点: 狭いカラムに置くため**縦型で生成**し、矢印の長い余白はバンド切り出しで詰める（手順の詳細は ~/Claude/CLAUDE.md の図表生成節）
-  - 採用基準: サイトのコピーと文言一致・不自然な途中改行なし・存在しない主張の混入なし（満たすまで再生成、ダメなら HTML/CSS 維持）
-- **Before/After 対比図（`.lp-ba`）と視覚メタファーが要る図解は HTML/CSS 部品で作る**
-  - Napkin は対比図が苦手（内容の捏造・平板化を実測 2026-07-12）
+- **図解（フロー図・対比図とも）はHTML/CSS部品で作る**（`.lp-flowfig` `.lp-ba` 等）
+  - **このサイトでは Napkin 生成画像を使わない**（ユーザー判断 2026-07-14）
+    - 経緯: PC表示のみ Napkin 画像に出し分ける方式を3つのLPで導入したが（2026-07-12）、図が適切でなく全点不採用・HTML/CSS 図に差し戻した
+    - Napkin は対比図も苦手（内容の捏造・平板化を実測 2026-07-12）
+    - ~/Claude/CLAUDE.md の図表生成節（Napkin 既定）より本規約を優先する
   - インラインSVGも使わない: 縮小時に文字が潰れる（ユーザー指摘 2026-07-10）
 
 ## 運用メモ
