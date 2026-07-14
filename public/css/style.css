@@ -2252,7 +2252,7 @@ a.btn-outline::after {
 
 .footer-inner {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-columns: 1.6fr 1.5fr 1fr 1fr;
   gap: 40px;
   padding-bottom: 44px;
 }
@@ -2312,6 +2312,10 @@ a.btn-outline::after {
   .container {
     width: auto;
     padding: 0 22px;
+  }
+
+  .footer-inner {
+    grid-template-columns: 1fr 1fr;
   }
 }
 
