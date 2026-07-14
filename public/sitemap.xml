@@ -66,6 +66,16 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://nextb.net/articles/kitting-automation/</loc>
+    <lastmod>2026-07-12</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://nextb.net/articles/mac-windows-mdm/</loc>
+    <lastmod>2026-07-14</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://nextb.net/privacy.html</loc>
     <lastmod>2026-07-05</lastmod>
     <priority>0.3</priority>
