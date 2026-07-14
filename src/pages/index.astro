@@ -1,6 +1,15 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Cta from '../components/Cta.astro';
+import { getCollection } from 'astro:content';
+
+const fmt = (d: Date) =>
+  `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
+
+// お知らせは最新の公開コラムから自動生成する（手動更新不要）
+const latestArticles = (await getCollection('articles', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
+  .slice(0, 3);
 ---
 <BaseLayout
   title="株式会社ネクストブリッジ | 導入するだけのITから、使われるITへ。"
@@ -35,18 +44,12 @@ import Cta from '../components/Cta.astro';
     <div class="container">
       <h2>お知らせ</h2>
       <ul class="news-list">
-        <li>
-          <time datetime="2026-07-10">2026.07.10</time>
-          <a href="/articles/shadow-ai-discovery/">コラム「シャドーAIの見つけ方 — 個人アカウント利用を実態調査する6つの方法」を公開しました</a>
-        </li>
-        <li>
-          <time datetime="2026-07-07">2026.07.07</time>
-          <a href="/articles/claude-code-managed-settings/">コラム「Claude Code managed settings の実務設計」を公開しました</a>
-        </li>
-        <li>
-          <time datetime="2026-07-06">2026.07.06</time>
-          <a href="/articles/claude-code-rollout-checklist/">コラム「Claude Codeを会社で使わせる前に決めること」を公開しました</a>
-        </li>
+        {latestArticles.map((article) => (
+          <li>
+            <time datetime={article.data.pubDate.toISOString().split('T')[0]}>{fmt(article.data.pubDate)}</time>
+            <a href={`/articles/${article.id}/`}>コラム「{article.data.title}」を公開しました</a>
+          </li>
+        ))}
       </ul>
     </div>
   </section>
