@@ -1434,37 +1434,23 @@ a.btn-outline::after {
 
 /* 図解: 統制前後の対比 */
 .lp-ba {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  gap: 28px;
-  align-items: stretch;
-  max-width: 880px;
+  max-width: 840px;
   margin: 0 auto;
-}
-
-.lp-ba-panel {
-  border-radius: 16px;
-  padding: 26px 24px;
-  text-align: center;
   display: flex;
   flex-direction: column;
+  gap: 14px;
+}
+
+.lp-ba-head,
+.lp-ba-row {
+  display: grid;
+  grid-template-columns: 118px 1fr 30px 1fr;
+  gap: 12px;
   align-items: center;
-  gap: 20px;
-}
-
-.lp-ba-panel--before {
-  background-color: var(--white);
-  border: 2px dashed #c9d1de;
-}
-
-.lp-ba-panel--after {
-  background-color: #f7faff;
-  border: 2px solid var(--accent);
-  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.08);
 }
 
 .lp-ba-chip {
-  display: inline-block;
+  justify-self: center;
   background-color: #eef1f6;
   color: var(--muted);
   font-size: 0.82rem;
@@ -1478,65 +1464,92 @@ a.btn-outline::after {
   color: var(--white);
 }
 
-.lp-ba-scatter {
-  position: relative;
-  width: 200px;
-  height: 132px;
-}
-
-.lp-ba-scatter i {
-  position: absolute;
-  border-radius: 50%;
-  background-color: #9aa8bf;
-}
-
-.lp-ba-scatter i:nth-child(1) { width: 22px; height: 22px; left: 18px; top: 22px; }
-.lp-ba-scatter i:nth-child(2) { width: 16px; height: 16px; left: 84px; top: 6px; background-color: #b6c1d2; }
-.lp-ba-scatter i:nth-child(3) { width: 20px; height: 20px; left: 150px; top: 30px; }
-.lp-ba-scatter i:nth-child(4) { width: 15px; height: 15px; left: 48px; top: 72px; background-color: #b6c1d2; }
-.lp-ba-scatter i:nth-child(5) { width: 22px; height: 22px; left: 118px; top: 82px; }
-.lp-ba-scatter i:nth-child(6) { width: 13px; height: 13px; left: 8px; top: 106px; background-color: #c3cdda; }
-.lp-ba-scatter i:nth-child(7) { width: 14px; height: 14px; left: 176px; top: 108px; background-color: #c3cdda; }
-
-.lp-ba-grid {
-  background-color: var(--white);
-  border: 1px solid #bcd0f5;
-  border-radius: 12px;
-  padding: 18px;
-  display: grid;
-  grid-template-columns: repeat(3, 20px);
-  gap: 14px;
-}
-
-.lp-ba-grid i {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: var(--accent);
-}
-
-.lp-ba-grid i:nth-child(even) {
-  background-color: #6f96e8;
-}
-
-.lp-ba-panel p {
-  font-size: 1rem;
+.lp-ba-topic {
+  font-size: 0.85rem;
   font-weight: 700;
-  margin-top: auto;
-}
-
-.lp-ba-panel--before p {
   color: var(--muted);
 }
 
-.lp-ba-panel--after p {
+.lp-ba-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 12px;
+  padding: 13px 16px;
+  font-size: 0.93rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.lp-ba-cell::before {
+  flex: none;
+  width: 21px;
+  height: 21px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 0.72rem;
+}
+
+.lp-ba-cell--before {
+  background-color: var(--white);
+  border: 2px dashed #c9d1de;
+  color: var(--muted);
+}
+
+.lp-ba-cell--before::before {
+  content: "×";
+  background-color: #eef1f6;
+  color: #8b96a8;
+  font-size: 0.95rem;
+}
+
+.lp-ba-cell--after {
+  background-color: #f7faff;
+  border: 2px solid var(--accent);
   color: var(--accent-dark);
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.08);
+}
+
+.lp-ba-cell--after::before {
+  content: "✓";
+  background-color: var(--accent);
+  color: var(--white);
 }
 
 .lp-ba-arrow {
-  align-self: center;
-  width: 26px;
-  height: 26px;
+  justify-self: center;
+  width: 12px;
+  height: 12px;
+  border-right: 3px solid var(--accent);
+  border-bottom: 3px solid var(--accent);
+  transform: rotate(-45deg);
+}
+
+.lp-ba-sum {
+  margin-top: 8px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-weight: 700;
+}
+
+.lp-ba-sum-before {
+  color: var(--muted);
+}
+
+.lp-ba-sum-after {
+  color: var(--accent-dark);
+  font-size: 1.05rem;
+}
+
+.lp-ba-sum-arrow {
+  width: 10px;
+  height: 10px;
   border-right: 3px solid var(--accent);
   border-bottom: 3px solid var(--accent);
   transform: rotate(-45deg);
@@ -2514,8 +2527,26 @@ a.btn-outline::after {
   }
 
   .lp-ba {
+    gap: 20px;
+  }
+
+  .lp-ba-head {
+    display: none;
+  }
+
+  .lp-ba-row {
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 8px;
+  }
+
+  .lp-ba-sum {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .lp-ba-sum-arrow {
+    transform: rotate(45deg);
   }
 
   .lp-checklist--cols2 {
@@ -2532,7 +2563,7 @@ a.btn-outline::after {
 
   .lp-ba-arrow {
     transform: rotate(45deg);
-    margin: 0 auto;
+    margin: -2px auto;
   }
 
   .features-grid {

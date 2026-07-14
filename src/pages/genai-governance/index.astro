@@ -133,22 +133,36 @@ import Cta from '../../components/Cta.astro';
         <p class="lp-eyebrow">BEFORE / AFTER</p>
         <h2>統制が効くと、ここまで変わります</h2>
       </div>
-      <div class="lp-ba" role="img" aria-label="統制前は利用が個人任せでバラバラ、会社から見えない。統制後は会社の枠組みに集約され、見える・説明できる状態になる">
-        <div class="lp-ba-panel lp-ba-panel--before">
+      <div class="lp-ba" role="img" aria-label="統制前は、社員が個人アカウントで使い、ガイドラインを作っても守られず、統制の状況を説明できない。統制後は、会社管理のアカウントに集約され、ルールは設定として配布されて個人では変えられず、設定と配布の証跡で監査・ISMSに説明できる">
+        <div class="lp-ba-head" aria-hidden="true">
+          <span class="lp-ba-topic"></span>
           <span class="lp-ba-chip">統制前</span>
-          <div class="lp-ba-scatter" aria-hidden="true">
-            <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-          </div>
-          <p>個人任せで、見えない</p>
-        </div>
-        <div class="lp-ba-arrow" aria-hidden="true"></div>
-        <div class="lp-ba-panel lp-ba-panel--after">
+          <span></span>
           <span class="lp-ba-chip lp-ba-chip--accent">統制後</span>
-          <div class="lp-ba-grid" aria-hidden="true">
-            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-          </div>
-          <p>会社として、見える・説明できる</p>
         </div>
+        <div class="lp-ba-row" aria-hidden="true">
+          <span class="lp-ba-topic">アカウント</span>
+          <p class="lp-ba-cell lp-ba-cell--before">個人アカウントで使っている</p>
+          <span class="lp-ba-arrow"></span>
+          <p class="lp-ba-cell lp-ba-cell--after">会社管理のアカウントに集約</p>
+        </div>
+        <div class="lp-ba-row" aria-hidden="true">
+          <span class="lp-ba-topic">ルール</span>
+          <p class="lp-ba-cell lp-ba-cell--before">ガイドラインを作っても守られない</p>
+          <span class="lp-ba-arrow"></span>
+          <p class="lp-ba-cell lp-ba-cell--after">設定として配布され、個人では変えられない</p>
+        </div>
+        <div class="lp-ba-row" aria-hidden="true">
+          <span class="lp-ba-topic">監査・ISMS</span>
+          <p class="lp-ba-cell lp-ba-cell--before">統制の状況を説明できない</p>
+          <span class="lp-ba-arrow"></span>
+          <p class="lp-ba-cell lp-ba-cell--after">設定と配布の証跡で説明できる</p>
+        </div>
+        <p class="lp-ba-sum" aria-hidden="true">
+          <span class="lp-ba-sum-before">個人任せで、見えない</span>
+          <span class="lp-ba-sum-arrow"></span>
+          <span class="lp-ba-sum-after">会社として、見える・説明できる</span>
+        </p>
       </div>
     </div>
   </section>

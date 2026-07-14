@@ -130,22 +130,36 @@ import Cta from '../../components/Cta.astro';
         <p class="lp-eyebrow">BEFORE / AFTER</p>
         <h2>導入すると、ここまで変わります</h2>
       </div>
-      <div class="lp-ba" role="img" aria-label="導入前は端末の所在も設定もバラバラで台帳と実態が合わない。導入後は全端末が管理基盤に集約され、見える・守られている状態になる">
-        <div class="lp-ba-panel lp-ba-panel--before">
+      <div class="lp-ba" role="img" aria-label="導入前は、どの端末があるか正確に分からず、新しいPCのたびに手作業で、セキュリティ設定も端末ごとにバラバラ。導入後は、全端末を一覧で把握でき、電源を入れるだけでセットアップが終わり、会社基準の設定が全端末に一括適用される">
+        <div class="lp-ba-head" aria-hidden="true">
+          <span class="lp-ba-topic"></span>
           <span class="lp-ba-chip">導入前</span>
-          <div class="lp-ba-scatter" aria-hidden="true">
-            <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-          </div>
-          <p>台帳と実態が、合っていない</p>
-        </div>
-        <div class="lp-ba-arrow" aria-hidden="true"></div>
-        <div class="lp-ba-panel lp-ba-panel--after">
+          <span></span>
           <span class="lp-ba-chip lp-ba-chip--accent">導入後</span>
-          <div class="lp-ba-grid" aria-hidden="true">
-            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-          </div>
-          <p>全端末が、見える・守られている</p>
         </div>
+        <div class="lp-ba-row" aria-hidden="true">
+          <span class="lp-ba-topic">端末の把握</span>
+          <p class="lp-ba-cell lp-ba-cell--before">どの端末があるか正確に分からない</p>
+          <span class="lp-ba-arrow"></span>
+          <p class="lp-ba-cell lp-ba-cell--after">全端末を一覧で把握</p>
+        </div>
+        <div class="lp-ba-row" aria-hidden="true">
+          <span class="lp-ba-topic">セットアップ</span>
+          <p class="lp-ba-cell lp-ba-cell--before">新しいPCのたびに手作業</p>
+          <span class="lp-ba-arrow"></span>
+          <p class="lp-ba-cell lp-ba-cell--after">電源を入れるだけで完了</p>
+        </div>
+        <div class="lp-ba-row" aria-hidden="true">
+          <span class="lp-ba-topic">セキュリティ設定</span>
+          <p class="lp-ba-cell lp-ba-cell--before">端末ごとにバラバラ</p>
+          <span class="lp-ba-arrow"></span>
+          <p class="lp-ba-cell lp-ba-cell--after">会社基準を全端末に一括適用</p>
+        </div>
+        <p class="lp-ba-sum" aria-hidden="true">
+          <span class="lp-ba-sum-before">台帳と実態が、合っていない</span>
+          <span class="lp-ba-sum-arrow"></span>
+          <span class="lp-ba-sum-after">全端末が、見える・守られている</span>
+        </p>
       </div>
     </div>
   </section>
