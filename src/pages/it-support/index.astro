@@ -1,11 +1,12 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Cta from '../../components/Cta.astro';
+import CaseCard from '../../components/CaseCard.astro';
+import { itStartupCase } from '../../data/cases';
 ---
 <BaseLayout
   title="情シス伴走支援「もうひとりの情シス」 | 株式会社ネクストブリッジ"
   description="専任の情シスがいない会社のIT業務を、月額の顧問契約でまるごと支援。PC・アカウントの管理、セキュリティ整備、SaaSの運用、社員からの相談対応まで、「もうひとりの情シス」として伴走します。"
-  canonical="https://nextb.net/it-support/"
   ogTitle="情シス伴走支援「もうひとりの情シス」 | NEXT Bridge"
   ogDescription="専任の情シスがいない会社のIT業務を、月額の顧問契約でまるごと支援。相談から実務まで「もうひとりの情シス」として伴走します。"
 >
@@ -215,24 +216,7 @@ import Cta from '../../components/Cta.astro';
         <img src="/images/ill-meeting.svg" alt="" loading="lazy" width="398" height="247">
       </div>
       <div class="case-grid">
-        <div class="case-card">
-          <span class="case-tag">情シス伴走支援</span>
-          <h3>ITスタートアップ ― 「もうひとりの情シス」として社内IT全般を継続支援</h3>
-          <dl class="case-fields">
-            <div class="case-field">
-              <dt>課題</dt>
-              <dd>専任の情シスが不在で、CTOが本業のかたわら社内ITを兼務していた。</dd>
-            </div>
-            <div class="case-field">
-              <dt>支援内容</dt>
-              <dd>IT顧問として定例と随時の相談で伴走。PCキッティング手順の整備、SaaS・アカウント管理、ISMS認証の運用まで支援。</dd>
-            </div>
-            <div class="case-field">
-              <dt>成果</dt>
-              <dd>専任者が不在のまま社内ITを回せる体制を整備。3年以上継続してご契約いただいています。</dd>
-            </div>
-          </dl>
-        </div>
+        <CaseCard data={itStartupCase.summary} />
       </div>
     </div>
   </section>

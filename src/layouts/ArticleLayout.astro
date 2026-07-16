@@ -47,6 +47,7 @@ const jsonLd = JSON.stringify({
   '@type': 'Article',
   headline: title,
   description,
+  image: [ogImage],
   datePublished: iso(pubDate),
   dateModified: iso(updatedDate ?? pubDate),
   author: {
@@ -65,7 +66,10 @@ const jsonLd = JSON.stringify({
   canonical={canonical}
   ogTitle={title}
   ogDescription={description}
+  ogType="article"
   ogImage={ogImage}
+  articlePublishedTime={iso(pubDate)}
+  articleModifiedTime={iso(updatedDate ?? pubDate)}
   twitterImage={ogImage}
 >
   <script type="application/ld+json" set:html={jsonLd} />

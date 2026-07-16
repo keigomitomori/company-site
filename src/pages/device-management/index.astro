@@ -1,11 +1,12 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Cta from '../../components/Cta.astro';
+import CaseCard from '../../components/CaseCard.astro';
+import { deviceManagementCase } from '../../data/cases';
 ---
 <BaseLayout
   title="Intune / Entra ID デバイス管理導入支援 | 株式会社ネクストブリッジ"
   description="Microsoft Intune / Entra ID によるデバイス管理基盤の設計・構築を支援。PC 100〜200台規模の構築実績。Autopilot によるキッティング自動化、セキュリティポリシーの一括適用、運用の引き継ぎまで一貫して支援します。"
-  canonical="https://nextb.net/device-management/"
   ogTitle="Intune / Entra ID デバイス管理導入支援 | NEXT Bridge"
   ogDescription="Microsoft Intune / Entra ID によるデバイス管理基盤の設計・構築を支援。キッティング自動化から運用定着まで。"
 >
@@ -236,24 +237,7 @@ import Cta from '../../components/Cta.astro';
         <img src="/images/ill-handshake.svg" alt="" loading="lazy" width="365" height="239">
       </div>
       <div class="case-grid">
-        <div class="case-card">
-          <span class="case-tag">デバイス管理導入</span>
-          <h3>専門サービス業（PC 100〜200台） ― Entra ID / Intune による管理基盤の構築</h3>
-          <dl class="case-fields">
-            <div class="case-field">
-              <dt>課題</dt>
-              <dd>キッティングが1台ずつの手作業で、負荷が大きく設定品質にばらつきがあった。</dd>
-            </div>
-            <div class="case-field">
-              <dt>支援内容</dt>
-              <dd>Entra ID / Intune の導入を設計から構築まで一貫支援。Autopilot 前提のゼロタッチキッティングと運用手順を整備。</dd>
-            </div>
-            <div class="case-field">
-              <dt>成果</dt>
-              <dd>初期設定の多くを自動化。PCの定期入れ替えに合わせて新基盤へ移行する道筋を確立。</dd>
-            </div>
-          </dl>
-        </div>
+        <CaseCard data={deviceManagementCase.summary} />
       </div>
     </div>
   </section>

@@ -1,0 +1,26 @@
+---
+import type { CaseCardData } from '../data/cases';
+
+interface Props {
+  data: CaseCardData;
+}
+const { data } = Astro.props;
+---
+<div class="case-card">
+  <span class="case-tag">{data.tag}</span>
+  <h3>{data.title}</h3>
+  <dl class="case-fields">
+    <div class="case-field">
+      <dt>課題</dt>
+      <dd>{data.problem}</dd>
+    </div>
+    <div class="case-field">
+      <dt>支援内容</dt>
+      <dd>{data.support}</dd>
+    </div>
+    <div class="case-field">
+      <dt>成果</dt>
+      <dd>{data.outcome}</dd>
+    </div>
+  </dl>
+</div>

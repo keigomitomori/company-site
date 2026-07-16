@@ -1,11 +1,12 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Cta from '../../components/Cta.astro';
+import CaseCard from '../../components/CaseCard.astro';
+import { claudeEnterpriseCase, claudeCodeGovernanceCase } from '../../data/cases';
 ---
 <BaseLayout
   title="生成AI・Claude Codeの社内統制支援 | 株式会社ネクストブリッジ"
   description="Claude・Claude Codeを安全に社内展開するための統制支援です。利用ガイドライン策定、SSO・アカウント統制、managed settingsの設計、Intune/MDMでの配布、ISMSとの整合まで、情シスの視点で一貫して支援します。"
-  canonical="https://nextb.net/genai-governance/"
   ogTitle="生成AI・Claude Codeの社内統制支援 | NEXT Bridge"
   ogDescription="Claude・Claude Codeを安全に社内展開するための統制支援。ガイドライン策定からmanaged settings・MDM配布・ISMS整合まで。"
   ogImage="https://nextb.net/images/og-genai-governance.png"
@@ -243,42 +244,8 @@ import Cta from '../../components/Cta.astro';
         <img src="/images/ill-handshake.svg" alt="" loading="lazy" width="365" height="239">
       </div>
       <div class="case-grid">
-        <div class="case-card">
-          <span class="case-tag">生成AI統制</span>
-          <h3>事業会社 ― Claude Enterprise の全社導入</h3>
-          <dl class="case-fields">
-            <div class="case-field">
-              <dt>課題</dt>
-              <dd>全社導入の方針は決まったが、統制も定着も見通せる体制がなかった。</dd>
-            </div>
-            <div class="case-field">
-              <dt>支援内容</dt>
-              <dd>導入設計、SSO・アカウント統制、ガイドライン策定、勉強会・利用分析を担当。</dd>
-            </div>
-            <div class="case-field">
-              <dt>成果</dt>
-              <dd>統制の枠組みと定着サイクルを確立。役員から現場まで活用が拡大。</dd>
-            </div>
-          </dl>
-        </div>
-        <div class="case-card">
-          <span class="case-tag">生成AI統制</span>
-          <h3>コンサルティング会社 ― Claude Code の配布統制</h3>
-          <dl class="case-fields">
-            <div class="case-field">
-              <dt>課題</dt>
-              <dd>Claude Code の統一配布と、権限・接続範囲の統制が課題だった。</dd>
-            </div>
-            <div class="case-field">
-              <dt>支援内容</dt>
-              <dd>Intune による配布設計、managed settings の方針、接続範囲の設計を担当。</dd>
-            </div>
-            <div class="case-field">
-              <dt>成果</dt>
-              <dd>「個人任せの試行」から「会社として統制された活用」へ移行。</dd>
-            </div>
-          </dl>
-        </div>
+        <CaseCard data={claudeEnterpriseCase.summary} />
+        <CaseCard data={claudeCodeGovernanceCase.summary} />
       </div>
     </div>
   </section>

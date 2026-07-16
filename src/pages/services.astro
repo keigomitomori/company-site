@@ -2,6 +2,8 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import Cta from '../components/Cta.astro';
+import CaseCard from '../components/CaseCard.astro';
+import { itStartupCase, deviceManagementCase, genaiAdoptionCase } from '../data/cases';
 ---
 <BaseLayout
   title="サービス | 株式会社ネクストブリッジ"
@@ -87,60 +89,9 @@ import Cta from '../components/Cta.astro';
         <p>Cases</p>
       </div>
       <div class="case-grid">
-        <div class="case-card">
-          <span class="case-tag">情シスコンサルティング</span>
-          <h3>ITスタートアップ ― 「もうひとりの情シス」として社内IT全般を継続支援</h3>
-          <dl class="case-fields">
-            <div class="case-field">
-              <dt>課題</dt>
-              <dd>専任の情シス担当が不在で、CTOが本業のかたわら社内ITを兼務。デバイス管理やSaaSの統制、セキュリティ認証の運用まで手が回らない状態でした。</dd>
-            </div>
-            <div class="case-field">
-              <dt>支援内容</dt>
-              <dd>IT顧問として定例と随時のご相談で伴走。PCキッティング手順の整備、SaaS・アカウント管理、生成AIツールの利用統制、ISMS認証の運用・再認証対応を支援しています。</dd>
-            </div>
-            <div class="case-field">
-              <dt>成果</dt>
-              <dd>専任者が不在のままでも社内ITを継続運用できる体制を整備。3年以上にわたり継続してご契約いただいています。</dd>
-            </div>
-          </dl>
-        </div>
-        <div class="case-card">
-          <span class="case-tag">製品導入支援</span>
-          <h3>専門サービス業（PC 100〜200台規模） ― Entra ID / Intune によるデバイス管理基盤の構築</h3>
-          <dl class="case-fields">
-            <div class="case-field">
-              <dt>課題</dt>
-              <dd>PCのキッティングが1台ずつの手作業で、担当者の負荷が大きく設定品質にもばらつきがある状態。PCの定期入れ替えを控え、管理の仕組みづくりが急務でした。</dd>
-            </div>
-            <div class="case-field">
-              <dt>支援内容</dt>
-              <dd>Entra ID / Intune の導入を設計から構築まで一貫して支援。設計書・パラメータシートを整備し、Autopilot を前提としたゼロタッチキッティングと運用手順を構築しました。</dd>
-            </div>
-            <div class="case-field">
-              <dt>成果</dt>
-              <dd>手作業のキッティングから、初期設定の多くを自動化するゼロタッチ展開へ。PCの定期入れ替えに合わせて新しい管理基盤に移行する道筋を作りました。</dd>
-            </div>
-          </dl>
-        </div>
-        <div class="case-card">
-          <span class="case-tag">生成AI導入支援</span>
-          <h3>コンサルティング会社 ― 生成AI活用の候補業務を3ヶ月で試作・現場評価</h3>
-          <dl class="case-fields">
-            <div class="case-field">
-              <dt>課題</dt>
-              <dd>生成AIを業務に活かしたい意向はあるものの、どの業務から着手すべきか、品質をどう担保するかが見えず、活用が個人の試行にとどまっていました。</dd>
-            </div>
-            <div class="case-field">
-              <dt>支援内容</dt>
-              <dd>業務分析からユースケース設計、生成AIによる業務自動化の試作、現場メンバーによる評価までを3ヶ月で実施。週次の定例で改善を重ねました。</dd>
-            </div>
-            <div class="case-field">
-              <dt>成果</dt>
-              <dd>6つの業務領域で約10種の成果物を試作し、現場評価で実用可否と残る課題を特定。標準化・実データ検証という次のフェーズに進む土台ができました。</dd>
-            </div>
-          </dl>
-        </div>
+        <CaseCard data={itStartupCase.full} />
+        <CaseCard data={deviceManagementCase.full} />
+        <CaseCard data={genaiAdoptionCase.full} />
       </div>
     </div>
   </section>
