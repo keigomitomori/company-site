@@ -1,0 +1,18 @@
+---
+import type { ServiceCardData } from '../data/services';
+
+interface Props {
+  service: ServiceCardData;
+}
+const { service } = Astro.props;
+---
+<a href={service.href} class="card card--link">
+  <div class="card-illust">
+    <img src={service.image.src} alt="" loading="lazy" width={service.image.width} height={service.image.height}>
+  </div>
+  <div class="card-body">
+    <h3>{service.title}</h3>
+    <p>{service.description}</p>
+    <span class="card-more">詳しく見る →</span>
+  </div>
+</a>

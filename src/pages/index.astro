@@ -3,6 +3,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Cta from '../components/Cta.astro';
 import { getCollection } from 'astro:content';
 import LpBanner from '../components/LpBanner.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import { services } from '../data/services';
 import { fmt, iso } from '../utils/date';
 
 // お知らせは最新の公開コラムから自動生成する（手動更新不要）
@@ -107,46 +109,7 @@ const orgJsonLd = JSON.stringify({
         <p>Services</p>
       </div>
       <div class="card-grid card-grid--lp">
-        <a href="/device-management/" class="card card--link">
-          <div class="card-illust">
-            <img src="/images/ill-devicemgmt.png" alt="" loading="lazy" width="609" height="470">
-          </div>
-          <div class="card-body">
-            <h3>デバイス管理導入支援</h3>
-            <p>Intune / Entra ID でPCの管理を仕組み化。キッティングの自動化から運用の引き継ぎまで支援します。</p>
-            <span class="card-more">詳しく見る →</span>
-          </div>
-        </a>
-        <a href="/genai-adoption/" class="card card--link">
-          <div class="card-illust">
-            <img src="/images/ill-growth.svg" alt="" loading="lazy" width="458" height="345">
-          </div>
-          <div class="card-body">
-            <h3>生成AI活用支援</h3>
-            <p>効果の出る業務を見極めて、試作・現場評価から全社展開まで伴走します。</p>
-            <span class="card-more">詳しく見る →</span>
-          </div>
-        </a>
-        <a href="/genai-governance/" class="card card--link">
-          <div class="card-illust">
-            <img src="/images/ill-shieldpc.svg" alt="" loading="lazy" width="255" height="282">
-          </div>
-          <div class="card-body">
-            <h3>生成AI・Claude Codeの社内統制支援</h3>
-            <p>ガイドラインと設定による強制で、生成AIを安全に使える状態を作ります。</p>
-            <span class="card-more">詳しく見る →</span>
-          </div>
-        </a>
-        <a href="/it-support/" class="card card--link">
-          <div class="card-illust">
-            <img src="/images/ill-support.svg" alt="" loading="lazy" width="354" height="273">
-          </div>
-          <div class="card-body">
-            <h3>情シス伴走支援「もうひとりの情シス」</h3>
-            <p>専任の情シスがいない会社のIT業務を、月額の顧問契約でまるごと支援します。</p>
-            <span class="card-more">詳しく見る →</span>
-          </div>
-        </a>
+        {services.map((service) => <ServiceCard service={service} />)}
       </div>
       <LpBanner text="それぞれの料金の目安は料金ページでご案内しています" href="/pricing.html" label="料金" />
     </div>

@@ -5,6 +5,8 @@ import Cta from '../components/Cta.astro';
 import CaseCard from '../components/CaseCard.astro';
 import { itStartupCase, deviceManagementCase, genaiAdoptionCase } from '../data/cases';
 import LpBanner from '../components/LpBanner.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import { services } from '../data/services';
 ---
 <BaseLayout
   title="サービス | 株式会社ネクストブリッジ"
@@ -22,52 +24,9 @@ import LpBanner from '../components/LpBanner.astro';
         <p>Service Details</p>
       </div>
 
-      <div class="service-detail">
-        <div class="service-detail-text">
-          <h3>情シスコンサルティング</h3>
-          <p>情報システム部門が抱える課題を整理し、最適なIT戦略を策定。専任の情シス担当がいない企業でも、外部パートナーとしてIT環境の最適化を支援します。</p>
-          <ul class="feature-list">
-            <li>IT資産・インフラの現状分析と改善提案</li>
-            <li>セキュリティポリシーの策定・運用支援</li>
-            <li>ITコスト最適化のコンサルティング</li>
-            <li>ヘルプデスク・運用体制の構築支援</li>
-          </ul>
-        </div>
+      <div class="card-grid card-grid--lp">
+        {services.map((service) => <ServiceCard service={service} />)}
       </div>
-
-      <LpBanner text="専任情シスがいない会社向けの伴走支援は専用ページでご案内しています" href="/it-support/" label="情シス伴走支援「もうひとりの情シス」" />
-
-      <div class="service-detail">
-        <div class="service-detail-text">
-          <h3>製品導入支援</h3>
-          <p>業務課題に合ったIT製品を選定し、導入から定着まで一貫してサポート。「導入して終わり」ではなく、現場で使われ続ける仕組みを一緒に作ります。Microsoft 365 / Entra ID / Intune / Google Workspace などのID・デバイス管理基盤を得意としています。</p>
-          <ul class="feature-list">
-            <li>業務要件に基づいた最適な製品選定</li>
-            <li>導入計画の策定とプロジェクト管理</li>
-            <li>既存システムとの連携・データ移行</li>
-            <li>社内トレーニング・定着化サポート</li>
-          </ul>
-        </div>
-      </div>
-
-      <LpBanner text="Intune / Entra ID によるデバイス管理基盤の構築は専用ページでご案内しています" href="/device-management/" label="デバイス管理導入支援" />
-
-      <div class="service-detail">
-        <div class="service-detail-text">
-          <h3>生成AI導入支援</h3>
-          <p>生成AIを業務に活用するための導入支援を行います。業務分析から活用シーン設計、社内ガイドライン策定、利用統制、運用定着までをサポートします。</p>
-          <ul class="feature-list">
-            <li>生成AI活用に向けた業務プロセス分析</li>
-            <li>ユースケースの設計とPoC実施</li>
-            <li>社内利用ガイドライン・ポリシー策定</li>
-            <li>社員向けAIリテラシー研修の実施</li>
-          </ul>
-        </div>
-      </div>
-
-      <LpBanner text="業務への活用（攻め）は専用ページでご案内しています" href="/genai-adoption/" label="生成AI活用支援" />
-
-      <LpBanner text="Claude や Claude Code の社内展開・統制（守り）は専用ページでご案内しています" href="/genai-governance/" label="生成AI・Claude Codeの社内統制支援" />
     </div>
   </section>
 

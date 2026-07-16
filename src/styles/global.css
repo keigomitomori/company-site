@@ -809,32 +809,6 @@ a.btn-outline::after {
   margin-bottom: 10px;
 }
 
-/* ========================================
-   Service Detail (text-led)
-   ======================================== */
-.service-detail {
-  border-left: 3px solid var(--accent);
-  padding: 8px 0 8px 32px;
-  margin-bottom: 48px;
-}
-
-.service-detail:last-child {
-  margin-bottom: 0;
-}
-
-.service-detail-text h3 {
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: var(--ink);
-  margin-bottom: 12px;
-}
-
-.service-detail-text p {
-  color: var(--muted);
-  margin-bottom: 16px;
-  font-size: 0.95rem;
-}
-
 .feature-list li {
   padding: 5px 0;
   color: var(--text);
@@ -2531,10 +2505,6 @@ main > .cta:last-child {
 
   .info-table td {
     font-size: 0.85rem;
-  }
-
-  .service-detail {
-    padding-left: 20px;
   }
 
   .case-card {
