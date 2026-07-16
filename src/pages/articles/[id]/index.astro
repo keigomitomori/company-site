@@ -1,5 +1,6 @@
 ---
 import { getCollection, render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
 import ArticleLayout from '../../../layouts/ArticleLayout.astro';
 
 export async function getStaticPaths() {
@@ -10,6 +11,9 @@ export async function getStaticPaths() {
   }));
 }
 
+interface Props {
+  article: CollectionEntry<'articles'>;
+}
 const { article } = Astro.props;
 const { Content } = await render(article);
 ---
