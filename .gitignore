@@ -3,6 +3,7 @@ node_modules/
 dist/
 .astro/
 .DS_Store
+__pycache__/
 
 # 未公開コラムのストック（ビルド・git 管理の対象外。公開時に所定の場所へ移す）
 _stock/

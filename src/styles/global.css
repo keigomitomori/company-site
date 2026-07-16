@@ -637,30 +637,31 @@ a.btn-outline::after {
   padding: 22px;
 }
 
-.orgfig-top {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  gap: 12px;
-  align-items: stretch;
+.orgfig-illust {
   margin-bottom: 14px;
 }
 
-.orgfig-node {
-  background-color: var(--white);
-  border: 1px solid var(--node-border);
-  border-radius: 10px;
-  padding: 18px 12px 14px;
+.orgfig-illust img {
+  width: 100%;
+  max-width: 480px;
+  height: auto;
+  margin: 0 auto;
+  display: block;
+}
+
+.orgfig-labels {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 4px;
+  margin-bottom: 6px;
+}
+
+.orgfig-label {
   text-align: center;
-  box-shadow: var(--shadow-card);
 }
 
-.orgfig-node img {
-  height: 84px;
-  width: auto;
-  margin: 0 auto 10px;
-}
-
-.orgfig-node strong {
+.orgfig-label strong {
   display: block;
   font-size: 0.95rem;
   font-weight: 700;
@@ -668,70 +669,20 @@ a.btn-outline::after {
   line-height: 1.5;
 }
 
-.orgfig-node span {
+.orgfig-label span {
   font-size: 0.72rem;
   color: var(--muted);
 }
 
-.orgfig-node--nb {
-  border-top: 3px solid var(--accent);
-}
-
-.orgfig-link {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  padding: 0 2px;
-}
-
-.orgfig-pill {
-  background-color: var(--accent-soft);
+.orgfig-label--nb strong {
   color: var(--accent-dark);
-  font-size: 0.7rem;
-  font-weight: 500;
-  padding: 3px 10px;
-  border-radius: 999px;
-  white-space: nowrap;
 }
 
-.orgfig-arrow {
-  width: 60px;
-  height: 12px;
-}
-
-.orgfig-domains {
-  background-color: var(--white);
-  border: 1px solid var(--node-border);
-  border-radius: 10px;
-  padding: 16px 18px;
-  box-shadow: var(--shadow-card);
-}
-
-.orgfig-domains-label {
-  display: block;
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: var(--accent);
-  letter-spacing: 0.08em;
-  margin-bottom: 10px;
-}
-
-.orgfig-domains ul {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-}
-
-.orgfig-domains li {
-  background-color: var(--bg-soft);
-  border-radius: 6px;
+.orgfig-note {
   text-align: center;
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: var(--ink);
-  padding: 9px 4px;
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-bottom: 14px;
 }
 
 .figure figcaption {
