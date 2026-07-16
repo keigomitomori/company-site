@@ -18,6 +18,30 @@ const iso = (d: Date) => d.toISOString().split('T')[0];
 const canonical = `https://nextb.net/articles/${slug}/`;
 const ogImage = `https://nextb.net/images/og/${slug}.png`;
 
+// 記事末尾のCTAはカテゴリに合わせて出し分ける（未定義カテゴリは汎用文言）
+const ctaByCategory: Record<string, { heading: string; text: string }> = {
+  '生成AI統制': {
+    heading: '生成AI統制の現状、一度整理してみませんか',
+    text: '「何から手を付けるべきか」の整理からで構いません。現在の利用状況・環境をお聞きし、統制の全体像と優先順位をご提案します。',
+  },
+  'デバイス管理': {
+    heading: 'PC・デバイス管理の現状、一度整理してみませんか',
+    text: '「何から手を付けるべきか」の整理からで構いません。現在の台数・環境をお聞きし、管理基盤づくりの全体像と優先順位をご提案します。',
+  },
+  'セキュリティ': {
+    heading: 'セキュリティ対策の現状、一度整理してみませんか',
+    text: '「何から手を付けるべきか」の整理からで構いません。現在の環境と体制をお聞きし、対策の全体像と優先順位をご提案します。',
+  },
+  '情シス運営': {
+    heading: '社内ITの困りごと、一度整理してみませんか',
+    text: '「何から手を付けるべきか」の整理からで構いません。現在の運用状況をお聞きし、改善の全体像と優先順位をご提案します。',
+  },
+};
+const cta = ctaByCategory[category] ?? {
+  heading: '社内ITの困りごと、一度整理してみませんか',
+  text: '「何から手を付けるべきか」の整理からで構いません。現在の状況をお聞きし、改善の全体像と優先順位をご提案します。',
+};
+
 const jsonLd = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'Article',
@@ -77,8 +101,8 @@ const jsonLd = JSON.stringify({
   </article>
 
   <Cta
-    heading="生成AI統制の現状、一度整理してみませんか"
-    text="「何から手を付けるべきか」の整理からで構いません。現在の利用状況・環境をお聞きし、統制の全体像と優先順位をご提案します。"
+    heading={cta.heading}
+    text={cta.text}
     buttonClass="btn btn-primary"
     buttonLabel="相談してみる"
   />

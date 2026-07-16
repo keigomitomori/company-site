@@ -2,13 +2,12 @@
   <div class="container">
     <div class="logo">
       <a href="/">
-        <img src="/images/logo.webp" alt="NEXT Bridge">
+        <img src="/images/logo.webp" alt="NEXT Bridge" width="1117" height="185">
       </a>
     </div>
-    <input type="checkbox" id="menu-toggle" class="menu-toggle" aria-hidden="true">
-    <label for="menu-toggle" class="menu-icon" role="button" aria-label="メニューを開閉する"><span></span></label>
-    <label for="menu-toggle" class="nav-overlay" aria-hidden="true"></label>
-    <nav class="nav">
+    <button type="button" class="menu-icon" aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開く"><span></span></button>
+    <div class="nav-overlay" aria-hidden="true"></div>
+    <nav class="nav" id="site-nav">
       <ul class="nav-list">
         <li><a href="/">ホーム</a></li>
         <li><a href="/about.html">会社概要</a></li>
@@ -20,3 +19,26 @@
     </nav>
   </div>
 </header>
+<script is:inline>
+  (function () {
+    var header = document.querySelector('.header');
+    var btn = header && header.querySelector('.menu-icon');
+    var overlay = header && header.querySelector('.nav-overlay');
+    if (!header || !btn || !overlay) return;
+    function setOpen(open) {
+      header.classList.toggle('nav-open', open);
+      btn.setAttribute('aria-expanded', String(open));
+      btn.setAttribute('aria-label', open ? 'メニューを閉じる' : 'メニューを開く');
+    }
+    btn.addEventListener('click', function () {
+      setOpen(btn.getAttribute('aria-expanded') !== 'true');
+    });
+    overlay.addEventListener('click', function () { setOpen(false); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && btn.getAttribute('aria-expanded') === 'true') {
+        setOpen(false);
+        btn.focus();
+      }
+    });
+  })();
+</script>

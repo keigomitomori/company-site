@@ -32,8 +32,17 @@ import PageHeader from '../components/PageHeader.astro';
   </section>
 
   <script is:inline>
-    if (typeof gtag === 'function') {
-      gtag('event', 'generate_lead', { event_category: 'contact', event_label: 'contact_form' });
-    }
+    // 送信直後の初回表示のみ計上する（リロード・URL直打ちでの二重計上を防ぐ）
+    (function () {
+      try {
+        if (sessionStorage.getItem('leadSubmitted') !== '1') return;
+        sessionStorage.removeItem('leadSubmitted');
+      } catch (err) {
+        return;
+      }
+      if (typeof gtag === 'function') {
+        gtag('event', 'generate_lead', { event_category: 'contact', event_label: 'contact_form' });
+      }
+    })();
   </script>
 </BaseLayout>

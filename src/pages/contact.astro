@@ -19,6 +19,10 @@ import PageHeader from '../components/PageHeader.astro';
       </div>
 
       <form class="contact-form" action="https://formspree.io/f/myknjqar" method="POST">
+        <!-- JS無効環境でも送信後にサイト内の完了ページへ戻すための Formspree 指定 -->
+        <input type="hidden" name="_next" value="https://nextb.net/thanks.html">
+        <!-- honeypot: 人間には見えない欄。botが埋めると Formspree 側で破棄される -->
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
         <div class="form-group">
           <label for="company">会社名</label>
           <input type="text" id="company" name="company" autocomplete="organization" placeholder="例：株式会社サンプル">
@@ -86,6 +90,7 @@ import PageHeader from '../components/PageHeader.astro';
           headers: { 'Accept': 'application/json' }
         }).then(function (res) {
           if (!res.ok) throw new Error('submit failed');
+          try { sessionStorage.setItem('leadSubmitted', '1'); } catch (err) {}
           window.location.href = '/thanks.html';
         }).catch(function () {
           btn.disabled = false;
