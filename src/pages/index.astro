@@ -3,9 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Cta from '../components/Cta.astro';
 import { getCollection } from 'astro:content';
 import LpBanner from '../components/LpBanner.astro';
-
-const fmt = (d: Date) =>
-  `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
+import { fmt, iso } from '../utils/date';
 
 // お知らせは最新の公開コラムから自動生成する（手動更新不要）
 const latestArticles = (await getCollection('articles', ({ data }) => !data.draft))
@@ -68,7 +66,7 @@ const orgJsonLd = JSON.stringify({
       <ul class="news-list">
         {latestArticles.map((article) => (
           <li>
-            <time datetime={article.data.pubDate.toISOString().split('T')[0]}>{fmt(article.data.pubDate)}</time>
+            <time datetime={iso(article.data.pubDate)}>{fmt(article.data.pubDate)}</time>
             <a href={`/articles/${article.id}/`}>コラム「{article.data.title}」を公開しました</a>
           </li>
         ))}

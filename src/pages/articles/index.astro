@@ -3,12 +3,11 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import Cta from '../../components/Cta.astro';
+import { fmt, iso } from '../../utils/date';
 
 const articles = (await getCollection('articles', ({ data }) => !data.draft)).sort(
   (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
 );
-const fmt = (d: Date) =>
-  `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
 ---
 <BaseLayout
   title="コラム | 株式会社ネクストブリッジ"
@@ -27,7 +26,7 @@ const fmt = (d: Date) =>
               <img class="article-list-thumb" src={`/images/og/${article.id}.png`} alt="" loading="lazy" width="1200" height="630">
               <div class="article-list-body">
                 <div class="article-list-meta">
-                  <time datetime={article.data.pubDate.toISOString().split('T')[0]}>{fmt(article.data.pubDate)}</time>
+                  <time datetime={iso(article.data.pubDate)}>{fmt(article.data.pubDate)}</time>
                   <span class="article-category">{article.data.category}</span>
                 </div>
                 <h2>{article.data.title}</h2>

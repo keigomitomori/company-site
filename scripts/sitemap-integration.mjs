@@ -29,12 +29,17 @@ export default function localSitemap({ site }) {
         for (const file of htmlFiles) {
           const rel = relative(distDir, file).split(sep).join('/');
           const html = await readFile(file, 'utf8');
-          const path = rel.endsWith('index.html') ? rel.slice(0, -'index.html'.length) : rel;
+          const isIndex = rel === 'index.html' || rel.endsWith('/index.html');
+          const path = isIndex ? rel.slice(0, -'index.html'.length) : rel;
           const realUrl = new URL(`/${path}`, site).href;
 
           const m = html.match(/<link rel="canonical" href="([^"]*)"/);
-          if (!m) canonicalErrors.push(`${rel}: canonical がありません`);
-          else if (m[1] !== realUrl) canonicalErrors.push(`${rel}: canonical=${m[1]} が実URL ${realUrl} と不一致`);
+          if (!m) {
+            // canonical を持たない HTML（サイト所有権確認ファイル等）はサイトマップ対象外として警告に留める
+            logger.warn(`${rel}: canonical がないため sitemap から除外します`);
+            continue;
+          }
+          if (m[1] !== realUrl) canonicalErrors.push(`${rel}: canonical=${m[1]} が実URL ${realUrl} と不一致`);
 
           if (rel === '404.html') continue;
           if (/<meta\s+name="robots"\s+content="noindex"/i.test(html)) continue;

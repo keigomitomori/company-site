@@ -199,6 +199,11 @@ a.btn-outline::after {
   top: 8px;
 }
 
+/* スキップリンクの着地時に sticky ヘッダー（60px）へ隠れないようにする */
+#main {
+  scroll-margin-top: 60px;
+}
+
 /* ========================================
    Header
    ======================================== */
@@ -1852,9 +1857,10 @@ a.btn-outline::after {
   border-top: 1px solid rgba(255, 255, 255, 0.14);
 }
 
-.cta + .footer,
-.highlight-dark + .footer {
-  border-top: 1px solid rgba(255, 255, 255, 0.14);
+/* ダークCTAで終わるページで、同色のフッターとの境界線を出す
+   （footer は main の外にあるため隣接セレクタでは届かない） */
+main > .cta:last-child {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
 }
 
 .cta h2 {

@@ -22,6 +22,7 @@ for (const file of htmlFiles) {
   const html = await readFile(file, 'utf8');
   const targets = [...html.matchAll(/(?:href|src)="(\/[^"]*)"/g)].map((m) => m[1]);
   for (const target of targets) {
+    if (target.startsWith('//')) continue; // プロトコル相対URL（外部）は対象外
     const path = target.split('#')[0].split('?')[0];
     if (path === '' || path === '/') continue;
     const candidates = path.endsWith('/')

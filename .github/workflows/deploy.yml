@@ -11,6 +11,11 @@ permissions:
   pages: write
   id-token: write
 
+# 連続 push 時にデプロイが競合・逆転しないようにする（進行中はキャンセルせず直列化）
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
 jobs:
   # 型検査・OG画像の存在・canonical一致（ビルド内）・内部リンクを検証する。
   # main への push だけでなく PR でも走らせ、壊れた変更をデプロイ前に止める。
@@ -44,6 +49,9 @@ jobs:
         uses: actions/checkout@v7
       - name: Build with Astro
         uses: withastro/action@v6
+        with:
+          # verify ジョブと同じ Node で検証済み成果物と同条件のビルドにする
+          node-version: 22
 
   deploy:
     needs: build

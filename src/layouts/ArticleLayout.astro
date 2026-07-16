@@ -1,6 +1,7 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import Cta from '../components/Cta.astro';
+import { fmt, iso } from '../utils/date';
 
 interface Props {
   title: string;
@@ -12,9 +13,6 @@ interface Props {
 }
 const { title, description, slug, pubDate, updatedDate, category } = Astro.props;
 
-const fmt = (d: Date) =>
-  `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
-const iso = (d: Date) => d.toISOString().split('T')[0];
 const canonical = `https://nextb.net/articles/${slug}/`;
 const ogImage = `https://nextb.net/images/og/${slug}.png`;
 

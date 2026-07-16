@@ -16,6 +16,8 @@ export async function GET(context: APIContext) {
       pubDate: a.data.pubDate,
       link: `/articles/${a.id}/`,
     })),
-    customData: '<language>ja</language>',
+    xmlns: { atom: 'http://www.w3.org/2005/Atom' },
+    customData:
+      '<language>ja</language><atom:link href="https://nextb.net/rss.xml" rel="self" type="application/rss+xml"/>',
   });
 }

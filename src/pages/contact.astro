@@ -79,6 +79,13 @@ import PageHeader from '../components/PageHeader.astro';
     (function () {
       var form = document.querySelector('.contact-form');
       if (!form || !window.fetch) return;
+      // bfcache 復元時（thanks からブラウザバック等）に送信ボタンを初期状態へ戻す
+      window.addEventListener('pageshow', function (e) {
+        if (!e.persisted) return;
+        var btn = form.querySelector('button[type="submit"]');
+        btn.disabled = false;
+        btn.textContent = '送信する';
+      });
       form.addEventListener('submit', function (e) {
         e.preventDefault();
         var btn = form.querySelector('button[type="submit"]');
