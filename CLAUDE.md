@@ -15,8 +15,14 @@
 
 ## デザイン・素材の規約
 
-- **LPは `lp-*` コンポーネントを共用する**（public/css/style.css の「LP v2」セクション）
+- **LPは `lp-*` コンポーネントを共用する**（src/styles/global.css の「LP 共通部品」セクション）
   - 標準構成: ヒーロー → お悩み → 宣言バンド → 3つの特長 → 中間CTA → 支援の流れ → 事例 → FAQ → CTA
+- **コンポーネント化の線引き**（2026-07-16 導入。過剰共通化を防ぐための基準）
+  - **データ駆動にするもの**（構造が固定的な下回り）: 支援の流れ `LpSteps`・FAQ `LpFaq`・誘導バナー `LpBanner`・中間CTA `LpConsult`・事例 `CaseCard`（正本は src/data/cases.ts）
+  - **直書きを維持するもの**（コピーと意匠を作り込む上物）: ヒーロー・宣言バンド・お悩み・特長・フロー図・Before/After
+    - 理由: LPごとに構成が既に分岐しており、props に畳むと編集コストが逆に上がる。構造と変更理由が収束したら再評価する
+- **CSSの命名**: 新規モディファイアは BEM 風の `--` 形式（`.card--link` 等）。既存の単一ハイフン（`btn-primary`・`section-gray` 等）は互換のため維持する
+- **CSSの色・影はセマンティックトークンを使う**（:root の `--accent-soft`・`--muted-on-dark`・`--shadow-card` 等）。同じ意味の色を hex 直書きで増やさない
 - **イラストはソコストから調達する**（https://soco-st.com、商用利用可・クレジット不要）
   - SVG直リンク: `https://soco-st.com/wp-content/themes/socost/upload/<ID>_color.svg`
   - オレンジ系（#febe69・#ffda71 等）はブランド青 #8fb0f0 に置換してから `public/images/ill-*.svg` に配置する
@@ -30,8 +36,11 @@
 ## 運用メモ
 
 - **デプロイ**: main へ push すると GitHub Actions（.github/workflows/deploy.yml）が GitHub Pages に自動デプロイする
+  - CI の verify ジョブが型検査（astro check）・OG画像の存在・canonical の実URL一致・内部リンクを検証し、失敗するとデプロイされない
 - **dist/ はビルド成果物**（リポジトリ管理外）。CI が build するのでローカル build は検証用
-- **sitemap.xml は public/ の静的ファイル**。ページを追加したら手動で URL を追記する
+- **sitemap.xml はビルド時に自動生成**（scripts/sitemap-integration.mjs が dist の実ファイルから生成。手動追記は不要。noindex ページと404は自動除外）
+- **canonical は原則自動導出**。ルート直下の `.html` ページ（about・services 等）のみ BaseLayout に明示指定する（実URLとの一致はビルドが検証する）
+- **コラム公開手順**: _stock/ から md と OG 画像 png を mv して push するだけ（お知らせ・一覧・sitemap は自動生成。OG 画像の置き忘れは CI が検知）
 - **料金の目安**（ユーザー決定 2026-07-11）: 顧問契約 月10万円〜（税別）／プロジェクト型支援 30万円〜（税別）。金額は目安レンジ表記とする
 - **契約はすべて準委任のみ**（ユーザー決定 2026-07-11）
   - 請負と誤読される肯定表現（「一括」「成果物を決めて進める」「完成させます」等）をサイトに書かない

@@ -10,7 +10,14 @@
   --accent: #2563eb;
   --accent-dark: #1d4fd7;
   --line: #e3e7ee;
+  --line-strong: #b9c3d4;
   --bg-soft: #f5f7fa;
+  --accent-soft: #e9f0fd;
+  --muted-on-dark: #93a1bd;
+  --panel-bg: #fbfcfe;
+  --node-border: #dfe5ee;
+  --shadow-card: 0 1.5px 4px rgba(15, 27, 51, 0.06);
+  --shadow-card-soft: 0 1.5px 4px rgba(15, 27, 51, 0.04);
   --white: #ffffff;
   --radius: 6px;
   --font: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
@@ -173,10 +180,6 @@ a.btn-outline::after {
 
 .news-list a:hover {
   color: var(--accent);
-}
-
-.news-list .news-plain {
-  color: var(--text);
 }
 
 /* キーボード利用者向けのスキップリンク（フォーカス時のみ表示） */
@@ -349,20 +352,6 @@ a.btn-outline::after {
   position: relative;
 }
 
-.hero--illust {
-  background: linear-gradient(180deg, #f3f7fd 0%, #ffffff 100%);
-  padding: 72px 0 64px;
-}
-
-.hero--illust::before,
-.hero--illust::after {
-  display: none;
-}
-
-.hero.hero--illust h1 {
-  font-size: 2.4rem;
-}
-
 .hero--cover {
   background:
     linear-gradient(90deg, rgba(255, 255, 255, 0.97) 0%, rgba(255, 255, 255, 0.88) 38%, rgba(246, 249, 253, 0.4) 62%, rgba(246, 249, 253, 0.05) 100%),
@@ -411,20 +400,6 @@ a.btn-outline::after {
   line-height: 1.5;
 }
 
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
-  gap: 56px;
-  align-items: center;
-}
-
-.hero-visual img,
-.hero-visual svg {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
 .hero-eyebrow {
   font-size: 0.85rem;
   font-weight: 500;
@@ -460,13 +435,6 @@ a.btn-outline::after {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
-}
-
-.feature-item {
-  background-color: var(--white);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 30px 28px;
 }
 
 .feature-num {
@@ -535,6 +503,7 @@ a.btn-outline::after {
 
 .statement .section-title {
   text-align: left;
+  margin-bottom: 24px;
 }
 
 .statement .section-title::after {
@@ -550,16 +519,21 @@ a.btn-outline::after {
   gap: 20px;
 }
 
+/* .feature-item（トップの特長カード）と基礎宣言を共有する。hover があるのは .card のみ */
+.feature-item,
 .card {
   background-color: var(--white);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 30px 28px;
+}
+
+.card {
   transition: border-color 0.2s;
 }
 
 .card:hover {
-  border-color: #b9c3d4;
+  border-color: var(--line-strong);
 }
 
 .card-grid--lp {
@@ -583,16 +557,6 @@ a.btn-outline::after {
   font-size: 0.88rem;
   font-weight: 700;
   color: var(--accent);
-}
-
-.card-icon {
-  color: var(--accent);
-  margin-bottom: 16px;
-}
-
-.card-icon svg {
-  width: 30px;
-  height: 30px;
 }
 
 .card-illust {
@@ -621,25 +585,6 @@ a.btn-outline::after {
   line-height: 1.9;
 }
 
-/* LP banner (under service cards) */
-.lp-banner {
-  margin-top: 24px;
-  border: 1px solid var(--line);
-  border-left: 3px solid var(--accent);
-  padding: 20px 26px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-.lp-banner p {
-  font-size: 0.95rem;
-  color: var(--text);
-  font-weight: 500;
-}
-
 /* ========================================
    Statement (philosophy preview)
    ======================================== */
@@ -665,10 +610,6 @@ a.btn-outline::after {
   margin-top: 14px;
 }
 
-.statement .section-title {
-  margin-bottom: 24px;
-}
-
 /* ========================================
    Split layout (text + figure)
    ======================================== */
@@ -683,23 +624,9 @@ a.btn-outline::after {
   margin: 0;
 }
 
-.figure-panel {
-  background-color: #fbfcfe;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  padding: 22px;
-}
-
-.figure-panel svg {
-  width: 100%;
-  height: auto;
-  display: block;
-  font-family: var(--font);
-}
-
 /* Org figure (illustrated) */
 .orgfig {
-  background-color: #fbfcfe;
+  background-color: var(--panel-bg);
   border: 1px solid var(--line);
   border-radius: 12px;
   padding: 22px;
@@ -715,11 +642,11 @@ a.btn-outline::after {
 
 .orgfig-node {
   background-color: var(--white);
-  border: 1px solid #dfe5ee;
+  border: 1px solid var(--node-border);
   border-radius: 10px;
   padding: 18px 12px 14px;
   text-align: center;
-  box-shadow: 0 1.5px 4px rgba(15, 27, 51, 0.06);
+  box-shadow: var(--shadow-card);
 }
 
 .orgfig-node img {
@@ -755,7 +682,7 @@ a.btn-outline::after {
 }
 
 .orgfig-pill {
-  background-color: #e9f0fd;
+  background-color: var(--accent-soft);
   color: var(--accent-dark);
   font-size: 0.7rem;
   font-weight: 500;
@@ -771,10 +698,10 @@ a.btn-outline::after {
 
 .orgfig-domains {
   background-color: var(--white);
-  border: 1px solid #dfe5ee;
+  border: 1px solid var(--node-border);
   border-radius: 10px;
   padding: 16px 18px;
-  box-shadow: 0 1.5px 4px rgba(15, 27, 51, 0.06);
+  box-shadow: var(--shadow-card);
 }
 
 .orgfig-domains-label {
@@ -817,6 +744,11 @@ a.btn-outline::after {
 }
 
 .highlight-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
   background-color: var(--ink);
   border-radius: 10px;
   padding: 44px 52px;
@@ -834,14 +766,6 @@ a.btn-outline::after {
   border: 1px solid rgba(126, 166, 244, 0.22);
   border-radius: 50%;
   pointer-events: none;
-}
-
-.highlight-inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 28px;
-  flex-wrap: wrap;
 }
 
 .eyebrow-light {
@@ -877,7 +801,7 @@ a.btn-outline::after {
 .page-header p {
   font-size: 0.85rem;
   margin-top: 6px;
-  color: #93a1bd;
+  color: var(--muted-on-dark);
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -985,9 +909,10 @@ a.btn-outline::after {
   padding: 30px 34px;
 }
 
-.case-tag {
+.case-tag,
+.article-category {
   display: inline-block;
-  background-color: #e9f0fd;
+  background-color: var(--accent-soft);
   color: var(--accent-dark);
   font-size: 0.78rem;
   font-weight: 500;
@@ -1112,8 +1037,27 @@ a.btn-outline::after {
 }
 
 /* ========================================
-   LP components
+   LP 共通部品（LP4本・料金・トップで共用）
    ======================================== */
+/* 別ページへの誘導バナー（LpBanner コンポーネント） */
+.lp-banner {
+  margin-top: 24px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  padding: 20px 26px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.lp-banner p {
+  font-size: 0.95rem;
+  color: var(--text);
+  font-weight: 500;
+}
+
 .ill {
   display: flex;
   justify-content: center;
@@ -1134,11 +1078,8 @@ a.btn-outline::after {
   max-width: 340px;
 }
 
-/* ========================================
-   LP v2 (genai-governance)
-   ======================================== */
 .lp-hero {
-  background: linear-gradient(180deg, #edf3fe 0%, #ffffff 100%);
+  background: linear-gradient(180deg, #edf3fe 0%, var(--white) 100%);
   padding: 76px 0 64px;
 }
 
@@ -1268,7 +1209,7 @@ a.btn-outline::after {
   padding: 14px 20px;
   font-size: 0.95rem;
   color: var(--text);
-  box-shadow: 0 1.5px 4px rgba(15, 27, 51, 0.04);
+  box-shadow: var(--shadow-card-soft);
 }
 
 .lp-checklist li::before {
@@ -1311,7 +1252,7 @@ a.btn-outline::after {
 }
 
 .lp-band-sub {
-  color: #93a1bd;
+  color: var(--muted-on-dark);
   font-size: 0.95rem;
 }
 
@@ -1371,7 +1312,7 @@ a.btn-outline::after {
 
 /* 図解: ルール→設定→強制のフロー */
 .lp-flowfig {
-  background-color: #fbfcfe;
+  background-color: var(--panel-bg);
   border: 1px solid var(--line);
   border-radius: 14px;
   padding: 26px;
@@ -1381,11 +1322,11 @@ a.btn-outline::after {
 
 .lp-flowfig-node {
   background-color: var(--white);
-  border: 1px solid #dfe5ee;
+  border: 1px solid var(--node-border);
   border-radius: 10px;
   padding: 13px 18px;
   text-align: center;
-  box-shadow: 0 1.5px 4px rgba(15, 27, 51, 0.06);
+  box-shadow: var(--shadow-card);
 }
 
 .lp-flowfig-node strong {
@@ -1419,13 +1360,13 @@ a.btn-outline::after {
   width: 13px;
   height: 13px;
   margin: -3px auto;
-  border-right: 2.5px solid #b9c3d4;
-  border-bottom: 2.5px solid #b9c3d4;
+  border-right: 2.5px solid var(--line-strong);
+  border-bottom: 2.5px solid var(--line-strong);
   transform: rotate(45deg);
 }
 
 .lp-flowfig-result {
-  background-color: #e9f0fd;
+  background-color: var(--accent-soft);
   border-radius: 10px;
   padding: 14px 12px;
   display: flex;
@@ -1584,7 +1525,7 @@ a.btn-outline::after {
 }
 
 .lp-consult {
-  background-color: #e9f0fd;
+  background-color: var(--accent-soft);
   padding: 40px 0;
 }
 
@@ -1613,10 +1554,11 @@ a.btn-outline::after {
   border: 1px solid var(--line);
   border-radius: 12px;
   padding: 26px 22px;
-  box-shadow: 0 1.5px 4px rgba(15, 27, 51, 0.04);
+  box-shadow: var(--shadow-card-soft);
 }
 
-.lp-step-ill {
+.lp-step-ill,
+.price-ill {
   height: 96px;
   display: flex;
   align-items: center;
@@ -1624,9 +1566,13 @@ a.btn-outline::after {
   margin-bottom: 16px;
 }
 
-.lp-step-ill img {
+.lp-step-ill img,
+.price-ill img {
   max-height: 96px;
   width: auto;
+}
+
+.lp-step-ill img {
   max-width: 70%;
 }
 
@@ -1652,7 +1598,9 @@ a.btn-outline::after {
   font-size: 0.85rem;
 }
 
-/* 送信完了ページ */
+/* ========================================
+   送信完了ページ
+   ======================================== */
 .thanks-box {
   max-width: 640px;
   margin: 0 auto;
@@ -1698,7 +1646,9 @@ a.btn-outline::after {
   margin-top: 10px;
 }
 
-/* 料金ページ */
+/* ========================================
+   料金ページ
+   ======================================== */
 .price-lead {
   text-align: center;
   color: var(--muted);
@@ -1721,20 +1671,12 @@ a.btn-outline::after {
   border-radius: 12px;
   padding: 32px 30px;
   text-align: center;
-  box-shadow: 0 1.5px 4px rgba(15, 27, 51, 0.04);
+  box-shadow: var(--shadow-card-soft);
 }
 
-.price-ill {
-  height: 96px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 16px;
-}
+/* 枠は .lp-step-ill と共通（定義は LP セクション）。img の横幅だけ料金カード向けに狭い */
 
 .price-ill img {
-  max-height: 96px;
-  width: auto;
   max-width: 60%;
 }
 
@@ -2088,16 +2030,7 @@ a.btn-outline::after {
   color: var(--accent);
 }
 
-.article-category {
-  display: inline-block;
-  background-color: #e9f0fd;
-  color: var(--accent-dark);
-  font-size: 0.75rem;
-  font-weight: 500;
-  padding: 3px 12px;
-  border-radius: 999px;
-  margin-bottom: 12px;
-}
+/* チップの見た目は .case-tag と共通（定義は Case Studies セクション） */
 
 .article-header h1 {
   font-size: 1.75rem;
@@ -2300,7 +2233,7 @@ a.btn-outline::after {
 
 .footer-company p {
   font-size: 0.85rem;
-  color: #93a1bd;
+  color: var(--muted-on-dark);
   line-height: 1.9;
 }
 
@@ -2318,7 +2251,7 @@ a.btn-outline::after {
 
 .footer-nav ul a {
   font-size: 0.85rem;
-  color: #93a1bd;
+  color: var(--muted-on-dark);
   transition: color 0.2s;
 }
 
@@ -2328,7 +2261,7 @@ a.btn-outline::after {
 
 .footer-contact p {
   font-size: 0.85rem;
-  color: #93a1bd;
+  color: var(--muted-on-dark);
   margin-bottom: 4px;
 }
 
@@ -2422,8 +2355,7 @@ a.btn-outline::after {
     padding: 56px 0 48px;
   }
 
-  .hero h1,
-  .hero.hero--illust h1 {
+  .hero h1 {
     font-size: 1.55rem;
   }
 
@@ -2434,16 +2366,6 @@ a.btn-outline::after {
   .hero::before,
   .hero::after {
     display: none;
-  }
-
-  .hero-grid {
-    grid-template-columns: 1fr;
-    gap: 32px;
-  }
-
-  .hero-visual {
-    max-width: 320px;
-    margin: 0 auto;
   }
 
   .hero--cover {
