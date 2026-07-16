@@ -11,16 +11,38 @@ const fmt = (d: Date) =>
 const latestArticles = (await getCollection('articles', ({ data }) => !data.draft))
   .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
   .slice(0, 3);
+
+const orgJsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: '株式会社ネクストブリッジ',
+  alternateName: 'NEXT Bridge',
+  url: 'https://nextb.net/',
+  logo: 'https://nextb.net/images/logo.webp',
+  address: {
+    '@type': 'PostalAddress',
+    postalCode: '104-0061',
+    addressRegion: '東京都',
+    addressLocality: '中央区',
+    streetAddress: '銀座1-12-4 N&E BLD.7階',
+    addressCountry: 'JP',
+  },
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'customer support',
+    url: 'https://nextb.net/contact.html',
+    availableLanguage: 'ja',
+  },
+});
 ---
 <BaseLayout
   title="株式会社ネクストブリッジ | 導入するだけのITから、使われるITへ。"
   description="株式会社ネクストブリッジの公式サイトです。情シスコンサルティング・製品導入支援・生成AI導入支援を行っています。"
   ogTitle="NEXT Bridge｜導入するだけのITから、使われるITへ。"
   ogDescription="情シスコンサルティング・製品導入支援・生成AI導入支援を行っています。"
-  twitterTitle="NEXT Bridge｜導入するだけのITから、使われるITへ。"
-  twitterDescription="情シスコンサルティング・製品導入支援・生成AI導入支援を行っています。"
-  twitterImage="https://nextb.net/images/og-default.png"
 >
+  <script type="application/ld+json" set:html={orgJsonLd} />
+
   <section class="hero hero--cover">
     <div class="container">
       <div class="hero-copy">

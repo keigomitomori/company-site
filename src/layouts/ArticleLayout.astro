@@ -42,6 +42,16 @@ const cta = ctaByCategory[category] ?? {
   text: '「何から手を付けるべきか」の整理からで構いません。現在の状況をお聞きし、改善の全体像と優先順位をご提案します。',
 };
 
+const breadcrumbJsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: 'https://nextb.net/' },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: 'https://nextb.net/articles/' },
+    { '@type': 'ListItem', position: 3, name: title },
+  ],
+});
+
 const jsonLd = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'Article',
@@ -73,6 +83,7 @@ const jsonLd = JSON.stringify({
   twitterImage={ogImage}
 >
   <script type="application/ld+json" set:html={jsonLd} />
+  <script type="application/ld+json" set:html={breadcrumbJsonLd} />
 
   <article class="article">
     <header class="article-header">
