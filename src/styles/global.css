@@ -1258,9 +1258,10 @@ a.btn-outline::after {
 }
 
 .lp-flowfig-illust-labels {
-  /* 列幅は ill-kitting-flow.png 内の実際のアイコン中心位置に合わせて実測（等分ではない） */
+  /* 列幅は画像内の実際のアイコン中心位置に合わせて実測（等分ではない）。
+     画像ごとに比率が異なるため --flowfig-cols をインラインstyleで指定する */
   display: grid;
-  grid-template-columns: 23.8% 49% 27.2%;
+  grid-template-columns: var(--flowfig-cols, 1fr 1fr 1fr);
   padding: 0 4px;
 }
 
