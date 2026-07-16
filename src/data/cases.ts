@@ -38,7 +38,7 @@ export const deviceManagementCase: { full: CaseCardData; summary: CaseCardData }
     support:
       'Entra ID / Intune の導入を設計から構築まで一貫して支援。設計書・パラメータシートを整備し、Autopilot を前提としたゼロタッチキッティングと運用手順を構築しました。',
     outcome:
-      '手作業のキッティングから、初期設定の多くを自動化するゼロタッチ展開へ。PCの定期入れ替えに合わせて新しい管理基盤に移行する道筋を作りました。',
+      'Autopilot によるゼロタッチ展開で、初期設定の多くを自動化。PCの定期入れ替えに合わせて新しい管理基盤に移行する道筋を作りました。',
   },
   summary: {
     tag: 'デバイス管理導入',
