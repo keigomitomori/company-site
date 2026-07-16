@@ -4,6 +4,7 @@ import PageHeader from '../components/PageHeader.astro';
 import Cta from '../components/Cta.astro';
 import CaseCard from '../components/CaseCard.astro';
 import { itStartupCase, deviceManagementCase, genaiAdoptionCase } from '../data/cases';
+import LpBanner from '../components/LpBanner.astro';
 ---
 <BaseLayout
   title="サービス | 株式会社ネクストブリッジ"
@@ -34,10 +35,7 @@ import { itStartupCase, deviceManagementCase, genaiAdoptionCase } from '../data/
         </div>
       </div>
 
-      <div class="lp-banner">
-        <p>専任情シスがいない会社向けの伴走支援は専用ページでご案内しています</p>
-        <a href="/it-support/" class="btn btn-text">情シス伴走支援「もうひとりの情シス」 →</a>
-      </div>
+      <LpBanner text="専任情シスがいない会社向けの伴走支援は専用ページでご案内しています" href="/it-support/" label="情シス伴走支援「もうひとりの情シス」" />
 
       <div class="service-detail">
         <div class="service-detail-text">
@@ -52,10 +50,7 @@ import { itStartupCase, deviceManagementCase, genaiAdoptionCase } from '../data/
         </div>
       </div>
 
-      <div class="lp-banner">
-        <p>Intune / Entra ID によるデバイス管理基盤の構築は専用ページでご案内しています</p>
-        <a href="/device-management/" class="btn btn-text">デバイス管理導入支援 →</a>
-      </div>
+      <LpBanner text="Intune / Entra ID によるデバイス管理基盤の構築は専用ページでご案内しています" href="/device-management/" label="デバイス管理導入支援" />
 
       <div class="service-detail">
         <div class="service-detail-text">
@@ -70,15 +65,9 @@ import { itStartupCase, deviceManagementCase, genaiAdoptionCase } from '../data/
         </div>
       </div>
 
-      <div class="lp-banner">
-        <p>業務への活用（攻め）は専用ページでご案内しています</p>
-        <a href="/genai-adoption/" class="btn btn-text">生成AI活用支援 →</a>
-      </div>
+      <LpBanner text="業務への活用（攻め）は専用ページでご案内しています" href="/genai-adoption/" label="生成AI活用支援" />
 
-      <div class="lp-banner">
-        <p>Claude や Claude Code の社内展開・統制（守り）は専用ページでご案内しています</p>
-        <a href="/genai-governance/" class="btn btn-text">生成AI・Claude Codeの社内統制支援 →</a>
-      </div>
+      <LpBanner text="Claude や Claude Code の社内展開・統制（守り）は専用ページでご案内しています" href="/genai-governance/" label="生成AI・Claude Codeの社内統制支援" />
     </div>
   </section>
 
@@ -144,10 +133,7 @@ import { itStartupCase, deviceManagementCase, genaiAdoptionCase } from '../data/
       </div>
       <p class="contract-note">いずれのご契約も準委任です。詳しくは料金ページの注記をご覧ください。</p>
 
-      <div class="lp-banner">
-        <p>それぞれの料金の目安は料金ページでご案内しています</p>
-        <a href="/pricing.html" class="btn btn-text">料金 →</a>
-      </div>
+      <LpBanner text="それぞれの料金の目安は料金ページでご案内しています" href="/pricing.html" label="料金" />
     </div>
   </section>
 

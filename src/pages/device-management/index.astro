@@ -3,6 +3,26 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Cta from '../../components/Cta.astro';
 import CaseCard from '../../components/CaseCard.astro';
 import { deviceManagementCase } from '../../data/cases';
+import LpSteps from '../../components/LpSteps.astro';
+import { ill } from '../../data/illustrations';
+import LpFaq from '../../components/LpFaq.astro';
+import LpBanner from '../../components/LpBanner.astro';
+import LpConsult from '../../components/LpConsult.astro';
+
+const steps = [
+  { image: ill.magnifier, title: "現状調査", items: ["端末・ライセンスの棚卸し", "いまの運用の確認"] },
+  { image: ill.document, title: "設計", items: ["ポリシー・構成の設計", "設計書・パラメータシート整備"] },
+  { image: ill.shieldpc, title: "構築・展開", items: ["検証してから段階展開", "既存端末の移行計画"] },
+  { image: ill.growth, title: "運用引き継ぎ", items: ["運用手順書の整備", "社内担当への引き継ぎ"] },
+];
+
+const faqItems = [
+  { q: "何台くらいの規模から頼めますか？", a: "数十台規模からご相談いただけます。構築実績の中心は100〜200台規模です。" },
+  { q: "ライセンスは何が必要ですか？", a: "Microsoft 365 Business Premium 以上が目安です。現在のご契約内容を確認したうえで、過不足をご提案します。" },
+  { q: "いま使っているPCも管理下に入れられますか？", a: "はい。使用中の端末を段階的に登録する移行計画を立てて進めます。PCの入れ替え時期に合わせる進め方も可能です。" },
+  { q: "構築後の運用もお願いできますか？", a: "はい。月額の顧問契約（情シス伴走支援）で、構築後の運用まで継続して支援できます。" },
+  { q: "費用はどのくらいですか？", a: "30万円〜（税別）が目安で、台数と構成によって変わります。詳しくは<a href=\"/pricing.html\">料金ページ</a>をご覧ください。" },
+];
 ---
 <BaseLayout
   title="Intune / Entra ID デバイス管理導入支援 | 株式会社ネクストブリッジ"
@@ -165,12 +185,7 @@ import { deviceManagementCase } from '../../data/cases';
     </div>
   </section>
 
-  <section class="lp-consult">
-    <div class="container lp-consult-inner">
-      <p>「いまの環境からでも移行できる？」— まずは現状をお聞かせください。</p>
-      <a href="/contact.html" class="btn btn-primary">無料で相談する</a>
-    </div>
-  </section>
+  <LpConsult text="「いまの環境からでも移行できる？」— まずは現状をお聞かせください。" />
 
   <section class="section">
     <div class="container">
@@ -178,52 +193,7 @@ import { deviceManagementCase } from '../../data/cases';
         <p class="lp-eyebrow">FLOW</p>
         <h2>支援の流れ</h2>
       </div>
-      <ol class="lp-steps">
-        <li class="lp-step">
-          <div class="lp-step-ill">
-            <img src="/images/ill-magnifier.svg" alt="" loading="lazy" width="142" height="285">
-          </div>
-          <span class="lp-step-num">STEP 01</span>
-          <h3>現状調査</h3>
-          <ul class="feature-list">
-            <li>端末・ライセンスの棚卸し</li>
-            <li>いまの運用の確認</li>
-          </ul>
-        </li>
-        <li class="lp-step">
-          <div class="lp-step-ill">
-            <img src="/images/ill-document.svg" alt="" loading="lazy" width="215" height="199">
-          </div>
-          <span class="lp-step-num">STEP 02</span>
-          <h3>設計</h3>
-          <ul class="feature-list">
-            <li>ポリシー・構成の設計</li>
-            <li>設計書・パラメータシート整備</li>
-          </ul>
-        </li>
-        <li class="lp-step">
-          <div class="lp-step-ill">
-            <img src="/images/ill-shieldpc.svg" alt="" loading="lazy" width="255" height="282">
-          </div>
-          <span class="lp-step-num">STEP 03</span>
-          <h3>構築・展開</h3>
-          <ul class="feature-list">
-            <li>検証してから段階展開</li>
-            <li>既存端末の移行計画</li>
-          </ul>
-        </li>
-        <li class="lp-step">
-          <div class="lp-step-ill">
-            <img src="/images/ill-growth.svg" alt="" loading="lazy" width="458" height="345">
-          </div>
-          <span class="lp-step-num">STEP 04</span>
-          <h3>運用引き継ぎ</h3>
-          <ul class="feature-list">
-            <li>運用手順書の整備</li>
-            <li>社内担当への引き継ぎ</li>
-          </ul>
-        </li>
-      </ol>
+      <LpSteps steps={steps} />
     </div>
   </section>
 
@@ -248,32 +218,8 @@ import { deviceManagementCase } from '../../data/cases';
         <p class="lp-eyebrow">FAQ</p>
         <h2>よくあるご質問</h2>
       </div>
-      <div class="lp-faq">
-        <details>
-          <summary>何台くらいの規模から頼めますか？</summary>
-          <p>数十台規模からご相談いただけます。構築実績の中心は100〜200台規模です。</p>
-        </details>
-        <details>
-          <summary>ライセンスは何が必要ですか？</summary>
-          <p>Microsoft 365 Business Premium 以上が目安です。現在のご契約内容を確認したうえで、過不足をご提案します。</p>
-        </details>
-        <details>
-          <summary>いま使っているPCも管理下に入れられますか？</summary>
-          <p>はい。使用中の端末を段階的に登録する移行計画を立てて進めます。PCの入れ替え時期に合わせる進め方も可能です。</p>
-        </details>
-        <details>
-          <summary>構築後の運用もお願いできますか？</summary>
-          <p>はい。月額の顧問契約（情シス伴走支援）で、構築後の運用まで継続して支援できます。</p>
-        </details>
-        <details>
-          <summary>費用はどのくらいですか？</summary>
-          <p>30万円〜（税別）が目安で、台数と構成によって変わります。詳しくは<a href="/pricing.html">料金ページ</a>をご覧ください。</p>
-        </details>
-      </div>
-      <div class="lp-banner">
-        <p>この基盤の上で、Claude Code など生成AIツールの配布統制も実現できます</p>
-        <a href="/genai-governance/" class="btn btn-text">生成AI・Claude Codeの社内統制支援 →</a>
-      </div>
+      <LpFaq items={faqItems} />
+      <LpBanner text="この基盤の上で、Claude Code など生成AIツールの配布統制も実現できます" href="/genai-governance/" label="生成AI・Claude Codeの社内統制支援" />
     </div>
   </section>
 

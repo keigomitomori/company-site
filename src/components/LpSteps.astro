@@ -1,0 +1,27 @@
+---
+import type { Illustration } from '../data/illustrations';
+
+interface Step {
+  image: Illustration;
+  title: string;
+  items: string[];
+}
+interface Props {
+  steps: Step[];
+}
+const { steps } = Astro.props;
+---
+<ol class="lp-steps">
+  {steps.map((step, i) => (
+    <li class="lp-step">
+      <div class="lp-step-ill">
+        <img src={step.image.src} alt="" loading="lazy" width={step.image.width} height={step.image.height}>
+      </div>
+      <span class="lp-step-num">STEP {String(i + 1).padStart(2, '0')}</span>
+      <h3>{step.title}</h3>
+      <ul class="feature-list">
+        {step.items.map((item) => <li>{item}</li>)}
+      </ul>
+    </li>
+  ))}
+</ol>

@@ -2,6 +2,24 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import Cta from '../components/Cta.astro';
+import LpSteps from '../components/LpSteps.astro';
+import { ill } from '../data/illustrations';
+import LpFaq from '../components/LpFaq.astro';
+
+const steps = [
+  { image: ill.magnifier, title: "無料相談", items: ["現状と困りごとを伺います", "オンラインで30分程度"] },
+  { image: ill.meeting, title: "範囲のすり合わせ", items: ["やること・やらないことを整理", "ご予算に合わせて調整"] },
+  { image: ill.document, title: "お見積もり", items: ["金額と進め方をご提示", "お見積もりは無料です"] },
+  { image: ill.handshake, title: "ご契約・開始", items: ["契約手続きのうえ支援開始", "開始後も範囲を調整できます"] },
+];
+
+const faqItems = [
+  { q: "相談やお見積もりに費用はかかりますか？", a: "かかりません。初回相談とお見積もりは無料です。" },
+  { q: "予算が決まっています。範囲を合わせてもらえますか？", a: "はい。優先順位を付けて、ご予算に収まる範囲からのご提案もできます。" },
+  { q: "契約形態は請負ですか？準委任ですか？", a: "いずれのご支援も準委任契約です。業務の遂行に対して対価をいただく形で、成果物の完成をお約束する請負契約は承っていません。" },
+  { q: "顧問契約とプロジェクト型支援は併用できますか？", a: "はい。構築はプロジェクト型で、その後の運用は顧問契約で、という組み合わせが多いです。" },
+  { q: "支援の範囲は途中で変えられますか？", a: "はい。定例ミーティングで状況を見ながら、範囲や頻度を調整できます。" },
+];
 ---
 <BaseLayout
   title="料金 | 株式会社ネクストブリッジ"
@@ -109,52 +127,7 @@ import Cta from '../components/Cta.astro';
         <p class="lp-eyebrow">FLOW</p>
         <h2>お見積もりの流れ</h2>
       </div>
-      <ol class="lp-steps">
-        <li class="lp-step">
-          <div class="lp-step-ill">
-            <img src="/images/ill-magnifier.svg" alt="" loading="lazy" width="142" height="285">
-          </div>
-          <span class="lp-step-num">STEP 01</span>
-          <h3>無料相談</h3>
-          <ul class="feature-list">
-            <li>現状と困りごとを伺います</li>
-            <li>オンラインで30分程度</li>
-          </ul>
-        </li>
-        <li class="lp-step">
-          <div class="lp-step-ill">
-            <img src="/images/ill-meeting.svg" alt="" loading="lazy" width="398" height="247">
-          </div>
-          <span class="lp-step-num">STEP 02</span>
-          <h3>範囲のすり合わせ</h3>
-          <ul class="feature-list">
-            <li>やること・やらないことを整理</li>
-            <li>ご予算に合わせて調整</li>
-          </ul>
-        </li>
-        <li class="lp-step">
-          <div class="lp-step-ill">
-            <img src="/images/ill-document.svg" alt="" loading="lazy" width="215" height="199">
-          </div>
-          <span class="lp-step-num">STEP 03</span>
-          <h3>お見積もり</h3>
-          <ul class="feature-list">
-            <li>金額と進め方をご提示</li>
-            <li>お見積もりは無料です</li>
-          </ul>
-        </li>
-        <li class="lp-step">
-          <div class="lp-step-ill">
-            <img src="/images/ill-handshake.svg" alt="" loading="lazy" width="365" height="239">
-          </div>
-          <span class="lp-step-num">STEP 04</span>
-          <h3>ご契約・開始</h3>
-          <ul class="feature-list">
-            <li>契約手続きのうえ支援開始</li>
-            <li>開始後も範囲を調整できます</li>
-          </ul>
-        </li>
-      </ol>
+      <LpSteps steps={steps} />
     </div>
   </section>
 
@@ -164,28 +137,7 @@ import Cta from '../components/Cta.astro';
         <p class="lp-eyebrow">FAQ</p>
         <h2>料金に関するよくあるご質問</h2>
       </div>
-      <div class="lp-faq">
-        <details>
-          <summary>相談やお見積もりに費用はかかりますか？</summary>
-          <p>かかりません。初回相談とお見積もりは無料です。</p>
-        </details>
-        <details>
-          <summary>予算が決まっています。範囲を合わせてもらえますか？</summary>
-          <p>はい。優先順位を付けて、ご予算に収まる範囲からのご提案もできます。</p>
-        </details>
-        <details>
-          <summary>契約形態は請負ですか？準委任ですか？</summary>
-          <p>いずれのご支援も準委任契約です。業務の遂行に対して対価をいただく形で、成果物の完成をお約束する請負契約は承っていません。</p>
-        </details>
-        <details>
-          <summary>顧問契約とプロジェクト型支援は併用できますか？</summary>
-          <p>はい。構築はプロジェクト型で、その後の運用は顧問契約で、という組み合わせが多いです。</p>
-        </details>
-        <details>
-          <summary>支援の範囲は途中で変えられますか？</summary>
-          <p>はい。定例ミーティングで状況を見ながら、範囲や頻度を調整できます。</p>
-        </details>
-      </div>
+      <LpFaq items={faqItems} />
     </div>
   </section>
 

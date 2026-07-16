@@ -3,6 +3,25 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Cta from '../../components/Cta.astro';
 import CaseCard from '../../components/CaseCard.astro';
 import { itStartupCase } from '../../data/cases';
+import LpSteps from '../../components/LpSteps.astro';
+import { ill } from '../../data/illustrations';
+import LpFaq from '../../components/LpFaq.astro';
+import LpBanner from '../../components/LpBanner.astro';
+import LpConsult from '../../components/LpConsult.astro';
+
+const steps = [
+  { image: ill.magnifier, title: "無料相談", items: ["いまの困りごとを棚卸し", "IT環境の現状を確認"] },
+  { image: ill.document, title: "ご提案・お見積もり", items: ["支援範囲のすり合わせ", "月額と進め方のご提案"] },
+  { image: ill.shieldpc, title: "支援開始", items: ["相談窓口の開設", "優先度の高い課題から着手"] },
+  { image: ill.growth, title: "定例で改善", items: ["定例ミーティングで見直し", "成長に合わせて範囲を調整"] },
+];
+
+const faqItems = [
+  { q: "何名くらいの規模が対象ですか？", a: "10名前後の立ち上げ期から100名を超える規模まで支援しています。専任の情シスがいない、または一人で手が回っていない会社が中心です。" },
+  { q: "訪問はしてもらえますか？", a: "基本はリモートで、機器の入れ替えなど必要な場面では訪問も組み合わせます。" },
+  { q: "どこまでお願いできますか？", a: "助言だけでなく、設定作業やアカウント発行などの実務まで対応します。範囲はご契約時にすり合わせます。" },
+  { q: "費用はどのくらいですか？", a: "月10万円〜（税別）が目安で、支援範囲と頻度によって変わります。詳しくは<a href=\"/pricing.html\">料金ページ</a>をご覧ください。" },
+];
 ---
 <BaseLayout
   title="情シス伴走支援「もうひとりの情シス」 | 株式会社ネクストブリッジ"
@@ -144,12 +163,7 @@ import { itStartupCase } from '../../data/cases';
     </div>
   </section>
 
-  <section class="lp-consult">
-    <div class="container lp-consult-inner">
-      <p>ITの「困った」、まとめて相談してみませんか？</p>
-      <a href="/contact.html" class="btn btn-primary">無料で相談する</a>
-    </div>
-  </section>
+  <LpConsult text="ITの「困った」、まとめて相談してみませんか？" />
 
   <section class="section">
     <div class="container">
@@ -157,52 +171,7 @@ import { itStartupCase } from '../../data/cases';
         <p class="lp-eyebrow">FLOW</p>
         <h2>支援の流れ</h2>
       </div>
-      <ol class="lp-steps">
-        <li class="lp-step">
-          <div class="lp-step-ill">
-            <img src="/images/ill-magnifier.svg" alt="" loading="lazy" width="142" height="285">
-          </div>
-          <span class="lp-step-num">STEP 01</span>
-          <h3>無料相談</h3>
-          <ul class="feature-list">
-            <li>いまの困りごとを棚卸し</li>
-            <li>IT環境の現状を確認</li>
-          </ul>
-        </li>
-        <li class="lp-step">
-          <div class="lp-step-ill">
-            <img src="/images/ill-document.svg" alt="" loading="lazy" width="215" height="199">
-          </div>
-          <span class="lp-step-num">STEP 02</span>
-          <h3>ご提案・お見積もり</h3>
-          <ul class="feature-list">
-            <li>支援範囲のすり合わせ</li>
-            <li>月額と進め方のご提案</li>
-          </ul>
-        </li>
-        <li class="lp-step">
-          <div class="lp-step-ill">
-            <img src="/images/ill-shieldpc.svg" alt="" loading="lazy" width="255" height="282">
-          </div>
-          <span class="lp-step-num">STEP 03</span>
-          <h3>支援開始</h3>
-          <ul class="feature-list">
-            <li>相談窓口の開設</li>
-            <li>優先度の高い課題から着手</li>
-          </ul>
-        </li>
-        <li class="lp-step">
-          <div class="lp-step-ill">
-            <img src="/images/ill-growth.svg" alt="" loading="lazy" width="458" height="345">
-          </div>
-          <span class="lp-step-num">STEP 04</span>
-          <h3>定例で改善</h3>
-          <ul class="feature-list">
-            <li>定例ミーティングで見直し</li>
-            <li>成長に合わせて範囲を調整</li>
-          </ul>
-        </li>
-      </ol>
+      <LpSteps steps={steps} />
     </div>
   </section>
 
@@ -227,28 +196,8 @@ import { itStartupCase } from '../../data/cases';
         <p class="lp-eyebrow">FAQ</p>
         <h2>よくあるご質問</h2>
       </div>
-      <div class="lp-faq">
-        <details>
-          <summary>何名くらいの規模が対象ですか？</summary>
-          <p>10名前後の立ち上げ期から100名を超える規模まで支援しています。専任の情シスがいない、または一人で手が回っていない会社が中心です。</p>
-        </details>
-        <details>
-          <summary>訪問はしてもらえますか？</summary>
-          <p>基本はリモートで、機器の入れ替えなど必要な場面では訪問も組み合わせます。</p>
-        </details>
-        <details>
-          <summary>どこまでお願いできますか？</summary>
-          <p>助言だけでなく、設定作業やアカウント発行などの実務まで対応します。範囲はご契約時にすり合わせます。</p>
-        </details>
-        <details>
-          <summary>費用はどのくらいですか？</summary>
-          <p>月10万円〜（税別）が目安で、支援範囲と頻度によって変わります。詳しくは<a href="/pricing.html">料金ページ</a>をご覧ください。</p>
-        </details>
-      </div>
-      <div class="lp-banner">
-        <p>Intune / Entra ID によるデバイス管理基盤の構築は専用ページでご案内しています</p>
-        <a href="/device-management/" class="btn btn-text">デバイス管理導入支援 →</a>
-      </div>
+      <LpFaq items={faqItems} />
+      <LpBanner text="Intune / Entra ID によるデバイス管理基盤の構築は専用ページでご案内しています" href="/device-management/" label="デバイス管理導入支援" />
     </div>
   </section>
 

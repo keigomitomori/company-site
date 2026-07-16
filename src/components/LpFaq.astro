@@ -1,0 +1,19 @@
+---
+interface FaqItem {
+  q: string;
+  /** 回答文。リンク等のHTMLを含められる（set:html で描画） */
+  a: string;
+}
+interface Props {
+  items: FaqItem[];
+}
+const { items } = Astro.props;
+---
+<div class="lp-faq">
+  {items.map((item) => (
+    <details>
+      <summary>{item.q}</summary>
+      <p set:html={item.a} />
+    </details>
+  ))}
+</div>

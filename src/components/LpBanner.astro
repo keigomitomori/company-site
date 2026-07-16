@@ -1,0 +1,12 @@
+---
+interface Props {
+  text: string;
+  href: string;
+  label: string;
+}
+const { text, href, label } = Astro.props;
+---
+<div class="lp-banner">
+  <p>{text}</p>
+  <a href={href} class="btn btn-text">{label} →</a>
+</div>

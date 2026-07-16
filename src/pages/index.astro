@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Cta from '../components/Cta.astro';
 import { getCollection } from 'astro:content';
+import LpBanner from '../components/LpBanner.astro';
 
 const fmt = (d: Date) =>
   `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
@@ -127,10 +128,7 @@ const latestArticles = (await getCollection('articles', ({ data }) => !data.draf
           </div>
         </a>
       </div>
-      <div class="lp-banner">
-        <p>それぞれの料金の目安は料金ページでご案内しています</p>
-        <a href="/pricing.html" class="btn btn-text">料金 →</a>
-      </div>
+      <LpBanner text="それぞれの料金の目安は料金ページでご案内しています" href="/pricing.html" label="料金" />
     </div>
   </section>
 

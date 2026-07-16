@@ -3,6 +3,26 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Cta from '../../components/Cta.astro';
 import CaseCard from '../../components/CaseCard.astro';
 import { genaiAdoptionCase } from '../../data/cases';
+import LpSteps from '../../components/LpSteps.astro';
+import { ill } from '../../data/illustrations';
+import LpFaq from '../../components/LpFaq.astro';
+import LpBanner from '../../components/LpBanner.astro';
+import LpConsult from '../../components/LpConsult.astro';
+
+const steps = [
+  { image: ill.magnifier, title: "業務の棚卸し", items: ["現場ヒアリング", "候補業務の優先順位付け"] },
+  { image: ill.document, title: "試作", items: ["ユースケースの設計", "プロトタイプの作成"] },
+  { image: ill.meeting, title: "現場評価", items: ["現場メンバーが実際に使用", "週次定例で改善"] },
+  { image: ill.growth, title: "展開・定着", items: ["ルール・研修とあわせて展開", "効果の測定と改善"] },
+];
+
+const faqItems = [
+  { q: "対象の業務が決まっていなくても相談できますか？", a: "はい。業務の洗い出しと優先順位付けから始めるケースがほとんどです。" },
+  { q: "どんなツールを使いますか？", a: "Claude を中心に、目的に合わせて選定します。特定ツールの販売代理ではないため、中立な立場で選べます。" },
+  { q: "現場が忙しくても進められますか？", a: "ヒアリングと試作はこちらで巻き取ります。現場の負担は、評価時のフィードバックが中心になるよう設計します。" },
+  { q: "セキュリティやルールも一緒に頼めますか？", a: "はい。ガイドライン策定や設定による統制まで、同じ窓口で支援できます。" },
+  { q: "費用はどのくらいですか？", a: "30万円〜（税別）が目安で、対象業務の数と期間によって変わります。詳しくは<a href=\"/pricing.html\">料金ページ</a>をご覧ください。" },
+];
 ---
 <BaseLayout
   title="生成AI活用支援（業務への導入・定着） | 株式会社ネクストブリッジ"
@@ -125,12 +145,7 @@ import { genaiAdoptionCase } from '../../data/cases';
     </div>
   </section>
 
-  <section class="lp-consult">
-    <div class="container lp-consult-inner">
-      <p>「うちの業務だと、何に使える？」— 業務の棚卸しからご一緒します。</p>
-      <a href="/contact.html" class="btn btn-primary">無料で相談する</a>
-    </div>
-  </section>
+  <LpConsult text="「うちの業務だと、何に使える？」— 業務の棚卸しからご一緒します。" />
 
   <section class="section">
     <div class="container">
@@ -138,52 +153,7 @@ import { genaiAdoptionCase } from '../../data/cases';
         <p class="lp-eyebrow">FLOW</p>
         <h2>支援の流れ</h2>
       </div>
-      <ol class="lp-steps">
-        <li class="lp-step">
-          <div class="lp-step-ill">
-            <img src="/images/ill-magnifier.svg" alt="" loading="lazy" width="142" height="285">
-          </div>
-          <span class="lp-step-num">STEP 01</span>
-          <h3>業務の棚卸し</h3>
-          <ul class="feature-list">
-            <li>現場ヒアリング</li>
-            <li>候補業務の優先順位付け</li>
-          </ul>
-        </li>
-        <li class="lp-step">
-          <div class="lp-step-ill">
-            <img src="/images/ill-document.svg" alt="" loading="lazy" width="215" height="199">
-          </div>
-          <span class="lp-step-num">STEP 02</span>
-          <h3>試作</h3>
-          <ul class="feature-list">
-            <li>ユースケースの設計</li>
-            <li>プロトタイプの作成</li>
-          </ul>
-        </li>
-        <li class="lp-step">
-          <div class="lp-step-ill">
-            <img src="/images/ill-meeting.svg" alt="" loading="lazy" width="398" height="247">
-          </div>
-          <span class="lp-step-num">STEP 03</span>
-          <h3>現場評価</h3>
-          <ul class="feature-list">
-            <li>現場メンバーが実際に使用</li>
-            <li>週次定例で改善</li>
-          </ul>
-        </li>
-        <li class="lp-step">
-          <div class="lp-step-ill">
-            <img src="/images/ill-growth.svg" alt="" loading="lazy" width="458" height="345">
-          </div>
-          <span class="lp-step-num">STEP 04</span>
-          <h3>展開・定着</h3>
-          <ul class="feature-list">
-            <li>ルール・研修とあわせて展開</li>
-            <li>効果の測定と改善</li>
-          </ul>
-        </li>
-      </ol>
+      <LpSteps steps={steps} />
     </div>
   </section>
 
@@ -208,32 +178,8 @@ import { genaiAdoptionCase } from '../../data/cases';
         <p class="lp-eyebrow">FAQ</p>
         <h2>よくあるご質問</h2>
       </div>
-      <div class="lp-faq">
-        <details>
-          <summary>対象の業務が決まっていなくても相談できますか？</summary>
-          <p>はい。業務の洗い出しと優先順位付けから始めるケースがほとんどです。</p>
-        </details>
-        <details>
-          <summary>どんなツールを使いますか？</summary>
-          <p>Claude を中心に、目的に合わせて選定します。特定ツールの販売代理ではないため、中立な立場で選べます。</p>
-        </details>
-        <details>
-          <summary>現場が忙しくても進められますか？</summary>
-          <p>ヒアリングと試作はこちらで巻き取ります。現場の負担は、評価時のフィードバックが中心になるよう設計します。</p>
-        </details>
-        <details>
-          <summary>セキュリティやルールも一緒に頼めますか？</summary>
-          <p>はい。ガイドライン策定や設定による統制まで、同じ窓口で支援できます。</p>
-        </details>
-        <details>
-          <summary>費用はどのくらいですか？</summary>
-          <p>30万円〜（税別）が目安で、対象業務の数と期間によって変わります。詳しくは<a href="/pricing.html">料金ページ</a>をご覧ください。</p>
-        </details>
-      </div>
-      <div class="lp-banner">
-        <p>守り（ルール・設定による統制）の支援は専用ページでご案内しています</p>
-        <a href="/genai-governance/" class="btn btn-text">生成AI・Claude Codeの社内統制支援 →</a>
-      </div>
+      <LpFaq items={faqItems} />
+      <LpBanner text="守り（ルール・設定による統制）の支援は専用ページでご案内しています" href="/genai-governance/" label="生成AI・Claude Codeの社内統制支援" />
     </div>
   </section>
 

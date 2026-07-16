@@ -3,6 +3,24 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Cta from '../../components/Cta.astro';
 import CaseCard from '../../components/CaseCard.astro';
 import { claudeEnterpriseCase, claudeCodeGovernanceCase } from '../../data/cases';
+import LpSteps from '../../components/LpSteps.astro';
+import { ill } from '../../data/illustrations';
+import LpFaq from '../../components/LpFaq.astro';
+import LpConsult from '../../components/LpConsult.astro';
+
+const steps = [
+  { image: ill.magnifier, title: "現状診断", items: ["利用実態の棚卸し", "プラン選定の支援", "機密データの区分整理"] },
+  { image: ill.document, title: "ルール策定", items: ["利用ガイドライン作成", "入力してよい情報の線引き", "例外承認フローの設計"] },
+  { image: ill.shieldpc, title: "技術統制", items: ["SSO・アカウント統制", "managed settings 設計", "Intune / MDM 配布"] },
+  { image: ill.growth, title: "定着支援", items: ["社内勉強会・研修", "利用状況の分析", "推進担当の育成"] },
+];
+
+const faqItems = [
+  { q: "何から相談すればいいですか？", a: "現状の共有だけで大丈夫です。利用状況やお使いの環境（Microsoft 365 など）をお聞きして、進め方をご提案します。" },
+  { q: "ガイドラインはすでにあります。途中からでも頼めますか？", a: "はい。設定による統制だけ、定着支援だけなど、必要な部分からお手伝いできます。" },
+  { q: "ISMS認証を運用中です。整合できますか？", a: "はい。リスクアセスメントへの載せ方から規程との整合まで、ISMSの運用に沿った形で進めます。" },
+  { q: "Claude 以外の生成AIにも対応できますか？", a: "Claude・Claude Code を中心としつつ、他の生成AIを含めた利用ルールづくりもご相談いただけます。" },
+];
 ---
 <BaseLayout
   title="生成AI・Claude Codeの社内統制支援 | 株式会社ネクストブリッジ"
@@ -168,12 +186,7 @@ import { claudeEnterpriseCase, claudeCodeGovernanceCase } from '../../data/cases
     </div>
   </section>
 
-  <section class="lp-consult">
-    <div class="container lp-consult-inner">
-      <p>「うちの場合はどう進める？」 — まずは現状をお聞かせください。</p>
-      <a href="/contact.html" class="btn btn-primary">無料で相談する</a>
-    </div>
-  </section>
+  <LpConsult text="「うちの場合はどう進める？」 — まずは現状をお聞かせください。" />
 
   <section class="section">
     <div class="container">
@@ -181,56 +194,7 @@ import { claudeEnterpriseCase, claudeCodeGovernanceCase } from '../../data/cases
         <p class="lp-eyebrow">FLOW</p>
         <h2>支援の流れ</h2>
       </div>
-      <ol class="lp-steps">
-        <li class="lp-step">
-          <div class="lp-step-ill">
-            <img src="/images/ill-magnifier.svg" alt="" loading="lazy" width="142" height="285">
-          </div>
-          <span class="lp-step-num">STEP 01</span>
-          <h3>現状診断</h3>
-          <ul class="feature-list">
-            <li>利用実態の棚卸し</li>
-            <li>プラン選定の支援</li>
-            <li>機密データの区分整理</li>
-          </ul>
-        </li>
-        <li class="lp-step">
-          <div class="lp-step-ill">
-            <img src="/images/ill-document.svg" alt="" loading="lazy" width="215" height="199">
-          </div>
-          <span class="lp-step-num">STEP 02</span>
-          <h3>ルール策定</h3>
-          <ul class="feature-list">
-            <li>利用ガイドライン作成</li>
-            <li>入力してよい情報の線引き</li>
-            <li>例外承認フローの設計</li>
-          </ul>
-        </li>
-        <li class="lp-step">
-          <div class="lp-step-ill">
-            <img src="/images/ill-shieldpc.svg" alt="" loading="lazy" width="255" height="282">
-          </div>
-          <span class="lp-step-num">STEP 03</span>
-          <h3>技術統制</h3>
-          <ul class="feature-list">
-            <li>SSO・アカウント統制</li>
-            <li>managed settings 設計</li>
-            <li>Intune / MDM 配布</li>
-          </ul>
-        </li>
-        <li class="lp-step">
-          <div class="lp-step-ill">
-            <img src="/images/ill-growth.svg" alt="" loading="lazy" width="458" height="345">
-          </div>
-          <span class="lp-step-num">STEP 04</span>
-          <h3>定着支援</h3>
-          <ul class="feature-list">
-            <li>社内勉強会・研修</li>
-            <li>利用状況の分析</li>
-            <li>推進担当の育成</li>
-          </ul>
-        </li>
-      </ol>
+      <LpSteps steps={steps} />
     </div>
   </section>
 
@@ -256,24 +220,7 @@ import { claudeEnterpriseCase, claudeCodeGovernanceCase } from '../../data/cases
         <p class="lp-eyebrow">FAQ</p>
         <h2>よくあるご質問</h2>
       </div>
-      <div class="lp-faq">
-        <details>
-          <summary>何から相談すればいいですか？</summary>
-          <p>現状の共有だけで大丈夫です。利用状況やお使いの環境（Microsoft 365 など）をお聞きして、進め方をご提案します。</p>
-        </details>
-        <details>
-          <summary>ガイドラインはすでにあります。途中からでも頼めますか？</summary>
-          <p>はい。設定による統制だけ、定着支援だけなど、必要な部分からお手伝いできます。</p>
-        </details>
-        <details>
-          <summary>ISMS認証を運用中です。整合できますか？</summary>
-          <p>はい。リスクアセスメントへの載せ方から規程との整合まで、ISMSの運用に沿った形で進めます。</p>
-        </details>
-        <details>
-          <summary>Claude 以外の生成AIにも対応できますか？</summary>
-          <p>Claude・Claude Code を中心としつつ、他の生成AIを含めた利用ルールづくりもご相談いただけます。</p>
-        </details>
-      </div>
+      <LpFaq items={faqItems} />
     </div>
   </section>
 
