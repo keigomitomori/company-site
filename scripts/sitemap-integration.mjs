@@ -24,6 +24,18 @@ export default function localSitemap({ site }) {
         };
         await walk(distDir);
 
+        // サイト所有権確認ファイル等、canonical を持たなくてよい既知パターン（sitemap 対象外）
+        const CANONICAL_EXEMPT = [/^google[0-9a-f]+\.html$/i];
+        // <meta name="robots" content="...noindex..."> を属性順・追加値に依存せず検出する
+        const hasNoindex = (html) => {
+          for (const tag of html.match(/<meta\b[^>]*>/gi) ?? []) {
+            if (/name=["']robots["']/i.test(tag) && /content=["'][^"']*noindex[^"']*["']/i.test(tag)) return true;
+          }
+          return false;
+        };
+        const escapeXml = (s) =>
+          s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
         const urls = [];
         const canonicalErrors = [];
         for (const file of htmlFiles) {
@@ -35,14 +47,14 @@ export default function localSitemap({ site }) {
 
           const m = html.match(/<link rel="canonical" href="([^"]*)"/);
           if (!m) {
-            // canonical を持たない HTML（サイト所有権確認ファイル等）はサイトマップ対象外として警告に留める
-            logger.warn(`${rel}: canonical がないため sitemap から除外します`);
+            if (CANONICAL_EXEMPT.some((re) => re.test(rel))) continue;
+            canonicalErrors.push(`${rel}: canonical がありません（BaseLayout を使っていますか？）`);
             continue;
           }
           if (m[1] !== realUrl) canonicalErrors.push(`${rel}: canonical=${m[1]} が実URL ${realUrl} と不一致`);
 
           if (rel === '404.html') continue;
-          if (/<meta\s+name="robots"\s+content="noindex"/i.test(html)) continue;
+          if (hasNoindex(html)) continue;
           urls.push(realUrl);
         }
 
@@ -54,7 +66,7 @@ export default function localSitemap({ site }) {
         const xml = [
           '<?xml version="1.0" encoding="UTF-8"?>',
           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
-          ...urls.map((u) => `  <url><loc>${u}</loc></url>`),
+          ...urls.map((u) => `  <url><loc>${escapeXml(u)}</loc></url>`),
           '</urlset>',
           '',
         ].join('\n');

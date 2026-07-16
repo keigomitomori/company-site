@@ -11,9 +11,10 @@ permissions:
   pages: write
   id-token: write
 
-# 連続 push 時にデプロイが競合・逆転しないようにする（進行中はキャンセルせず直列化）
+# 連続 push 時にデプロイが競合・逆転しないようにする（進行中はキャンセルせず直列化）。
+# ref 別グループにして、PR の verify が main のデプロイ待機枠を奪わないようにする
 concurrency:
-  group: pages
+  group: pages-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:

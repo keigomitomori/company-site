@@ -19,7 +19,7 @@ import PageHeader from '../components/PageHeader.astro';
       </div>
 
       <form class="contact-form" action="https://formspree.io/f/myknjqar" method="POST">
-        <!-- JS無効環境でも送信後にサイト内の完了ページへ戻すための Formspree 指定 -->
+        <!-- 非JS送信時のリダイレクト先指定（Formspree のプラン設定によっては無視され標準完了ページになる） -->
         <input type="hidden" name="_next" value="https://nextb.net/thanks.html">
         <!-- honeypot: 人間には見えない欄。botが埋めると Formspree 側で破棄される -->
         <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">

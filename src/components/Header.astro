@@ -18,6 +18,25 @@
       </ul>
     </nav>
   </div>
+  <noscript>
+    <style>
+      /* JS無効時はハンバーガーを隠し、モバイルでもナビを静的に展開する */
+      .menu-icon { display: none !important; }
+      @media (max-width: 768px) {
+        .header .container { flex-wrap: wrap; height: auto; padding-top: 10px; padding-bottom: 10px; }
+        .nav {
+          position: static;
+          visibility: visible;
+          width: 100%;
+          max-width: none;
+          height: auto;
+          box-shadow: none;
+          padding: 0;
+          transition: none;
+        }
+      }
+    </style>
+  </noscript>
 </header>
 <script is:inline>
   (function () {
