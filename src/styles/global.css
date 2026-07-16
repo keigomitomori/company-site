@@ -1250,6 +1250,28 @@ a.btn-outline::after {
   gap: 10px;
 }
 
+/* イラスト版フロー図（device-management のキッティング自動化のみで使用） */
+.lp-flowfig-illust {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.lp-flowfig-illust-labels {
+  /* 列幅は ill-kitting-flow.png 内の実際のアイコン中心位置に合わせて実測（等分ではない） */
+  display: grid;
+  grid-template-columns: 23.8% 49% 27.2%;
+  padding: 0 4px;
+}
+
+.lp-flowfig-illust-labels span {
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.5;
+}
+
 .lp-flowfig-node {
   background-color: var(--white);
   border: 1px solid var(--node-border);
