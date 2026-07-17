@@ -1,12 +1,16 @@
 ---
 interface Props {
   text: string;
+  note?: string;
 }
-const { text } = Astro.props;
+const { text, note } = Astro.props;
 ---
 <section class="lp-consult">
-  <div class="container lp-consult-inner">
-    <p>{text}</p>
-    <a href="/contact.html" class="btn btn-primary">無料で相談する</a>
+  <div class="container">
+    <div class="lp-consult-inner">
+      <p>{text}</p>
+      <a href="/contact.html" class="btn btn-primary">無料で相談する</a>
+    </div>
+    {note && <p class="lp-consult-note">{note}</p>}
   </div>
 </section>

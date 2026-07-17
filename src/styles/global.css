@@ -1496,6 +1496,13 @@ a.btn-outline::after {
   color: var(--ink);
 }
 
+.lp-consult-note {
+  margin-top: 14px;
+  text-align: center;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
 .lp-steps {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
