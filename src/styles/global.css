@@ -360,7 +360,7 @@ a.btn-outline::after {
 .hero--cover {
   background:
     linear-gradient(90deg, rgba(255, 255, 255, 0.97) 0%, rgba(255, 255, 255, 0.88) 38%, rgba(246, 249, 253, 0.4) 62%, rgba(246, 249, 253, 0.05) 100%),
-    url("/images/hero-photo.webp") right center / auto 115% no-repeat;
+    url("/images/hero-illustration.webp") right center / auto 115% no-repeat;
   background-color: #f4f8fd;
   padding: 92px 0;
 }
@@ -2332,7 +2332,7 @@ main > .cta:last-child {
   .hero--cover {
     background:
       linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.92)),
-      url("/images/hero-photo.webp") center / cover no-repeat;
+      url("/images/hero-illustration.webp") center / cover no-repeat;
     padding: 56px 0 48px;
   }
 
