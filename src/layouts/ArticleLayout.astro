@@ -58,12 +58,7 @@ const jsonLd = JSON.stringify({
   image: [ogImage],
   datePublished: iso(pubDate),
   dateModified: iso(updatedDate ?? pubDate),
-  author: {
-    '@type': 'Person',
-    name: '水戸守 桂吾',
-    jobTitle: '代表取締役',
-    worksFor: { '@type': 'Organization', name: '株式会社ネクストブリッジ', url: 'https://nextb.net/' },
-  },
+  author: { '@type': 'Organization', name: '株式会社ネクストブリッジ', url: 'https://nextb.net/' },
   publisher: { '@type': 'Organization', name: '株式会社ネクストブリッジ', url: 'https://nextb.net/' },
   mainEntityOfPage: canonical,
 });
@@ -94,7 +89,7 @@ const jsonLd = JSON.stringify({
         <p class="article-meta">
           <time datetime={iso(pubDate)}>{fmt(pubDate)} 公開</time>
           {updatedDate && <time datetime={iso(updatedDate)}>（{fmt(updatedDate)} 更新）</time>}
-          <span class="article-author-line">執筆: 水戸守 桂吾（株式会社ネクストブリッジ 代表取締役）</span>
+          <span class="article-author-line">執筆: 株式会社ネクストブリッジ</span>
         </p>
       </div>
     </header>
@@ -106,9 +101,9 @@ const jsonLd = JSON.stringify({
       </div>
 
       <aside class="author-box">
-        <p class="author-box-title">この記事を書いた人</p>
-        <p class="author-box-name">水戸守 桂吾<span>株式会社ネクストブリッジ 代表取締役</span></p>
-        <p class="author-box-bio">情シスコンサルタント。中堅・中小企業のIT顧問、Microsoft 365 / Entra ID / Intune の導入、ISMS運用、生成AI（Claude・Claude Code）の企業導入と統制設計を実務で支援している。</p>
+        <p class="author-box-title">執筆者</p>
+        <p class="author-box-name">株式会社ネクストブリッジ</p>
+        <p class="author-box-bio">中堅・中小企業のIT顧問、Microsoft 365 / Entra ID / Intune の導入、ISMS運用、生成AI（Claude・Claude Code）の企業導入と統制設計を実務で支援しています。</p>
       </aside>
     </div>
   </article>
