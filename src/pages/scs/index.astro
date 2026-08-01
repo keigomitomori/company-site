@@ -1,0 +1,226 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Cta from '../../components/Cta.astro';
+import CaseCard from '../../components/CaseCard.astro';
+import { itStartupCase } from '../../data/cases';
+import LpSteps from '../../components/LpSteps.astro';
+import { ill } from '../../data/illustrations';
+import LpFaq from '../../components/LpFaq.astro';
+import LpBanner from '../../components/LpBanner.astro';
+import LpConsult from '../../components/LpConsult.astro';
+
+// 時点依存の記述の棚卸し: 申請受付開始（2027年1〜3月頃予定）の時期に、
+// meta description・制度概要の注記・事例の注記・FAQ（義務／申請時期）を見直す。
+// 事実の出典: 経産省 SCS評価制度ページ（scs.html）・制度構築方針（2026-03-27公表）・
+// IPA /security/scs/（いずれも 2026-08-01 確認）
+
+const steps = [
+  { image: ill.magnifier, title: "現状の把握", items: ["要求事項と現状の突き合わせ", "ギャップの一覧化"] },
+  { image: ill.meeting, title: "対応計画", items: ["目指す段階（★3・★4）の検討", "優先順位と役割分担の整理"] },
+  { image: ill.shieldpc, title: "統制の整備", items: ["規程・台帳・手順の整備", "設定による技術的対策"] },
+  { image: ill.growth, title: "運用と評価の準備", items: ["記録が残る運用への定着", "自己評価（★3）・第三者評価（★4）への準備"] },
+];
+
+const faqItems = [
+  { q: "SCS評価制度への対応は義務ですか？", a: "いいえ。SCS評価制度は任意の制度で、取得しないことで商取引が規制されるものではないと経済産業省が説明しています。★をどう扱うかは取引先との契約・取引関係で決まるため、取引先からの要請の有無と自社の状況を踏まえ、対応の要否から一緒に整理できます。" },
+  { q: "「取得しないと取引できなくなる」という営業を受けました。本当ですか？", a: "制度としてそうした規制はありません。SCS評価制度を引き合いにした不適切な勧誘については、経済産業省と内閣官房が2026年4月に<a href=\"https://www.meti.go.jp/policy/netsecurity/20260427_scs.html\" target=\"_blank\" rel=\"noopener\">注意喚起</a>を公表しています。落ち着いて、対応の要否から検討することをおすすめします。" },
+  { q: "いつから申請できますか？", a: "申請受付は2027年1〜3月頃に始まる予定です（2026年8月時点の公表情報）。申請方法などの詳細は2026年度中に順次公表される予定ですが、基準は公表済みのため、統制の整備は現時点から進められます。" },
+  { q: "★3と★4のどちらを目指せばよいですか？", a: "★3は26項目の要求事項について自社で自己評価を行い、セキュリティ専門家の確認を受けて確定する方式です。★4は43項目が対象で、評価機関による第三者評価を受けます（有効期間は★3が1年、★4が3年）。取引先からの要請の有無と管理体制の現状を伺い、目指す段階から一緒に検討します。" },
+  { q: "★の取得まで対応してもらえますか？", a: "評価は制度上、★3では自社の自己評価にセキュリティ専門家の確認を受けて確定し、★4では評価機関の第三者評価を受ける仕組みです。当社が担当するのは、その前提となる統制の整備と評価への準備までです。成果物の完成をお約束する請負契約は承っておらず、準委任契約で支援します。" },
+  { q: "ISMS認証をすでに取得しています。SCS評価制度にも対応が必要ですか？", a: "対応が必要かどうかは取引先からの要請と取引上の位置づけで決まります（制度上の義務はありません）。経済産業省は、SCS評価制度とISMS認証を相互に補完し合う関係と説明しています。ISMSで整備した規程・記録のうち活かせる部分と、追加で必要な整備を確認するところから支援します。" },
+  { q: "費用はどのくらいですか？", a: "当社の支援費用は、プロジェクト型支援 30万円〜、継続的な運用まで含める場合は顧問契約 月10万円〜（いずれも税別）が目安です。目指す段階と現状の整備状況によって変わります。申請や専門家確認・第三者評価など制度側の費用は含みません（制度側の費用は未公表です）。詳しくは<a href=\"/pricing.html\">料金ページ</a>をご覧ください。" },
+];
+---
+<BaseLayout
+  title="SCS評価制度対応支援（統制整備・評価準備） | 株式会社ネクストブリッジ"
+  description="サプライチェーン強化に向けたセキュリティ対策評価制度（SCS評価制度）への対応を支援します。★3・★4の要求事項と現状のギャップ分析から、規程・台帳・設定の整備、評価への準備まで。申請受付は2027年1〜3月頃開始予定です。"
+  ogTitle="SCS評価制度対応支援 | NEXT Bridge"
+  ogDescription="★3・★4の要求事項と現状のギャップ分析から、規程・台帳・設定の整備、評価への準備まで。制度開始前の準備を社内側に立って支援します。"
+>
+  <!-- イラスト素材: ソコスト https://soco-st.com（商用利用可・クレジット不要）。ブランドカラーに合わせて一部の色を変更 -->
+
+  <section class="lp-hero">
+    <div class="container lp-hero-inner">
+      <div class="lp-hero-copy">
+        <p class="lp-hero-label">SCS評価制度対応支援</p>
+        <h1>SCS評価制度に沿った<br>統制の整備支援</h1>
+        <p class="lp-hero-sub">基準は公表済みで、申請受付は2027年1〜3月頃に始まる予定です。専任の情シスがいない会社でも準備を進められるよう、要求事項と現状の突き合わせから規程・台帳・設定の整備、評価への準備までを社内側に立って支援します。</p>
+        <div class="lp-hero-cta">
+          <a href="/contact.html" class="btn btn-primary btn-lg">無料で相談する</a>
+        </div>
+        <ul class="lp-hero-points">
+          <li>基準は★3が26項目・★4が43項目</li>
+          <li>申請受付は2027年1〜3月頃の予定</li>
+          <li>ISMS認証の運用支援の実績</li>
+        </ul>
+      </div>
+      <div class="lp-hero-visual">
+        <img src="/images/ill-shieldpc.svg" alt="" width="255" height="282">
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-gray">
+    <div class="container">
+      <div class="lp-title">
+        <p class="lp-eyebrow">PROBLEM</p>
+        <h2>SCS評価制度への対応、<br class="pc-br">こうなっていませんか？</h2>
+      </div>
+      <div class="lp-worry">
+        <figure class="lp-worry-ill">
+          <img src="/images/ill-worry.svg" alt="" loading="lazy" width="416" height="291">
+        </figure>
+        <ul class="lp-checklist">
+          <li>SCS評価制度という言葉は聞いたが、自社に関係するのか判断できない</li>
+          <li>要求事項の一覧を開いてみたが、何から手を付けるべきか分からない</li>
+          <li>★3と★4のどちらを目指すべきか、判断の材料がない</li>
+          <li>規程はあるが、台帳や記録が実態と合っていない</li>
+          <li>情シスが一人で、基準の読み込みまで手が回らない</li>
+          <li>対応を急がせる営業を受けたが、本当に必要なのか判断できない</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="lp-title">
+        <p class="lp-eyebrow">OVERVIEW</p>
+        <h2>SCS評価制度の概要</h2>
+      </div>
+      <p class="lp-overview-lead">サプライチェーン強化に向けたセキュリティ対策評価制度（SCS評価制度）は、企業のセキュリティ対策の状況を共通の基準で評価する国の制度です。経済産業省と内閣官房が制度構築方針を定め、IPA（情報処理推進機構）が運営します。取得は任意で、委託元の企業が取引先に求める対策の段階（★）を示す、といった使い方が想定されています。</p>
+      <div class="price-table-wrap">
+        <table class="price-table">
+          <thead>
+            <tr>
+              <th scope="col">段階</th>
+              <th scope="col">評価の方式</th>
+              <th scope="col">要求事項</th>
+              <th scope="col">有効期間</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">★3</th>
+              <td>自己評価にセキュリティ専門家の確認を受けて確定</td>
+              <td>26項目</td>
+              <td>1年</td>
+            </tr>
+            <tr>
+              <th scope="row">★4</th>
+              <td>評価機関による第三者評価</td>
+              <td>43項目</td>
+              <td>3年</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <ul class="price-notes">
+        <li>※ ★1・★2はSCS評価制度の枠外で、IPAの「SECURITY ACTION」（自己宣言）が該当します。★5は今後検討とされています。</li>
+        <li>※ 基準「★3・★4要求事項及び評価基準」は2026年3月に公表済みです。申請受付は2027年1〜3月頃に始まる予定で、申請方法などの詳細は2026年度中に順次公表される予定です。</li>
+        <li>※ 最新の情報は<a href="https://www.meti.go.jp/policy/netsecurity/scs.html" target="_blank" rel="noopener">経済産業省の制度ページ</a>と<a href="https://www.ipa.go.jp/security/scs/" target="_blank" rel="noopener">IPAの制度ページ</a>をご確認ください。</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="lp-band">
+    <div class="container">
+      <p class="lp-band-label">NEXT Bridge のSCS評価制度対応支援</p>
+      <p class="lp-band-copy">評価のための文書づくりから、<br class="pc-br">実態を伴う統制へ。</p>
+      <p class="lp-band-sub">要求事項を実務に合う手順・台帳・設定に落とし込み、評価の準備にも日々の運用にも使える形で整えます。</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="lp-title">
+        <p class="lp-eyebrow">FEATURE</p>
+        <h2>3つの特長</h2>
+      </div>
+      <div class="lp-features">
+
+        <div class="lp-feature">
+          <div class="lp-feature-text">
+            <span class="lp-feature-num">01</span>
+            <h3>要求事項とのギャップ分析から</h3>
+            <p>公表済みの基準に沿って現状を突き合わせ、★3の26項目・★4の43項目のどこまで対応できているかを一覧に整理します。目指す段階の判断も対応の優先順位づけも、この一覧が出発点になります。</p>
+          </div>
+          <figure class="lp-feature-ill lp-feature-ill--tall">
+            <img src="/images/ill-magnifier.svg" alt="" loading="lazy" width="142" height="285">
+          </figure>
+        </div>
+
+        <div class="lp-feature lp-feature--reverse">
+          <div class="lp-feature-text">
+            <span class="lp-feature-num">02</span>
+            <h3>運用で回る規程・台帳の整備</h3>
+            <p>規程・台帳・手順を業務の流れに合わせて作り込み、日々の運用の中で記録が残る形に整えます。ISMS認証の運用・再認証対応を支援してきた実績があります。</p>
+          </div>
+          <figure class="lp-feature-ill">
+            <img src="/images/ill-document.svg" alt="" loading="lazy" width="215" height="199">
+          </figure>
+        </div>
+
+        <div class="lp-feature">
+          <div class="lp-feature-text">
+            <span class="lp-feature-num">03</span>
+            <h3>社内側に立つ中立の相談相手</h3>
+            <p>特定製品の販売代理を持たない立場で、要求事項に照らして何が必要で何が不足しているかを整理します。必要以上の製品導入をおすすめすることはありません。契約は準委任で、社内側の相談相手として並走します。</p>
+          </div>
+          <figure class="lp-feature-ill">
+            <img src="/images/ill-handshake.svg" alt="" loading="lazy" width="365" height="239">
+          </figure>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <LpConsult
+    text="「まず何から手を付ければいい？」— 要求事項と現状の突き合わせからご一緒します。"
+    note="費用の目安（当社の支援費用）: プロジェクト型支援 30万円〜／顧問契約 月10万円〜（税別）。目指す段階と現状の整備状況により変わります。申請・専門家確認・第三者評価など制度側の費用は含みません。"
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="lp-title">
+        <p class="lp-eyebrow">FLOW</p>
+        <h2>支援の流れ</h2>
+      </div>
+      <LpSteps steps={steps} />
+    </div>
+  </section>
+
+  <section class="section section-gray">
+    <div class="container">
+      <div class="lp-title">
+        <p class="lp-eyebrow">CASE</p>
+        <h2>関連する支援実績</h2>
+      </div>
+      <ul class="price-notes price-notes--lead">
+        <li>※ SCS評価制度は申請受付の開始前で、★を取得した企業はまだありません（2026年8月時点）。以下はSCS評価制度対応の事例ではなく、セキュリティ認証の運用を支援してきた実績です。</li>
+      </ul>
+      <div class="case-grid">
+        <CaseCard data={itStartupCase.summary} />
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="lp-title">
+        <p class="lp-eyebrow">FAQ</p>
+        <h2>よくあるご質問</h2>
+      </div>
+      <LpFaq items={faqItems} />
+      <LpBanner text="整備後の運用まで含めた継続支援は専用ページでご案内しています" href="/it-support/" label="情シス伴走支援「もうひとりの情シス」" />
+    </div>
+  </section>
+
+  <Cta
+    heading="SCS評価制度への対応、現状の把握から始めませんか"
+    text="取引先との状況と社内の体制を伺い、目指す段階と進め方の目安をご提案します。初回相談は無料です。"
+    buttonClass="btn btn-primary"
+    buttonLabel="相談してみる"
+  />
+</BaseLayout>

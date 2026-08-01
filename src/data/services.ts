@@ -1,4 +1,4 @@
-// 4つのLPサービスの要約カード情報。トップページの「支援メニュー」と
+// LPサービスの要約カード情報。トップページの「支援メニュー」と
 // サービスページの「サービス詳細」で共用する正本。
 import { ill } from './illustrations';
 
@@ -27,6 +27,12 @@ export const services: ServiceCardData[] = [
     image: ill.shieldpc,
     title: '生成AI・Claude Codeの社内統制支援',
     description: 'ガイドラインと設定による強制で、生成AIを安全に使える状態を作ります。',
+  },
+  {
+    href: '/scs/',
+    image: ill.document,
+    title: 'SCS評価制度対応支援',
+    description: '★3・★4の要求事項と現状のギャップ分析から、規程・台帳・設定の整備、評価への準備までを支援します。',
   },
   {
     href: '/it-support/',

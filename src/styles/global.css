@@ -1106,6 +1106,13 @@ a.btn-outline::after {
   line-height: 1.6;
 }
 
+/* セクション見出し直下のリード段落（制度概要などの導入文） */
+.lp-overview-lead {
+  max-width: 820px;
+  margin: 0 auto 32px;
+  color: var(--text);
+}
+
 .lp-worry {
   display: grid;
   grid-template-columns: 1fr 1.2fr;
@@ -1238,6 +1245,11 @@ a.btn-outline::after {
   width: 100%;
   max-width: 360px;
   height: auto;
+}
+
+/* 縦長イラスト用: 幅を抑えて高さを他の図と揃える（モバイルの共通指定より優先） */
+.lp-feature-ill.lp-feature-ill--tall img {
+  max-width: 170px;
 }
 
 /* 図解: ルール→設定→強制のフロー */
@@ -1732,6 +1744,11 @@ a.btn-outline::after {
 .price-notes li {
   font-size: 0.82rem;
   color: var(--muted);
+}
+
+/* 本文の前に置く注記（事例の但し書きなど）: 上詰め・下に間隔 */
+.price-notes--lead {
+  margin: 0 auto 28px;
 }
 
 .lp-faq {
