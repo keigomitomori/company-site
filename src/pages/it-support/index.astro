@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import JsonLd from '../../components/JsonLd.astro';
+import { getService } from '../../data/services';
+import { serviceJsonLd } from '../../utils/jsonld';
 import Cta from '../../components/Cta.astro';
 import CaseCard from '../../components/CaseCard.astro';
 import { itStartupCase } from '../../data/cases';
@@ -24,13 +27,18 @@ const faqItems = [
   { q: "途中でやめられますか？", a: "はい。最低契約期間はなく、1ヶ月前までのお申し出で解約できます。" },
   { q: "費用はどのくらいですか？", a: "月10万円〜（税別）が目安で、支援範囲と頻度によって変わります。詳しくは<a href=\"/pricing.html\">料金ページ</a>をご覧ください。" },
 ];
+
+const service = getService('/it-support/');
+// meta description と構造化データ Service の description で共用する
+const description = "専任の情シスがいない会社のIT業務を、月額の顧問契約でまるごと支援。PC・アカウントの管理、セキュリティ整備、SaaSの運用、社員からの相談対応まで、「もうひとりの情シス」として伴走します。";
 ---
 <BaseLayout
-  title="情シス伴走支援「もうひとりの情シス」 | 株式会社ネクストブリッジ"
-  description="専任の情シスがいない会社のIT業務を、月額の顧問契約でまるごと支援。PC・アカウントの管理、セキュリティ整備、SaaSの運用、社員からの相談対応まで、「もうひとりの情シス」として伴走します。"
-  ogTitle="情シス伴走支援「もうひとりの情シス」 | NEXT Bridge"
+  title="情シス伴走支援「もうひとりの情シス」"
+  description={description}
   ogDescription="専任の情シスがいない会社のIT業務を、月額の顧問契約でまるごと支援。相談から実務まで「もうひとりの情シス」として伴走します。"
+  breadcrumbParents={[{ name: 'サービス', path: '/services.html' }]}
 >
+  <JsonLd slot="head" data={serviceJsonLd(Astro.site!, { name: service.title, description, path: service.href })} />
   <!-- イラスト素材: ソコスト https://soco-st.com（商用利用可・クレジット不要）。ブランドカラーに合わせて一部の色を変更 -->
 
   <section class="lp-hero">

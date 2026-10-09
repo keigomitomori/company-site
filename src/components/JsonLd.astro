@@ -1,0 +1,11 @@
+---
+// 構造化データを1ブロック出力する。<head> に置くため、ページからは slot="head" を付けて使う。
+// 中身は src/utils/jsonld.ts の関数で組み立てる。
+import { serializeJsonLd } from '../utils/jsonld';
+
+interface Props {
+  data: Record<string, unknown> | Record<string, unknown>[];
+}
+const { data } = Astro.props;
+---
+<script is:inline type="application/ld+json" set:html={serializeJsonLd(data)} />

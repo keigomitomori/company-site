@@ -1,8 +1,10 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import Cta from '../components/Cta.astro';
+import JsonLd from '../components/JsonLd.astro';
 import type { ArticleCategory } from '../data/articleCategories';
 import { fmt, iso } from '../utils/date';
+import { articleJsonLd } from '../utils/jsonld';
 
 interface Props {
   title: string;
@@ -14,8 +16,8 @@ interface Props {
 }
 const { title, description, slug, pubDate, updatedDate, category } = Astro.props;
 
-const canonical = `https://nextb.net/articles/${slug}/`;
-const ogImage = `https://nextb.net/images/og/${slug}.png`;
+// canonical は BaseLayout がページの実URL（/articles/<slug>/）から自動導出する
+const ogImage = `/images/og/${slug}.png`;
 
 // 記事末尾のCTAはカテゴリに合わせて出し分ける。カテゴリを追加して定義を漏らすと型エラーになる
 const ctaByCategory: Record<ArticleCategory, { heading: string; text: string }> = {
@@ -38,43 +40,26 @@ const ctaByCategory: Record<ArticleCategory, { heading: string; text: string }> 
 };
 const cta = ctaByCategory[category];
 
-const breadcrumbJsonLd = JSON.stringify({
-  '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'ホーム', item: 'https://nextb.net/' },
-    { '@type': 'ListItem', position: 2, name: 'コラム', item: 'https://nextb.net/articles/' },
-    { '@type': 'ListItem', position: 3, name: title },
-  ],
-});
-
-const jsonLd = JSON.stringify({
-  '@context': 'https://schema.org',
-  '@type': 'Article',
-  headline: title,
+const articleData = articleJsonLd(Astro.site!, {
+  title,
   description,
-  image: [ogImage],
+  path: Astro.url.pathname,
+  image: ogImage,
   datePublished: iso(pubDate),
   dateModified: iso(updatedDate ?? pubDate),
-  author: { '@type': 'Organization', name: '株式会社ネクストブリッジ', url: 'https://nextb.net/' },
-  publisher: { '@type': 'Organization', name: '株式会社ネクストブリッジ', url: 'https://nextb.net/' },
-  mainEntityOfPage: canonical,
 });
 ---
 <BaseLayout
-  title={`${title} | 株式会社ネクストブリッジ`}
+  title={title}
   description={description}
-  canonical={canonical}
   ogTitle={title}
-  ogDescription={description}
   ogType="article"
   ogImage={ogImage}
   articlePublishedTime={iso(pubDate)}
   articleModifiedTime={iso(updatedDate ?? pubDate)}
-  twitterImage={ogImage}
+  breadcrumbParents={[{ name: 'コラム', path: '/articles/' }]}
 >
-  <script type="application/ld+json" set:html={jsonLd} />
-  <script type="application/ld+json" set:html={breadcrumbJsonLd} />
+  <JsonLd slot="head" data={articleData} />
 
   <article class="article">
     <header class="article-header">

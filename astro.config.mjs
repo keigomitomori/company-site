@@ -1,7 +1,8 @@
 import { defineConfig } from 'astro/config';
 import localSitemap from './scripts/sitemap-integration.mjs';
+import { SITE_URL } from './src/config/site.ts';
 
-const site = 'https://nextb.net';
+const site = SITE_URL;
 
 export default defineConfig({
   site,
