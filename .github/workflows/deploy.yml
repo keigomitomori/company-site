@@ -6,20 +6,21 @@ on:
   pull_request:
   workflow_dispatch:
 
+# 既定は読み取りのみ。Pages への書き込み権限は deploy ジョブだけに与える
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
-# 連続 push 時にデプロイが競合・逆転しないようにする（進行中はキャンセルせず直列化）。
+# 連続 push 時にデプロイが競合・逆転しないようにする（main は進行中をキャンセルせず直列化）。
+# PR は最新の push だけ検証できればよいので、進行中の実行をキャンセルする。
 # ref 別グループにして、PR の verify が main のデプロイ待機枠を奪わないようにする
 concurrency:
   group: pages-${{ github.ref }}
-  cancel-in-progress: false
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   # 型検査・OG画像の存在・canonical一致（ビルド内）・内部リンクを検証する。
   # main への push だけでなく PR でも走らせ、壊れた変更をデプロイ前に止める。
+  # ビルドはこのジョブの1回だけで、検証済みの dist をそのままデプロイに回す（PR では回さない）
   verify:
     runs-on: ubuntu-latest
     steps:
@@ -28,6 +29,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v7
         with:
+          # Astro 7 の要求は Node 22.12 以上（package.json の engines と揃える）
           node-version: 22
           cache: npm
       - name: Install dependencies
@@ -40,24 +42,19 @@ jobs:
         run: npm run build
       - name: Internal link check
         run: node scripts/check-links.mjs
+      - name: Upload Pages artifact
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: dist
 
-  build:
+  deploy:
     needs: verify
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v7
-      - name: Build with Astro
-        uses: withastro/action@v6
-        with:
-          # verify ジョブと同じ Node で検証済み成果物と同条件のビルドにする
-          node-version: 22
-
-  deploy:
-    needs: build
-    if: github.event_name != 'pull_request'
-    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
