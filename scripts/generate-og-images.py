@@ -2,10 +2,16 @@
 """記事のアイキャッチ（OGP画像 1200x630）を frontmatter から自動生成する。
 
 使い方:
-  python3 scripts/generate-og-images.py            # 全記事分を生成
-  python3 scripts/generate-og-images.py <slug>     # 特定記事のみ
+  python3 scripts/generate-og-images.py                        # 公開済み記事（src/content/articles）全件
+  python3 scripts/generate-og-images.py <slug> [<slug> ...]    # 特定記事のみ
+  python3 scripts/generate-og-images.py _stock/articles/<slug>.md  # ファイルパスで指定
 
-出力先: public/images/og/<slug>.png
+slug は src/content/articles と _stock/articles の両方から探す。
+見つからない、または両方にあって決められない場合はエラー終了する（後者はパスで指定する）。
+
+出力先は記事の置き場所で決まる:
+  src/content/articles/<slug>.md → public/images/og/<slug>.png
+  _stock/articles/<slug>.md      → _stock/og/<slug>.png（公開時に記事と一緒に mv する）
 Chrome のパスは環境変数 CHROME_BIN で上書き可。
 """
 import html
@@ -19,6 +25,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 ARTICLES_DIR = ROOT / "src" / "content" / "articles"
 OUT_DIR = ROOT / "public" / "images" / "og"
+STOCK_ARTICLES_DIR = ROOT / "_stock" / "articles"
+STOCK_OUT_DIR = ROOT / "_stock" / "og"
+# 記事の置き場所 → アイキャッチの出力先（slug の探索順でもある）
+SOURCES = [(ARTICLES_DIR, OUT_DIR), (STOCK_ARTICLES_DIR, STOCK_OUT_DIR)]
 CHROME = os.environ.get(
     "CHROME_BIN", "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 )
@@ -161,13 +171,13 @@ def build_html(title: str, category: str) -> str:
     )
 
 
-def generate(md_path: Path) -> Path:
+def generate(md_path: Path, out_dir: Path) -> Path | None:
     fm = parse_frontmatter(md_path)
     if fm.get("draft") == "true":
         return None
     slug = md_path.stem
-    OUT_DIR.mkdir(parents=True, exist_ok=True)
-    out_png = OUT_DIR / f"{slug}.png"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    out_png = out_dir / f"{slug}.png"
     with tempfile.TemporaryDirectory() as td:
         html_path = Path(td) / "og.html"
         html_path.write_text(build_html(fm["title"], fm.get("category", "コラム")), encoding="utf-8")
@@ -188,15 +198,47 @@ def generate(md_path: Path) -> Path:
     return out_png
 
 
+def out_dir_for(md_path: Path) -> Path:
+    """記事ファイルの置き場所から出力先を決める（_stock 配下なら _stock/og）。"""
+    resolved = md_path.resolve()
+    for articles_dir, out_dir in SOURCES:
+        if resolved.parent == articles_dir.resolve():
+            return out_dir
+    return OUT_DIR
+
+
+def resolve_target(target: str) -> Path:
+    """slug またはファイルパスを記事ファイルに解決する。解決できなければエラー終了する。"""
+    if target.endswith(".md") or "/" in target or os.sep in target:
+        path = Path(target)
+        if not path.is_absolute():
+            path = Path.cwd() / path
+        if not path.is_file():
+            sys.exit(f"error: 記事ファイルが見つかりません: {target}")
+        return path
+    found = [d / f"{target}.md" for d, _ in SOURCES if (d / f"{target}.md").is_file()]
+    if not found:
+        searched = "、".join(str(d.relative_to(ROOT)) for d, _ in SOURCES)
+        sys.exit(f"error: slug '{target}' の記事が見つかりません（探した場所: {searched}）")
+    if len(found) > 1:
+        paths = "、".join(str(p.relative_to(ROOT)) for p in found)
+        sys.exit(f"error: slug '{target}' の記事が複数あります（{paths}）。ファイルパスで指定してください")
+    return found[0]
+
+
 def main():
     targets = sys.argv[1:]
-    md_files = sorted(ARTICLES_DIR.glob("*.md"))
     if targets:
-        md_files = [p for p in md_files if p.stem in targets]
+        # 先に全件を解決し、1件でも見つからなければ何も生成せずに止める
+        md_files = [resolve_target(t) for t in targets]
+    else:
+        md_files = sorted(ARTICLES_DIR.glob("*.md"))
     for md in md_files:
-        out = generate(md)
+        out = generate(md, out_dir_for(md))
         if out:
-            print(f"generated: {out.relative_to(ROOT)}")
+            print(f"generated: {out.relative_to(ROOT) if out.is_relative_to(ROOT) else out}")
+        elif targets:
+            print(f"skipped (draft: true): {md}")
 
 
 if __name__ == "__main__":
