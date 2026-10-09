@@ -15,7 +15,24 @@
   // 独自ドメインは Workers のカスタムドメインで割り当てる。
   // www.nextb.net → nextb.net の転送は Worker ではなくゾーンの Redirect Rule で行う（CLAUDE.md の運用メモ参照）
   "routes": [{ "pattern": "nextb.net", "custom_domain": true }],
-  // PR ごとのプレビューURL（wrangler versions upload）を有効にする
-  "workers_dev": true,
-  "preview_urls": true
+  // 本番を *.workers.dev でも公開すると重複コンテンツになるため閉じる
+  "workers_dev": false,
+  "env": {
+    // PR のプレビュー。独自ドメインを持たない別 Worker として workers.dev にだけ出す。
+    // 検索に載らないよう Worker が noindex を付ける
+    "preview": {
+      "name": "nextb-net-preview",
+      // 空で上書きしないと top-level の routes が継承され、デプロイ時に nextb.net の独自ドメインがプレビューへ付け替わる
+      "routes": [],
+      "workers_dev": true,
+      "vars": { "NOINDEX": "1" },
+      "assets": {
+        "directory": "./dist",
+        "binding": "ASSETS",
+        "html_handling": "none",
+        "not_found_handling": "none",
+        "run_worker_first": true
+      }
+    }
+  }
 }

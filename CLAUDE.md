@@ -83,7 +83,9 @@
 
 - **デプロイ**: main へ push すると GitHub Actions（.github/workflows/deploy.yml）が Cloudflare Workers（静的アセット）に自動デプロイする（ユーザー決定 2026-10-10。それまでは GitHub Pages）
   - CI の verify ジョブが型検査（astro check）・OG画像の存在・canonical の実URL一致・内部リンクを検証し、失敗するとデプロイされない
-  - PR では検証済みの dist をプレビュー版としてアップロードする（本番には反映されない。URL はジョブのログに出る）
+  - PR では検証済みの dist を、プレビュー用の別 Worker `nextb-net-preview`（workers.dev のみ・noindex）に配信する。本番には反映されない。URL はジョブのログに出る
+    - プレビューは1つなので、最後に push された PR の内容が表示される
+    - wrangler.jsonc の `env.preview` は `routes: []` を必ず保つ（消すと top-level の routes が継承され、本番の独自ドメインがプレビューに付け替わる）
   - GitHub の Secrets に `CLOUDFLARE_API_TOKEN`・`CLOUDFLARE_ACCOUNT_ID` が必要
 - **URL の解決**（wrangler.jsonc・worker/index.js）: `.html` 付きの URL を維持するため `html_handling` は `none`。アセットに一致しないリクエストだけ Worker が受け、次の順で GitHub Pages 時代と同じ動きを再現する
   - `/dir/` → `dir/index.html`、`/dir` → `/dir/` へ 301、`/about` → `/about.html` へ 301、それ以外は 404.html を 404 で返す
