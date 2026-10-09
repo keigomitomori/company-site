@@ -370,12 +370,19 @@ html.is-nav-locked {
   color: var(--on-dark-muted);
 }
 
-.footer-nav h4,
-.footer-contact h4 {
+.footer-company .footer-address {
+  font-style: normal;
+}
+
+/* 見出しレベルは h2 だが、見た目は小見出し（基底の h2 の書体・折り返し指定を打ち消す） */
+.footer-heading {
+  font-family: inherit;
   font-size: var(--fs-small);
   margin-bottom: var(--space-4);
   font-weight: 700;
   color: var(--on-dark-sub);
+  word-break: normal;
+  text-wrap: wrap;
 }
 
 .footer-nav ul li {
