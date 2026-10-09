@@ -1,11 +1,9 @@
 import rss from '@astrojs/rss';
-import { getCollection } from 'astro:content';
 import type { APIContext } from 'astro';
+import { getPublishedArticles } from '../utils/articles';
 
 export async function GET(context: APIContext) {
-  const articles = (await getCollection('articles', ({ data }) => !data.draft)).sort(
-    (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime(),
-  );
+  const articles = await getPublishedArticles();
   return rss({
     title: 'NEXT Bridge コラム',
     description: '情シス運営・デバイス管理・生成AI統制の実務コラム（株式会社ネクストブリッジ）',

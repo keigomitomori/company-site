@@ -1,6 +1,7 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import Cta from '../components/Cta.astro';
+import type { ArticleCategory } from '../data/articleCategories';
 import { fmt, iso } from '../utils/date';
 
 interface Props {
@@ -9,15 +10,15 @@ interface Props {
   slug: string;
   pubDate: Date;
   updatedDate?: Date;
-  category: string;
+  category: ArticleCategory;
 }
 const { title, description, slug, pubDate, updatedDate, category } = Astro.props;
 
 const canonical = `https://nextb.net/articles/${slug}/`;
 const ogImage = `https://nextb.net/images/og/${slug}.png`;
 
-// 記事末尾のCTAはカテゴリに合わせて出し分ける（未定義カテゴリは汎用文言）
-const ctaByCategory: Record<string, { heading: string; text: string }> = {
+// 記事末尾のCTAはカテゴリに合わせて出し分ける。カテゴリを追加して定義を漏らすと型エラーになる
+const ctaByCategory: Record<ArticleCategory, { heading: string; text: string }> = {
   '生成AI統制': {
     heading: '生成AI統制の現状、一度整理してみませんか',
     text: '「何から手を付けるべきか」の整理からで構いません。現在の利用状況・環境をお聞きし、統制の全体像と優先順位をご提案します。初回相談は無料です。',
@@ -35,10 +36,7 @@ const ctaByCategory: Record<string, { heading: string; text: string }> = {
     text: '「何から手を付けるべきか」の整理からで構いません。現在の運用状況をお聞きし、改善の全体像と優先順位をご提案します。初回相談は無料です。',
   },
 };
-const cta = ctaByCategory[category] ?? {
-  heading: '社内ITの困りごと、一度整理してみませんか',
-  text: '「何から手を付けるべきか」の整理からで構いません。現在の状況をお聞きし、改善の全体像と優先順位をご提案します。初回相談は無料です。',
-};
+const cta = ctaByCategory[category];
 
 const breadcrumbJsonLd = JSON.stringify({
   '@context': 'https://schema.org',

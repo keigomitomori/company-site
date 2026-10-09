@@ -1,16 +1,14 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Cta from '../components/Cta.astro';
-import { getCollection } from 'astro:content';
 import LpBanner from '../components/LpBanner.astro';
 import ServiceCard from '../components/ServiceCard.astro';
 import { services } from '../data/services';
 import { fmt, iso } from '../utils/date';
+import { getPublishedArticles } from '../utils/articles';
 
 // お知らせは最新の公開コラムから自動生成する（手動更新不要）
-const latestArticles = (await getCollection('articles', ({ data }) => !data.draft))
-  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
-  .slice(0, 3);
+const latestArticles = (await getPublishedArticles()).slice(0, 3);
 
 const orgJsonLd = JSON.stringify({
   '@context': 'https://schema.org',
