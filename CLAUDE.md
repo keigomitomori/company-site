@@ -59,14 +59,16 @@
 
 ## デザイン・素材の規約
 
-- **LPは `lp-*` コンポーネントを共用する**（src/styles/global.css の「LP 共通部品」セクション）
+- **LPは `lp-*` コンポーネントを共用する**（src/styles/lp.css の「LP 共通部品」）
   - 標準構成: ヒーロー → お悩み → 宣言バンド → 3つの特長 → 中間CTA → 支援の流れ → 事例 → FAQ → CTA
 - **コンポーネント化の線引き**（2026-07-16 導入。過剰共通化を防ぐための基準）
   - **データ駆動にするもの**（構造が固定的な下回り）: 支援の流れ `LpSteps`・FAQ `LpFaq`・誘導バナー `LpBanner`・中間CTA `LpConsult`・事例 `CaseCard`（正本は src/data/cases.ts）
   - **直書きを維持するもの**（コピーと意匠を作り込む上物）: ヒーロー・宣言バンド・お悩み・特長・フロー図・Before/After
     - 理由: LPごとに構成が既に分岐しており、props に畳むと編集コストが逆に上がる。構造と変更理由が収束したら再評価する
 - **CSSの命名**: 新規モディファイアは BEM 風の `--` 形式（`.card--link` 等）。既存の単一ハイフン（`btn-primary`・`section-gray` 等）は互換のため維持する
-- **CSSの色・影はセマンティックトークンを使う**（:root の `--accent-soft`・`--muted-on-dark`・`--shadow-card` 等）。同じ意味の色を hex 直書きで増やさない
+- **CSSの構成**（2026-10 再編）: 入口は src/styles/index.css。カスケードレイヤー `tokens → base → layout → components → lp` の順に、tokens.css・base.css・layout.css（ヘッダー・フッター・セクション・CTA）・components.css（ボタン・チップ・表など共用部品）・lp.css を読み込む
+  - 1つのページ・コンポーネントだけで使う指定は、その .astro の scoped `<style>` に置く（レイヤー外なので共通指定より常に優先される）。`:global()` は Markdown 本文など避けられない場合のみ
+- **CSSの色・角丸・影・余白はセマンティックトークンを使う**（src/styles/tokens.css の `--accent-soft`・`--on-dark-muted`・`--radius-lg`・`--shadow-card` 等）。同じ意味の色を hex 直書きで増やさない
 - **イラストはソコストから調達する**（https://soco-st.com、商用利用可・クレジット不要）
   - SVG直リンク: `https://soco-st.com/wp-content/themes/socost/upload/<ID>_color.svg`
   - オレンジ系（#febe69・#ffda71 等）はブランド青 #8fb0f0 に置換してから `public/images/ill-*.svg` に配置する

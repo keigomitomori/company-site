@@ -67,3 +67,44 @@ import PageHeader from '../components/PageHeader.astro';
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .legal {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .legal h3 {
+    font-size: 20px;
+    line-height: 1.6;
+    margin: var(--space-10) 0 var(--space-3);
+  }
+
+  .legal p,
+  .legal li {
+    color: var(--text-sub);
+  }
+
+  .legal ul {
+    list-style: disc;
+    padding-left: 1.5em;
+    margin-top: var(--space-2);
+  }
+
+  .legal li {
+    padding: 2px 0;
+  }
+
+  .legal a {
+    color: var(--accent-strong);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .legal .legal-date {
+    margin-top: var(--space-10);
+    text-align: right;
+    color: var(--muted);
+    font-size: var(--fs-small);
+  }
+</style>

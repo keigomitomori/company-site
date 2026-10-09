@@ -24,3 +24,70 @@ const { data } = Astro.props;
     </div>
   </dl>
 </div>
+
+<style>
+  /* 事例は色付きの地のセクションに置く白いカード（タグの見た目は components.css のチップ） */
+  .case-card {
+    background-color: var(--surface);
+    border-radius: var(--radius-lg);
+    padding: var(--space-8) var(--space-10);
+    box-shadow: var(--shadow-card);
+  }
+
+  .case-tag {
+    margin-bottom: var(--space-4);
+  }
+
+  h3 {
+    font-size: 21px;
+    line-height: 1.6;
+    margin-bottom: var(--space-5);
+  }
+
+  .case-fields {
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .case-field {
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    gap: var(--space-4);
+  }
+
+  .case-field dt {
+    font-size: var(--fs-caption);
+    font-weight: 700;
+    color: var(--ink);
+    background-color: var(--bg-page);
+    border-radius: var(--radius-sm);
+    text-align: center;
+    padding: var(--space-1) 0;
+    height: fit-content;
+    margin-top: 3px;
+  }
+
+  .case-field dd {
+    color: var(--text-sub);
+    font-size: 15px;
+  }
+
+  @media (max-width: 768px) {
+    .case-card {
+      padding: var(--space-6) var(--space-5);
+    }
+
+    h3 {
+      font-size: 19px;
+    }
+
+    .case-field {
+      grid-template-columns: 1fr;
+      gap: var(--space-1);
+    }
+
+    .case-field dt {
+      width: 96px;
+    }
+  }
+</style>

@@ -1,0 +1,882 @@
+/* ========================================
+   LP 共通部品（LP5本・料金・トップ・サービスで共用）
+   標準構成: ヒーロー → お悩み → 宣言バンド → 3つの特長 → 中間CTA → 支援の流れ → 事例 → FAQ → CTA
+   ======================================== */
+
+/* ---------- ヒーロー ---------- */
+.lp-hero {
+  background-color: var(--surface);
+  padding: var(--space-18) 0 var(--space-24);
+}
+
+.lp-hero-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: var(--space-14);
+  align-items: center;
+}
+
+.lp-hero-label {
+  margin-bottom: var(--space-5);
+}
+
+.lp-hero h1 {
+  font-size: var(--fs-h1-lp);
+  line-height: var(--lh-h1);
+  margin-bottom: var(--space-6);
+}
+
+.lp-hero-sub {
+  color: var(--text-sub);
+  font-size: 17px;
+  line-height: 1.9;
+  margin-bottom: var(--space-8);
+  max-width: 560px;
+}
+
+.lp-hero-cta {
+  margin-bottom: var(--space-6);
+}
+
+.lp-hero-points {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-5);
+}
+
+.lp-hero-points li {
+  font-size: var(--fs-small);
+  font-weight: 500;
+  color: var(--text-sub);
+}
+
+.lp-hero-points li::before {
+  content: "\2713";
+  color: var(--accent);
+  font-weight: 700;
+  margin-right: 6px;
+}
+
+.lp-hero-visual img {
+  width: auto;
+  max-width: min(100%, 420px);
+  max-height: 340px;
+  margin: 0 auto;
+}
+
+/* ---------- セクション見出し ---------- */
+.lp-title {
+  text-align: center;
+  margin-bottom: var(--space-14);
+}
+
+.lp-eyebrow {
+  margin-bottom: var(--space-4);
+  letter-spacing: 0.08em;
+}
+
+.lp-title h2 {
+  font-size: var(--fs-h2);
+  line-height: 1.45;
+  text-wrap: balance;
+}
+
+/* セクション見出し直下のリード段落（制度概要などの導入文） */
+.lp-overview-lead {
+  max-width: 820px;
+  margin: 0 auto var(--space-8);
+  color: var(--text-sub);
+}
+
+/* ---------- 中央寄せのイラスト（事例の上など） ---------- */
+.ill {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ill img {
+  width: 100%;
+  max-width: 430px;
+  height: auto;
+}
+
+/* イラストは白い面の上に置く（色付きの地のセクションでも白い円の台座を敷く） */
+.ill--center {
+  width: 240px;
+  height: 240px;
+  margin: 0 auto var(--space-10);
+  padding: var(--space-8);
+  background-color: var(--surface);
+  border-radius: 50%;
+  box-shadow: var(--shadow-card);
+}
+
+.ill--center img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+}
+
+/* ---------- お悩み ---------- */
+.lp-worry {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: var(--space-14);
+  align-items: center;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* イラストは白いパネルに載せる（お悩みは色付きの地に置かれるため） */
+.lp-worry-ill {
+  background-color: var(--surface);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-8);
+}
+
+.lp-worry-ill img {
+  width: 100%;
+  max-width: 360px;
+  height: auto;
+  margin: 0 auto;
+}
+
+.lp-checklist {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.lp-checklist li {
+  position: relative;
+  background-color: var(--surface);
+  border-radius: var(--radius-md);
+  padding: 14px var(--space-5) 14px 52px;
+  color: var(--text);
+  box-shadow: var(--shadow-card);
+}
+
+.lp-checklist li::before {
+  content: "\2717";
+  position: absolute;
+  left: var(--space-5);
+  top: 14px;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.lp-checklist--check li::before {
+  content: "\2713";
+}
+
+.lp-checklist--cols2 {
+  grid-template-columns: 1fr 1fr;
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+/* ---------- 宣言バンド ---------- */
+.lp-band {
+  background-color: var(--accent-tint);
+  text-align: center;
+  padding: var(--space-18) 0;
+}
+
+.lp-band-label {
+  color: var(--accent-strong);
+  font-size: var(--fs-small);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  margin-bottom: var(--space-4);
+}
+
+.lp-band-copy {
+  font-family: var(--font-display);
+  color: var(--ink);
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.55;
+  margin-bottom: var(--space-4);
+  word-break: auto-phrase;
+}
+
+.lp-band-sub {
+  color: var(--text-sub);
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* ---------- 3つの特長 ---------- */
+.lp-features {
+  display: grid;
+  gap: var(--space-18);
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.lp-feature {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-14);
+  align-items: center;
+}
+
+.lp-feature--reverse .lp-feature-text {
+  order: 1;
+}
+
+.lp-feature-num {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: var(--space-4);
+}
+
+.lp-feature-text h3 {
+  font-size: 24px;
+  line-height: 1.55;
+  margin-bottom: var(--space-4);
+}
+
+.lp-feature-text p {
+  color: var(--text-sub);
+  max-width: 460px;
+}
+
+.lp-feature-ill {
+  display: flex;
+  justify-content: center;
+}
+
+/* 横長・縦長のイラストが混在するため、幅と高さの両方に上限を設ける */
+.lp-feature-ill img {
+  width: auto;
+  max-width: min(100%, 340px);
+  max-height: 260px;
+}
+
+/* 縦長イラスト用: 幅を抑えて高さを他の図と揃える（モバイルの共通指定より優先） */
+.lp-feature-ill.lp-feature-ill--tall img {
+  max-width: 170px;
+}
+
+/* ---------- 図解: フロー図 ---------- */
+/* 白いパネルに淡色のノードを縦に並べる（イラスト版も同じ白パネルに載せる） */
+.lp-flowfig {
+  background-color: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-6);
+  display: grid;
+  gap: var(--space-3);
+}
+
+/* イラスト版フロー図（device-management・genai-adoption で使用） */
+.lp-flowfig-illust {
+  width: 100%;
+  height: auto;
+}
+
+.lp-flowfig-illust-labels {
+  /* 列幅は画像内の実際のアイコン中心位置に合わせて実測（等分ではない）。
+     画像ごとに比率が異なるため --flowfig-cols をインラインstyleで指定する */
+  display: grid;
+  grid-template-columns: var(--flowfig-cols, 1fr 1fr 1fr);
+  padding: 0 var(--space-1);
+}
+
+.lp-flowfig-illust-labels span {
+  text-align: center;
+  font-size: var(--fs-small);
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+.lp-flowfig-node {
+  background-color: var(--bg-page);
+  border-radius: var(--radius-md);
+  padding: 14px var(--space-5);
+  text-align: center;
+}
+
+.lp-flowfig-node strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.6;
+}
+
+.lp-flowfig-node span {
+  font-size: var(--fs-caption);
+  color: var(--muted);
+}
+
+.lp-flowfig-node--accent {
+  background-color: var(--accent);
+}
+
+.lp-flowfig-node--accent strong {
+  color: var(--on-accent);
+}
+
+.lp-flowfig-node--accent span {
+  color: var(--on-accent-sub);
+}
+
+.lp-flowfig-arrow {
+  width: 12px;
+  height: 12px;
+  margin: -2px auto;
+  border-right: 2.5px solid var(--line-strong);
+  border-bottom: 2.5px solid var(--line-strong);
+  transform: rotate(45deg);
+}
+
+.lp-flowfig-result {
+  background-color: var(--accent-soft);
+  border-radius: var(--radius-md);
+  padding: 14px var(--space-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.lp-flowfig-result span {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--accent-strong);
+}
+
+.lp-flowfig-result-arrow {
+  width: 22px;
+  height: 2px;
+  background-color: var(--accent-strong);
+  position: relative;
+  flex: none;
+}
+
+.lp-flowfig-result-arrow::after {
+  content: "";
+  position: absolute;
+  right: -1px;
+  top: -4px;
+  border-left: 7px solid var(--accent-strong);
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+}
+
+/* ---------- 図解: 導入前後の対比 ---------- */
+.lp-ba {
+  max-width: 880px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.lp-ba-head,
+.lp-ba-row {
+  display: grid;
+  grid-template-columns: 128px 1fr 30px 1fr;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+.lp-ba-chip {
+  justify-self: center;
+  background-color: var(--neutral-soft);
+  color: var(--muted);
+  font-size: var(--fs-caption);
+  font-weight: 700;
+  padding: var(--space-1) var(--space-5);
+  border-radius: var(--radius-pill);
+}
+
+.lp-ba-chip--accent {
+  background-color: var(--accent);
+  color: var(--on-accent);
+}
+
+.lp-ba-topic {
+  font-size: var(--fs-small);
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.lp-ba-cell {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  border-radius: var(--radius-md);
+  padding: 14px var(--space-4);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.lp-ba-cell::before {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+}
+
+.lp-ba-cell--before {
+  background-color: var(--surface);
+  border: 2px dashed var(--line-strong);
+  color: var(--muted);
+}
+
+.lp-ba-cell--before::before {
+  content: "×";
+  background-color: var(--neutral-soft);
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.lp-ba-cell--after {
+  background-color: var(--surface);
+  border: 2px solid var(--accent);
+  color: var(--accent-strong);
+  box-shadow: var(--shadow-card);
+}
+
+.lp-ba-cell--after::before {
+  content: "✓";
+  background-color: var(--accent);
+  color: var(--on-accent);
+}
+
+.lp-ba-arrow {
+  justify-self: center;
+  width: 12px;
+  height: 12px;
+  border-right: 3px solid var(--accent);
+  border-bottom: 3px solid var(--accent);
+  transform: rotate(-45deg);
+}
+
+.lp-ba-sum {
+  margin-top: var(--space-2);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--line-strong);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  font-weight: 700;
+}
+
+.lp-ba-sum-before {
+  color: var(--muted);
+}
+
+.lp-ba-sum-after {
+  font-family: var(--font-display);
+  color: var(--accent-strong);
+  font-size: 18px;
+}
+
+.lp-ba-sum-arrow {
+  width: 10px;
+  height: 10px;
+  border-right: 3px solid var(--accent);
+  border-bottom: 3px solid var(--accent);
+  transform: rotate(-45deg);
+}
+
+/* ---------- 中間CTA（LpConsult） ---------- */
+.lp-consult {
+  background-color: var(--accent-soft);
+  padding: var(--space-10) 0;
+}
+
+.lp-consult-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-8);
+  flex-wrap: wrap;
+}
+
+.lp-consult-inner p {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.lp-consult-note {
+  max-width: 820px;
+  text-wrap: pretty;
+  margin: var(--space-4) auto 0;
+  text-align: center;
+  font-size: var(--fs-small);
+  color: var(--muted);
+}
+
+/* ---------- 支援の流れ（LpSteps） ---------- */
+.lp-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-5);
+}
+
+.lp-step {
+  background-color: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8) var(--space-6);
+  box-shadow: var(--shadow-card);
+}
+
+.lp-step-ill {
+  height: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-4);
+}
+
+.lp-step-ill img {
+  max-height: 96px;
+  max-width: 70%;
+  width: auto;
+}
+
+.lp-step-num {
+  display: block;
+  text-align: center;
+  font-size: var(--fs-caption);
+  font-weight: 700;
+  color: var(--accent-strong);
+  letter-spacing: 0.12em;
+  margin-bottom: var(--space-1);
+}
+
+.lp-step h3 {
+  text-align: center;
+  font-size: 19px;
+  line-height: 1.5;
+  margin-bottom: var(--space-4);
+}
+
+.lp-step .feature-list li {
+  font-size: var(--fs-small);
+}
+
+/* ---------- よくあるご質問（LpFaq） ---------- */
+.lp-faq {
+  max-width: 800px;
+  margin: 0 auto;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.lp-faq details {
+  background-color: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+}
+
+.lp-faq summary {
+  position: relative;
+  cursor: pointer;
+  list-style: none;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.7;
+  padding: var(--space-5) 56px var(--space-5) 60px;
+  border-radius: var(--radius-md);
+}
+
+.lp-faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.lp-faq summary::before {
+  content: "Q";
+  position: absolute;
+  left: var(--space-6);
+  top: var(--space-5);
+  font-family: var(--font-display);
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.lp-faq summary::after {
+  content: "+";
+  position: absolute;
+  right: var(--space-6);
+  top: 18px;
+  font-size: 22px;
+  line-height: 1.4;
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.lp-faq details[open] summary::after {
+  content: "\2212";
+}
+
+.lp-faq details p {
+  padding: 0 var(--space-6) var(--space-5) 60px;
+  color: var(--text-sub);
+  font-size: 15px;
+  line-height: 1.95;
+}
+
+.lp-faq details p a {
+  color: var(--accent-strong);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ---------- 別ページへの誘導バナー（LpBanner） ---------- */
+.lp-banner {
+  margin: var(--space-8) auto 0;
+  max-width: 880px;
+  background-color: var(--accent-soft);
+  border-radius: var(--radius-lg);
+  padding: var(--space-3) var(--space-8);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-2) var(--space-6);
+  flex-wrap: wrap;
+}
+
+.lp-banner p {
+  padding: var(--space-2) 0;
+  color: var(--ink);
+  font-weight: 500;
+}
+
+/* ========================================
+   Responsive
+   ======================================== */
+@media (max-width: 1080px) {
+  .lp-hero-inner {
+    gap: var(--space-10);
+  }
+
+  .lp-steps {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .lp-hero {
+    padding: var(--space-10) 0 var(--space-14);
+  }
+
+  .lp-hero-inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  .lp-hero-sub {
+    font-size: var(--fs-body);
+  }
+
+  .lp-hero-visual img {
+    max-width: min(100%, 280px);
+    max-height: 220px;
+  }
+
+  .lp-title {
+    margin-bottom: var(--space-10);
+  }
+
+  .lp-worry {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  .lp-worry-ill {
+    padding: var(--space-6);
+  }
+
+  .lp-worry-ill img {
+    max-width: 260px;
+  }
+
+  .lp-checklist--cols2 {
+    grid-template-columns: 1fr;
+  }
+
+  .ill--center {
+    width: 200px;
+    height: 200px;
+    padding: var(--space-6);
+  }
+
+  .lp-band {
+    padding: var(--space-14) 0;
+  }
+
+  .lp-band-copy {
+    font-size: 24px;
+  }
+
+  .lp-band-sub {
+    text-align: left;
+  }
+
+  .lp-features {
+    gap: var(--space-14);
+  }
+
+  .lp-feature {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  .lp-feature--reverse .lp-feature-text {
+    order: 0;
+  }
+
+  .lp-feature-num {
+    font-size: 30px;
+  }
+
+  .lp-feature-text h3 {
+    font-size: 21px;
+  }
+
+  .lp-feature-ill img {
+    max-width: min(100%, 260px);
+    max-height: 200px;
+  }
+
+  .lp-flowfig {
+    padding: var(--space-5);
+  }
+
+  .lp-consult-inner {
+    flex-direction: column;
+    gap: var(--space-4);
+    text-align: center;
+  }
+
+  .lp-consult-inner p {
+    font-size: 18px;
+  }
+
+  .lp-consult-note {
+    text-align: left;
+  }
+
+  .lp-ba {
+    gap: var(--space-5);
+  }
+
+  .lp-ba-head {
+    display: none;
+  }
+
+  .lp-ba-row {
+    grid-template-columns: 1fr;
+    gap: var(--space-2);
+  }
+
+  .lp-ba-arrow {
+    transform: rotate(45deg);
+    margin: -2px auto;
+  }
+
+  .lp-ba-sum {
+    flex-direction: column;
+    gap: var(--space-3);
+    text-align: center;
+  }
+
+  .lp-ba-sum-arrow {
+    transform: rotate(45deg);
+  }
+
+  .lp-faq summary {
+    padding: var(--space-4) 48px var(--space-4) 48px;
+  }
+
+  .lp-faq summary::before {
+    left: var(--space-5);
+    top: var(--space-4);
+  }
+
+  .lp-faq summary::after {
+    right: var(--space-5);
+    top: 14px;
+  }
+
+  .lp-faq details p {
+    padding: 0 var(--space-5) var(--space-4) 48px;
+  }
+
+  .lp-banner {
+    padding: var(--space-3) var(--space-6);
+  }
+}
+
+@media (max-width: 480px) {
+  .lp-steps {
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+  }
+
+  /* 1列のときはイラストを左に置いて縦の長さを抑える */
+  .lp-step {
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    column-gap: var(--space-4);
+    align-items: start;
+    padding: var(--space-5);
+  }
+
+  .lp-step > :not(.lp-step-ill) {
+    grid-column: 2;
+  }
+
+  .lp-step-ill {
+    grid-row: 1 / span 3;
+    height: 72px;
+    margin: 0;
+  }
+
+  .lp-step-ill img {
+    max-height: 72px;
+    max-width: 100%;
+  }
+
+  .lp-step-num,
+  .lp-step h3 {
+    text-align: left;
+  }
+
+  .lp-step h3 {
+    margin-bottom: var(--space-2);
+  }
+
+  .lp-checklist li {
+    padding-left: 44px;
+  }
+
+  .lp-checklist li::before {
+    left: var(--space-4);
+  }
+}

@@ -40,3 +40,78 @@ const articles = (await getCollection('articles', ({ data }) => !data.draft)).so
 
   <Cta />
 </BaseLayout>
+
+<style>
+  .article-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+  }
+
+  /* 白い地に置くカードのため、ごく淡い線を添える */
+  .article-list-item {
+    background-color: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+
+  .article-list-item:hover {
+    box-shadow: var(--shadow-hover);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .article-list-item:hover {
+      transform: translateY(-2px);
+    }
+  }
+
+  .article-list-item a {
+    display: block;
+    height: 100%;
+    border-radius: var(--radius-lg);
+  }
+
+  .article-list-thumb {
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .article-list-body {
+    padding: var(--space-5) var(--space-6) var(--space-6);
+  }
+
+  .article-list-meta {
+    display: flex;
+    gap: var(--space-3);
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: var(--space-3);
+    font-size: var(--fs-caption);
+    color: var(--muted);
+  }
+
+  .article-list-item h2 {
+    font-size: 18px;
+    line-height: 1.6;
+  }
+
+  .article-list-item a:hover h2 {
+    color: var(--accent-strong);
+  }
+
+  @media (max-width: 1080px) {
+    .article-list {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .article-list {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

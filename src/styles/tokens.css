@@ -1,0 +1,108 @@
+/* ========================================
+   デザイントークン（B「やわらかな相談相手」）
+   色・角丸・影・余白・文字サイズの正本。同じ意味の値を hex や px で直書きしない
+   ======================================== */
+
+:root {
+  /* 文字色 */
+  --ink: #0f1b33; /* 見出し */
+  --text: #1f2733; /* 本文 */
+  --text-sub: #3d4757; /* リード・補足の本文 */
+  --muted: #4a5466; /* 注記・説明（bg-page・neutral-soft 上でも 4.5:1 以上） */
+
+  /* アクセント */
+  --accent: #2563eb;
+  --accent-strong: #1d4fd7; /* 淡色地の上のアクセント文字・hover */
+  --accent-soft: #e9f0fd; /* チップ・バッジ・中間CTA */
+  --accent-tint: #dfe9fb; /* 宣言バンド・ページ末CTA */
+  --on-accent: #ffffff;
+  --on-accent-sub: #eef4fe; /* accent 地の補足文字（4.5:1 以上） */
+
+  /* 地・面・線 */
+  --bg-page: #f4f7fc; /* 色付きの地のセクション */
+  --surface: #ffffff;
+  --line: #e3e9f3;
+  --line-strong: #c9d1de; /* 入力欄の枠・破線・矢印など、線を見せたい箇所 */
+  --neutral-soft: #eef1f6; /* 対比図の「導入前」チップなど無彩色の淡い面 */
+
+  /* 状態 */
+  --error: #d43c3c; /* 必須表示（白地で 4.5:1 以上） */
+  --focus-ring: var(--accent);
+
+  /* 暗い地（フッター） */
+  --on-dark: #ffffff;
+  --on-dark-sub: #b6c0d4; /* 見出し */
+  --on-dark-muted: #93a1bd; /* 本文・リンク */
+  --line-on-dark: rgba(255, 255, 255, 0.12);
+
+  /* 角丸 */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 20px; /* カード */
+  --radius-xl: 24px; /* パネル */
+  --radius-pill: 999px; /* ボタン・チップ */
+
+  /* 影 */
+  --shadow-card: 0 2px 8px rgba(15, 27, 51, 0.05);
+  --shadow-hover: 0 6px 20px rgba(15, 27, 51, 0.08);
+  --shadow-panel: -4px 0 20px rgba(15, 27, 51, 0.12); /* モバイルのメニューパネル */
+  --overlay: rgba(15, 27, 51, 0.45);
+
+  /* 余白 */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-14: 56px;
+  --space-18: 72px;
+  --space-24: 96px;
+  --space-28: 112px;
+
+  /* 書体 */
+  --font-body: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+  --font-display: "Zen Maru Gothic", "Noto Sans JP", "Hiragino Maru Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+
+  /* 文字サイズ */
+  --fs-h1: clamp(36px, 4.6vw, 60px);
+  --lh-h1: 1.35;
+  --fs-h1-lp: clamp(32px, 3.8vw, 50px); /* LPヒーロー: 2カラムに収まる大きさ */
+  --fs-h1-page: clamp(30px, 3.4vw, 42px); /* 下層ページ見出し */
+  --fs-h2: 36px;
+  --fs-h3: 22px;
+  --fs-lead: 18px;
+  --fs-body: 16px;
+  --lh-body: 1.85;
+  --fs-small: 14px;
+  --fs-caption: 13px;
+
+  /* レイアウト */
+  --container: 1200px;
+  --gutter: 24px;
+  --header-h: 76px;
+  --section-y: var(--space-24);
+}
+
+@media (max-width: 768px) {
+  :root {
+    --fs-h2: 28px;
+    --fs-h3: 20px;
+    --fs-lead: 16px;
+    --gutter: 20px;
+    --header-h: 64px;
+    --section-y: var(--space-14);
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    /* 390px 幅で「導入するだけのITから、」が1行に収まる大きさ */
+    --fs-h1: 30px;
+    --fs-h1-lp: 30px;
+    --fs-h1-page: 28px;
+    --fs-h2: 26px;
+  }
+}

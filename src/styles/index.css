@@ -1,0 +1,13 @@
+/* ========================================
+   NEXT Bridge — スタイルの入口（BaseLayout が読み込む）
+   カスケードレイヤーの順序: 後ろのレイヤーほど優先される。
+   ページ・コンポーネント固有の指定は各 .astro の scoped <style>（レイヤー外なので常に優先）に置く
+   ======================================== */
+
+@layer tokens, base, layout, components, lp;
+
+@import "./tokens.css" layer(tokens);
+@import "./base.css" layer(base);
+@import "./layout.css" layer(layout);
+@import "./components.css" layer(components);
+@import "./lp.css" layer(lp);

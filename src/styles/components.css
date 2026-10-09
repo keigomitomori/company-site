@@ -1,0 +1,296 @@
+/* ========================================
+   部品（複数ページ・複数コンポーネントで共用するもの）
+   1つのページ・コンポーネントだけで使う指定は、そのファイルの scoped <style> に置く
+   ======================================== */
+
+/* ========================================
+   Buttons
+   ======================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 48px;
+  padding: var(--space-2) var(--space-8);
+  border: 1.5px solid transparent;
+  border-radius: var(--radius-pill);
+  font-family: inherit;
+  font-size: var(--fs-body);
+  font-weight: 700;
+  line-height: 1.5;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.btn-primary {
+  background-color: var(--accent);
+  color: var(--on-accent);
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-strong);
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+/* セカンダリ: 白地＋アクセントの枠 */
+.btn-outline {
+  background-color: var(--surface);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.btn-outline:hover {
+  background-color: var(--accent-soft);
+  color: var(--accent-strong);
+  border-color: var(--accent-strong);
+}
+
+.btn-lg {
+  min-height: 56px;
+  padding: var(--space-3) var(--space-10);
+  font-size: 17px;
+}
+
+/* 文字だけのリンクボタン（誘導バナーなど） */
+.btn-text {
+  min-height: 48px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-sm);
+  color: var(--accent-strong);
+}
+
+.btn-text:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* ========================================
+   チップ（事例タグ・コラムのカテゴリ・LPのラベル）
+   ======================================== */
+.case-tag,
+.article-category,
+.lp-hero-label,
+.lp-eyebrow {
+  display: inline-block;
+  background-color: var(--accent-soft);
+  color: var(--accent-strong);
+  font-size: var(--fs-caption);
+  font-weight: 700;
+  line-height: 1.6;
+  padding: var(--space-1) 14px;
+  border-radius: var(--radius-pill);
+}
+
+/* ========================================
+   グリッド（サービスカード・事例カード）
+   ======================================== */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+.card-grid--lp {
+  grid-template-columns: 1fr 1fr;
+}
+
+.case-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .case-grid {
+    gap: var(--space-4);
+  }
+}
+
+/* ========================================
+   チェック付きリスト
+   ======================================== */
+.feature-list li {
+  position: relative;
+  padding: var(--space-1) 0 var(--space-1) 1.6em;
+  color: var(--text);
+  font-size: 15px;
+}
+
+.feature-list li::before {
+  content: "\2713";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* ========================================
+   完了・案内ボックス（送信完了・404）
+   ======================================== */
+.thanks-box {
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.thanks-box h2 {
+  font-size: 26px;
+  line-height: 1.5;
+  margin-bottom: var(--space-5);
+}
+
+.thanks-box > p {
+  color: var(--text-sub);
+  margin-bottom: var(--space-2);
+}
+
+.thanks-links {
+  background-color: var(--bg-page);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6) var(--space-8);
+  margin: var(--space-8) 0;
+  text-align: left;
+}
+
+.thanks-links p {
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: var(--space-2);
+}
+
+.thanks-links a,
+.thanks-box > p a {
+  color: var(--accent-strong);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.thanks-box .btn {
+  margin-top: var(--space-2);
+}
+
+@media (max-width: 768px) {
+  .thanks-box {
+    text-align: left;
+  }
+
+  .thanks-box h2 {
+    font-size: 22px;
+  }
+
+  .thanks-links {
+    padding: var(--space-5);
+  }
+}
+
+/* ========================================
+   表と注記（料金ページ・SCS LP の制度概要）
+   ======================================== */
+.price-table-wrap {
+  max-width: 880px;
+  margin: 0 auto;
+  overflow-x: auto;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
+.price-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background-color: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+}
+
+.price-table th,
+.price-table td {
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  font-size: 15px;
+  white-space: nowrap;
+}
+
+.price-table thead th {
+  background-color: var(--bg-page);
+  font-weight: 700;
+  color: var(--ink);
+  font-size: var(--fs-small);
+}
+
+.price-table thead th:first-child {
+  border-top-left-radius: var(--radius-lg);
+}
+
+.price-table thead th:last-child {
+  border-top-right-radius: var(--radius-lg);
+}
+
+.price-table tbody th {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.price-table tbody th a {
+  color: var(--accent-strong);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.price-table tbody tr:last-child th,
+.price-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.price-notes {
+  max-width: 880px;
+  margin: var(--space-5) auto 0;
+  display: grid;
+  gap: var(--space-2);
+}
+
+.price-notes li {
+  font-size: var(--fs-small);
+  color: var(--muted);
+}
+
+.price-notes a {
+  color: var(--accent-strong);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 768px) {
+  /* 狭い画面では折り返して横スクロールを減らす（収まらない分は枠内でスクロール） */
+  .price-table th,
+  .price-table td {
+    padding: var(--space-3);
+    font-size: var(--fs-small);
+    white-space: normal;
+    min-width: 4.5em;
+  }
+
+  .price-table tbody th {
+    min-width: 8em;
+  }
+}
+
+/* 本文の前に置く注記（事例の但し書きなど）: 上詰め・下に間隔 */
+.price-notes--lead {
+  margin: 0 auto var(--space-8);
+}
