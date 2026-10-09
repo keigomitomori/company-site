@@ -81,8 +81,14 @@
 
 ## 運用メモ
 
-- **デプロイ**: main へ push すると GitHub Actions（.github/workflows/deploy.yml）が GitHub Pages に自動デプロイする
+- **デプロイ**: main へ push すると GitHub Actions（.github/workflows/deploy.yml）が Cloudflare Workers（静的アセット）に自動デプロイする（ユーザー決定 2026-10-10。それまでは GitHub Pages）
   - CI の verify ジョブが型検査（astro check）・OG画像の存在・canonical の実URL一致・内部リンクを検証し、失敗するとデプロイされない
+  - PR では検証済みの dist をプレビュー版としてアップロードする（本番には反映されない。URL はジョブのログに出る）
+  - GitHub の Secrets に `CLOUDFLARE_API_TOKEN`・`CLOUDFLARE_ACCOUNT_ID` が必要
+- **URL の解決**（wrangler.jsonc・worker/index.js）: `.html` 付きの URL を維持するため `html_handling` は `none`。アセットに一致しないリクエストだけ Worker が受け、次の順で GitHub Pages 時代と同じ動きを再現する
+  - `/dir/` → `dir/index.html`、`/dir` → `/dir/` へ 301、`/about` → `/about.html` へ 301、それ以外は 404.html を 404 で返す
+  - www.nextb.net → nextb.net の転送は Worker でなく Cloudflare ゾーンの Redirect Rule で行う
+  - レスポンスヘッダー（セキュリティ系・`/_astro/*` の長期キャッシュ）は public/_headers
 - **dist/ はビルド成果物**（リポジトリ管理外）。CI が build するのでローカル build は検証用
 - **sitemap.xml はビルド時に自動生成**（scripts/sitemap-integration.mjs が dist の実ファイルから生成。手動追記は不要。noindex ページと404は自動除外）
 - **canonical は原則自動導出**。ルート直下の `.html` ページ（about・services 等）のみ BaseLayout に明示指定する（実URLとの一致はビルドが検証する）

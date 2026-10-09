@@ -1,0 +1,21 @@
+// Cloudflare Workers（静的アセット）の設定。デプロイは GitHub Actions から行う（.github/workflows/deploy.yml）
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "nextb-net",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    // 既定の auto-trailing-slash は /about.html を /about へ転送し canonical と食い違うため止める。
+    // ディレクトリURLの解決と 404 は worker/index.js が担う
+    "html_handling": "none",
+    "not_found_handling": "none"
+  },
+  // 独自ドメインは Workers のカスタムドメインで割り当てる。
+  // www.nextb.net → nextb.net の転送は Worker ではなくゾーンの Redirect Rule で行う（CLAUDE.md の運用メモ参照）
+  "routes": [{ "pattern": "nextb.net", "custom_domain": true }],
+  // PR ごとのプレビューURL（wrangler versions upload）を有効にする
+  "workers_dev": true,
+  "preview_urls": true
+}

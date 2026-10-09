@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Deploy to Cloudflare Workers
 
 on:
   push:
@@ -6,7 +6,6 @@ on:
   pull_request:
   workflow_dispatch:
 
-# 既定は読み取りのみ。Pages への書き込み権限は deploy ジョブだけに与える
 permissions:
   contents: read
 
@@ -14,13 +13,13 @@ permissions:
 # PR は最新の push だけ検証できればよいので、進行中の実行をキャンセルする。
 # ref 別グループにして、PR の verify が main のデプロイ待機枠を奪わないようにする
 concurrency:
-  group: pages-${{ github.ref }}
+  group: deploy-${{ github.ref }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   # 型検査・OG画像の存在・canonical一致（ビルド内）・内部リンクを検証する。
   # main への push だけでなく PR でも走らせ、壊れた変更をデプロイ前に止める。
-  # ビルドはこのジョブの1回だけで、検証済みの dist をそのままデプロイに回す（PR では回さない）
+  # ビルドはこのジョブの1回だけで、検証済みの dist をそのままプレビュー・本番に回す
   verify:
     runs-on: ubuntu-latest
     steps:
@@ -42,23 +41,65 @@ jobs:
         run: npm run build
       - name: Internal link check
         run: node scripts/check-links.mjs
-      - name: Upload Pages artifact
-        if: github.event_name != 'pull_request'
-        uses: actions/upload-pages-artifact@v5
+      - name: Upload dist
+        uses: actions/upload-artifact@v7
         with:
+          name: dist
           path: dist
+          include-hidden-files: true
+          retention-days: 7
+
+  # PR ごとにプレビュー版をアップロードする（本番には反映されない）。
+  # フォークからの PR には Secrets が渡らないため、同じリポジトリのブランチからの PR に限る
+  preview:
+    needs: verify
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Download dist
+        uses: actions/download-artifact@v8
+        with:
+          name: dist
+          path: dist
+      - name: Upload preview version
+        run: npx wrangler versions upload --preview-alias pr-${{ github.event.pull_request.number }}
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
   deploy:
     needs: verify
-    if: github.event_name != 'pull_request'
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    permissions:
-      pages: write
-      id-token: write
     environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      name: production
+      url: https://nextb.net
     steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v5
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Download dist
+        uses: actions/download-artifact@v8
+        with:
+          name: dist
+          path: dist
+      - name: Deploy
+        run: npx wrangler deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

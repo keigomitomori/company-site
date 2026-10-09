@@ -8,3 +8,6 @@ __pycache__/
 
 # 未公開コラムのストック（ビルド・git 管理の対象外。公開時に所定の場所へ移す）
 _stock/
+
+# wrangler のローカル状態
+.wrangler/
