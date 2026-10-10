@@ -1,0 +1,36 @@
+---
+// サービスの3グループをカードで並べる（トップの「支援メニュー」とサービスページで共用）。
+// 構成と並び順は src/data/services.ts の正本から導出する。1サービスだけのグループは横長カードにする
+import ServiceCard from './ServiceCard.astro';
+import { serviceGroupsWithServices } from '../data/services';
+
+const groups = serviceGroupsWithServices();
+---
+<div class="service-groups">
+  {groups.map(({ group, services }) => (
+    <div class="service-group">
+      <h3 class="service-group-label">{group.name}</h3>
+      {services.length === 1 ? (
+        <ServiceCard service={services[0]} wide />
+      ) : (
+        <div class="card-grid card-grid--lp">
+          {services.map((service) => <ServiceCard service={service} />)}
+        </div>
+      )}
+    </div>
+  ))}
+</div>
+
+<style>
+  .service-groups {
+    display: grid;
+    gap: var(--space-10);
+  }
+
+  .service-group-label {
+    font-size: 20px;
+    line-height: 1.5;
+    color: var(--accent-strong);
+    margin-bottom: var(--space-4);
+  }
+</style>

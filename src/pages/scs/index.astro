@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import JsonLd from '../../components/JsonLd.astro';
-import { getService } from '../../data/services';
+import { contactHref, getService } from '../../data/services';
 import { serviceJsonLd } from '../../utils/jsonld';
 import Cta from '../../components/Cta.astro';
 import CaseCard from '../../components/CaseCard.astro';
@@ -11,6 +11,7 @@ import { ill } from '../../data/illustrations';
 import LpFaq from '../../components/LpFaq.astro';
 import LpBanner from '../../components/LpBanner.astro';
 import LpConsult from '../../components/LpConsult.astro';
+import LpRelatedArticles from '../../components/LpRelatedArticles.astro';
 
 // 時点依存の記述の棚卸し: 申請受付開始（2027年1〜3月頃予定）の時期に、
 // meta description・制度概要の注記・事例の注記・FAQ（義務／申請時期）を見直す。
@@ -34,7 +35,7 @@ const faqItems = [
   { q: "費用はどのくらいですか？", a: "当社の支援費用は、プロジェクト型支援 30万円〜、継続的な運用まで含める場合は顧問契約 月10万円〜（いずれも税別）が目安です。目指す段階と現状の整備状況によって変わります。申請や専門家確認・第三者評価など制度側の費用は含みません（制度側の費用は未公表です）。詳しくは<a href=\"/pricing/\">料金ページ</a>をご覧ください。" },
 ];
 
-const service = getService('/scs/');
+const service = getService('scs');
 // meta description と構造化データ Service の description で共用する
 const description = "サプライチェーン強化に向けたセキュリティ対策評価制度（SCS評価制度）への対応を支援します。★3・★4の要求事項と現状のギャップ分析から、規程・台帳・設定の整備、評価への準備まで。申請受付は2027年1〜3月頃開始予定です。";
 ---
@@ -55,7 +56,7 @@ const description = "サプライチェーン強化に向けたセキュリテ�
         <h1>SCS評価制度に沿った<br>統制の整備支援</h1>
         <p class="lp-hero-sub">基準は公表済みで、申請受付は2027年1〜3月頃に始まる予定です。専任の情シスがいない会社でも準備を進められるよう、要求事項と現状の突き合わせから規程・台帳・設定の整備、評価への準備までを社内側に立って支援します。</p>
         <div class="lp-hero-cta">
-          <a href="/contact/" class="btn btn-primary btn-lg">無料で相談する</a>
+          <a href={contactHref(service.slug)} class="btn btn-primary btn-lg">無料で相談する</a>
         </div>
         <ul class="lp-hero-points">
           <li>基準は★3が26項目・★4が43項目</li>
@@ -186,6 +187,7 @@ const description = "サプライチェーン強化に向けたセキュリテ�
   </section>
 
   <LpConsult
+    service={service.slug}
     text="「まず何から手を付ければいい？」— 要求事項と現状の突き合わせからご一緒します。"
     note="費用の目安（当社の支援費用）: プロジェクト型支援 30万円〜／顧問契約 月10万円〜（税別）。目指す段階と現状の整備状況により変わります。申請・専門家確認・第三者評価など制度側の費用は含みません。"
   />
@@ -210,8 +212,11 @@ const description = "サプライチェーン強化に向けたセキュリテ�
         <li>※ SCS評価制度は申請受付の開始前で、★を取得した企業はまだありません（2026年8月時点）。以下はSCS評価制度対応の事例ではなく、セキュリティ認証の運用を支援してきた実績です。</li>
       </ul>
       <div class="case-grid">
-        <CaseCard data={itStartupCase.summary} />
+        <CaseCard entry={itStartupCase} />
       </div>
+      <p class="lp-more">
+        <a href="/cases/" class="btn btn-outline">ほかの支援事例を見る</a>
+      </p>
     </div>
   </section>
 
@@ -222,14 +227,18 @@ const description = "サプライチェーン強化に向けたセキュリテ�
         <h2>よくあるご質問</h2>
       </div>
       <LpFaq items={faqItems} />
-      <LpBanner text="整備後の運用まで含めた継続支援は専用ページでご案内しています" href="/it-support/" label="情シス伴走支援「もうひとりの情シス」" />
+      <LpBanner text="PCのセキュリティ設定を全端末にそろえる仕組みづくりは専用ページでご案内しています" service="device-management" />
+      <LpBanner text="整備後の運用まで含めた継続支援は専用ページでご案内しています" service="it-support" />
     </div>
   </section>
+
+  <LpRelatedArticles service={service.slug} />
 
   <Cta
     heading="SCS評価制度への対応、現状の把握から始めませんか"
     text="取引先との状況と社内の体制を伺い、目指す段階と進め方の目安をご提案します。初回相談は無料です。"
     buttonClass="btn btn-primary"
     buttonLabel="相談してみる"
+    href={contactHref(service.slug)}
   />
 </BaseLayout>

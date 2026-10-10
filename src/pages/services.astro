@@ -2,95 +2,107 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import Cta from '../components/Cta.astro';
-import CaseCard from '../components/CaseCard.astro';
-import { itStartupCase, deviceManagementCase, genaiAdoptionCase } from '../data/cases';
 import LpBanner from '../components/LpBanner.astro';
-import ServiceCard from '../components/ServiceCard.astro';
-import { services } from '../data/services';
+import ServiceGroups from '../components/ServiceGroups.astro';
+import { getService, type ServiceSlug } from '../data/services';
+
+// 比較表。セルに書いてよいのは各 LP（ヒーロー・お悩み・特長・中間CTA・FAQ）に既にある事実だけ。
+// 費用の目安は各 LP の中間CTAの注記と同じレンジにする（料金の決定は CLAUDE.md の運用メモが正本）
+const compareRows: { slug: ServiceSlug; situation: string; scope: string; contract: string[]; cost: string[] }[] = [
+  {
+    slug: 'it-support',
+    situation: '専任の情シスがいない、または一人で手が回っていない',
+    scope: 'PC・アカウントの管理、セキュリティ整備、SaaSの運用、社員からの相談対応',
+    contract: ['顧問契約'],
+    cost: ['顧問契約 月10万円〜（税別）'],
+  },
+  {
+    slug: 'device-management',
+    situation: '新しいPCのセットアップが毎回手作業で、セキュリティ設定が端末ごとにバラバラ',
+    scope: 'Intune / Entra ID による管理基盤の設計・構築、キッティングの自動化、運用の引き継ぎ',
+    contract: ['プロジェクト型支援'],
+    cost: ['プロジェクト型支援 30万円〜（税別）'],
+  },
+  {
+    slug: 'scs',
+    situation: 'SCS評価制度が自社に関係するのか、何から手を付けるべきか判断できない',
+    scope: '★3・★4の要求事項と現状のギャップ分析、規程・台帳・設定の整備、評価への準備',
+    contract: ['プロジェクト型支援', '顧問契約'],
+    cost: ['プロジェクト型支援 30万円〜（税別）', '顧問契約 月10万円〜（税別）'],
+  },
+  {
+    slug: 'genai-adoption',
+    situation: '生成AIをどの業務に使えるか分からず、一部の社員の試行にとどまっている',
+    scope: '業務の棚卸し、ユースケース設計、試作、現場評価、全社展開',
+    contract: ['プロジェクト型支援'],
+    cost: ['プロジェクト型支援 30万円〜（税別）'],
+  },
+  {
+    slug: 'genai-governance',
+    situation: '社員が生成AIを個人アカウントで使い始めていて、Claude Code の設定や権限も管理しきれない',
+    scope: '利用ガイドライン策定、SSO・アカウント統制、managed settings の設計、Intune / MDM での配布、ISMSとの整合',
+    contract: ['プロジェクト型支援', '顧問契約'],
+    cost: ['プロジェクト型支援 30万円〜（税別）', '顧問契約 月10万円〜（税別）'],
+  },
+];
 ---
 <BaseLayout
   title="サービス"
-  description="NEXT Bridgeのサービス紹介ページです。情シスコンサルティング・製品導入支援・生成AI導入支援をご提供しています。"
-  ogDescription="情シスコンサルティング・製品導入支援・生成AI導入支援をご提供しています。"
+  description="NEXT Bridgeのサービス一覧です。情シス業務／PC・セキュリティ／生成AIの3分野で、各サービスの対象となる状況・支援内容・ご契約の形・費用の目安を比較できます。"
+  ogDescription="情シス業務／PC・セキュリティ／生成AIの3分野のサービスと、支援内容・費用の目安の比較です。"
 >
   <PageHeader title="サービス" subtitle="Services" />
 
   <section class="section">
     <div class="container">
       <div class="section-title">
-        <h2>サービス詳細</h2>
-        <p>Service Details</p>
+        <h2>分野別のサービス</h2>
+        <p>Services</p>
       </div>
-
-      <div class="card-grid card-grid--lp">
-        {services.map((service) => <ServiceCard service={service} />)}
-      </div>
+      <p class="services-lead">ご相談の内容から、3つの分野でお選びいただけます。各サービスの違いは<a href="#compare">サービスの比較</a>でご確認いただけます。</p>
+      <ServiceGroups />
     </div>
   </section>
 
-  <section class="section section-gray" id="cases">
+  <section class="section section-gray" id="compare">
     <div class="container">
       <div class="section-title">
-        <h2>支援事例</h2>
-        <p>Cases</p>
+        <h2 id="compare-heading">サービスの比較</h2>
+        <p>Compare</p>
       </div>
-      <div class="case-grid">
-        <CaseCard data={itStartupCase.full} />
-        <CaseCard data={deviceManagementCase.full} />
-        <CaseCard data={genaiAdoptionCase.full} />
+      <p class="compare-scroll-hint">表は横にスクロールしてご覧いただけます。</p>
+      <div class="price-table-wrap price-table-wrap--wide" role="region" aria-labelledby="compare-heading" tabindex="0">
+        <table class="price-table price-table--compare">
+          <thead>
+            <tr>
+              <th scope="col">サービス</th>
+              <th scope="col">こんな状況の企業に</th>
+              <th scope="col">主な支援内容</th>
+              <th scope="col">ご契約の形</th>
+              <th scope="col">費用の目安</th>
+            </tr>
+          </thead>
+          <tbody>
+            {compareRows.map((row) => {
+              const service = getService(row.slug);
+              return (
+                <tr>
+                  <th scope="row"><a href={service.href}>{service.title}</a></th>
+                  <td>{row.situation}</td>
+                  <td>{row.scope}</td>
+                  <td>{row.contract.map((c) => <span class="compare-line">{c}</span>)}</td>
+                  <td>{row.cost.map((c) => <span class="compare-line">{c}</span>)}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
-    </div>
-  </section>
-
-  <section class="section" id="flow">
-    <div class="container">
-      <div class="section-title">
-        <h2>支援の流れ</h2>
-        <p>Flow</p>
-      </div>
-      <ol class="flow-steps">
-        <li class="flow-step">
-          <div class="flow-step-number">1</div>
-          <div class="flow-step-body">
-            <h3>お問い合わせ</h3>
-            <p>フォームよりご連絡ください。折り返し、初回相談の日程をご案内します。</p>
-          </div>
-        </li>
-        <li class="flow-step">
-          <div class="flow-step-number">2</div>
-          <div class="flow-step-body">
-            <h3>初回相談</h3>
-            <p>オンラインで現状の困りごとやご要望をお伺いします。まずは状況の整理からで構いません。</p>
-          </div>
-        </li>
-        <li class="flow-step">
-          <div class="flow-step-number">3</div>
-          <div class="flow-step-body">
-            <h3>ご提案・お見積もり</h3>
-            <p>お伺いした内容をもとに、支援範囲・進め方・お見積もりをご提案します。</p>
-          </div>
-        </li>
-        <li class="flow-step">
-          <div class="flow-step-number">4</div>
-          <div class="flow-step-body">
-            <h3>ご契約・支援開始</h3>
-            <p>内容にご納得いただけましたら契約を締結し、ご支援を開始します。</p>
-          </div>
-        </li>
-      </ol>
-      <div class="contract-grid">
-        <div class="contract-card">
-          <h3>顧問契約</h3>
-          <p>月次の定例と随時のご相談で、情シス業務に継続的に伴走します。長期のお付き合いを前提とした形です。</p>
-        </div>
-        <div class="contract-card">
-          <h3>プロジェクト型支援</h3>
-          <p>製品導入や生成AI活用の立ち上げなど、期間と支援範囲を定めてご支援します。</p>
-        </div>
-      </div>
-      <p class="contract-note">いずれのご契約も準委任です。詳しくは料金ページの注記をご覧ください。</p>
-
-      <LpBanner text="それぞれの料金の目安は料金ページでご案内しています" href="/pricing/" label="料金" />
+      <ul class="price-notes">
+        <li>※ 費用は目安で、支援範囲により変わります。SCS評価制度対応支援の金額は当社の支援費用で、申請・専門家確認・第三者評価など制度側の費用は含みません。</li>
+        <li>※ ご契約はいずれも準委任です。契約形態の違いは料金ページの<a href="/pricing/#contract">ご契約形態</a>、ご相談からの進め方は<a href="/pricing/#flow">ご相談から契約までの流れ</a>をご覧ください。</li>
+      </ul>
+      <LpBanner text="これまでの支援事例は、分野ごとにまとめてご覧いただけます" href="/cases/" label="支援事例" />
     </div>
   </section>
 
@@ -101,104 +113,44 @@ import { services } from '../data/services';
 </BaseLayout>
 
 <style>
-  /* ========== 支援の流れ ========== */
-  .flow-steps,
-  .contract-grid,
-  .contract-note {
-    max-width: 880px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .flow-step {
-    display: flex;
-    gap: var(--space-6);
-    align-items: flex-start;
-    padding: var(--space-6) 0;
-    border-bottom: 1px solid var(--line);
-  }
-
-  .flow-step:last-child {
-    border-bottom: none;
-  }
-
-  .flow-step-number {
-    flex: 0 0 44px;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background-color: var(--accent);
-    color: var(--on-accent);
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .flow-step-body h3 {
-    font-size: 20px;
-    line-height: 1.6;
-    margin-bottom: var(--space-1);
-  }
-
-  .flow-step-body p {
+  .services-lead {
+    max-width: 760px;
+    margin: calc(var(--space-8) * -1) auto var(--space-10);
+    text-align: center;
     color: var(--text-sub);
   }
 
-  /* ========== 契約形態 ========== */
-  .contract-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-5);
-    margin-top: var(--space-10);
+  .services-lead a {
+    color: var(--accent-strong);
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
 
-  /* 白い地に置くカードのため、ごく淡い線を添える */
-  .contract-card {
-    background-color: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-lg);
-    padding: var(--space-6) var(--space-8);
-    box-shadow: var(--shadow-card);
+  /* 契約の形が2つあるサービスは、形ごとに1行ずつ並べる */
+  .compare-line {
+    display: block;
   }
 
-  .contract-card h3 {
-    font-size: 20px;
-    margin-bottom: var(--space-2);
+  .compare-line + .compare-line {
+    margin-top: var(--space-1);
   }
 
-  .contract-card p {
-    color: var(--text-sub);
-    font-size: 15px;
-  }
-
-  .contract-note {
-    margin-top: var(--space-4);
-    color: var(--muted);
-    font-size: var(--fs-small);
+  /* 狭い画面では表が枠内で横スクロールになるため、その旨を添える */
+  .compare-scroll-hint {
+    display: none;
   }
 
   @media (max-width: 768px) {
-    .flow-step {
-      gap: var(--space-4);
-      padding: var(--space-5) 0;
+    .compare-scroll-hint {
+      display: block;
+      margin-bottom: var(--space-2);
+      font-size: var(--fs-small);
+      color: var(--muted);
     }
 
-    .flow-step-number {
-      flex-basis: 40px;
-      width: 40px;
-      height: 40px;
-      font-size: 16px;
-    }
-
-    .contract-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .contract-card {
-      padding: var(--space-5) var(--space-6);
+    .services-lead {
+      margin-top: calc(var(--space-5) * -1);
+      text-align: left;
     }
   }
 </style>

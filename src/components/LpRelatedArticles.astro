@@ -1,0 +1,41 @@
+---
+// LP の「関連するコラム」。サービスに対応するカテゴリ（src/data/services.ts の articleCategory）の
+// 公開コラムを新しい順に最大3件出す。カテゴリが無い・該当記事が無いときはセクションごと出さない
+import { getService, type ServiceSlug } from '../data/services';
+import { getPublishedArticles } from '../utils/articles';
+import { fmt, iso } from '../utils/date';
+
+interface Props {
+  service: ServiceSlug;
+}
+const category = getService(Astro.props.service).articleCategory;
+const articles = category
+  ? (await getPublishedArticles()).filter((a) => a.data.category === category).slice(0, 3)
+  : [];
+---
+{articles.length > 0 && (
+  <section class="section section-gray">
+    <div class="container">
+      <div class="lp-title">
+        <p class="lp-eyebrow">COLUMN</p>
+        <h2>関連するコラム</h2>
+      </div>
+      <ul class="lp-articles">
+        {articles.map((article) => (
+          <li class="lp-article">
+            <a href={`/articles/${article.id}/`}>
+              <img class="lp-article-thumb" src={`/images/og/${article.id}.png`} alt="" loading="lazy" width="1200" height="630">
+              <div class="lp-article-body">
+                <time datetime={iso(article.data.pubDate)}>{fmt(article.data.pubDate)}</time>
+                <h3>{article.data.title}</h3>
+              </div>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <p class="lp-more">
+        <a href="/articles/" class="btn btn-outline">コラム一覧を見る</a>
+      </p>
+    </div>
+  </section>
+)}

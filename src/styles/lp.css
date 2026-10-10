@@ -1,6 +1,6 @@
 /* ========================================
-   LP 共通部品（LP5本・料金・トップ・サービスで共用）
-   標準構成: ヒーロー → お悩み → 宣言バンド → 3つの特長 → 中間CTA → 支援の流れ → 事例 → FAQ → CTA
+   LP 共通部品（LP5本・料金・トップ・サービス・支援事例で共用）
+   標準構成: ヒーロー → お悩み → 宣言バンド → 3つの特長 → 中間CTA → 支援の流れ → 事例 → FAQ → 関連するコラム → CTA
    ======================================== */
 
 /* ---------- ヒーロー ---------- */
@@ -667,6 +667,70 @@
   font-weight: 500;
 }
 
+/* 誘導バナーが続くときは間隔を詰める */
+.lp-banner + .lp-banner {
+  margin-top: var(--space-3);
+}
+
+/* ---------- 一覧ページへのリンク（事例・関連するコラムの下） ---------- */
+.lp-more {
+  margin-top: var(--space-8);
+  text-align: center;
+}
+
+/* ---------- 関連するコラム（LpRelatedArticles） ---------- */
+.lp-articles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+.lp-article {
+  background-color: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+
+.lp-article:hover {
+  box-shadow: var(--shadow-hover);
+}
+
+.lp-article a {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.lp-article-thumb {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1200 / 630;
+  object-fit: cover;
+  border-bottom: 1px solid var(--line);
+}
+
+.lp-article-body {
+  padding: var(--space-5) var(--space-6) var(--space-6);
+}
+
+.lp-article-body time {
+  display: block;
+  font-size: var(--fs-caption);
+  color: var(--muted);
+  margin-bottom: var(--space-1);
+}
+
+.lp-article-body h3 {
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.lp-article a:hover h3 {
+  color: var(--accent-strong);
+}
+
 /* ========================================
    Responsive
    ======================================== */
@@ -676,6 +740,10 @@
   }
 
   .lp-steps {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .lp-articles {
     grid-template-columns: 1fr 1fr;
   }
 }
@@ -830,6 +898,38 @@
 
   .lp-banner {
     padding: var(--space-3) var(--space-6);
+  }
+
+  .lp-articles {
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+  }
+
+  /* 1列のときはサムネイルを左に小さく置いて縦の長さを抑える */
+  .lp-article a {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .lp-article-thumb {
+    flex: 0 0 120px;
+    width: 120px;
+    align-self: stretch;
+    object-position: left center;
+    border-bottom: 0;
+    border-right: 1px solid var(--line);
+  }
+
+  .lp-article-body {
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .lp-article-body h3 {
+    font-size: 15px;
+  }
+
+  .lp-more .btn {
+    width: 100%;
   }
 }
 

@@ -1,13 +1,19 @@
 ---
-import type { CaseCardData } from '../data/cases';
+import type { CaseEntry } from '../data/cases';
+import { getService } from '../data/services';
 
 interface Props {
-  data: CaseCardData;
+  entry: CaseEntry;
+  /** full: 詳細版（無い事例は要約版で代替）、summary: 要約版（LP 用） */
+  variant?: 'full' | 'summary';
 }
-const { data } = Astro.props;
+const { entry, variant = 'summary' } = Astro.props;
+const data = variant === 'full' ? (entry.full ?? entry.summary) : entry.summary;
+// タグはサービス名を services.ts から引く（事例ごとに表記を持たない）
+const tag = getService(entry.service).shortTitle;
 ---
 <div class="case-card">
-  <span class="case-tag">{data.tag}</span>
+  <span class="case-tag">{tag}</span>
   <h3>{data.title}</h3>
   <dl class="case-fields">
     <div class="case-field">

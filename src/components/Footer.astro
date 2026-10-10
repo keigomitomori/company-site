@@ -1,8 +1,11 @@
 ---
+import { serviceGroupsWithServices } from '../data/services';
 import { tokyoYear } from '../utils/date';
 
 // 著作権表示の年はビルド時点（日本時間）の年にする
 const year = tokyoYear();
+// サービスの列はグループ別に src/data/services.ts の順で並べる
+const groups = serviceGroupsWithServices();
 ---
 <footer class="footer">
   <div class="container">
@@ -15,20 +18,26 @@ const year = tokyoYear();
         <h2 class="footer-heading">サービス</h2>
         <ul>
           <li><a href="/services/">サービス一覧</a></li>
-          <li><a href="/it-support/">情シス伴走支援「もうひとりの情シス」</a></li>
-          <li><a href="/device-management/">デバイス管理導入支援</a></li>
-          <li><a href="/genai-adoption/">生成AI活用支援</a></li>
-          <li><a href="/genai-governance/">生成AI・Claude Codeの社内統制支援</a></li>
-          <li><a href="/scs/">SCS評価制度対応支援</a></li>
         </ul>
+        {groups.map(({ group, services }) => (
+          <div class="footer-group">
+            <p class="footer-group-label" id={`footer-group-${group.id}`}>{group.name}</p>
+            <ul aria-labelledby={`footer-group-${group.id}`}>
+              {services.map((service) => (
+                <li><a href={service.href}>{service.title}</a></li>
+              ))}
+            </ul>
+          </div>
+        ))}
       </nav>
       <nav class="footer-nav" aria-label="メニュー">
         <h2 class="footer-heading">メニュー</h2>
         <ul>
           <li><a href="/">ホーム</a></li>
-          <li><a href="/about/">会社概要</a></li>
+          <li><a href="/cases/">支援事例</a></li>
           <li><a href="/pricing/">料金</a></li>
           <li><a href="/articles/">コラム</a></li>
+          <li><a href="/about/">会社概要</a></li>
           <li><a href="/contact/">お問い合わせ</a></li>
           <li><a href="/privacy/">プライバシーポリシー</a></li>
         </ul>

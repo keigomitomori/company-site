@@ -1,0 +1,177 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Cta from '../../components/Cta.astro';
+import CaseCard from '../../components/CaseCard.astro';
+import { cases } from '../../data/cases';
+import { getService, serviceGroupsWithServices } from '../../data/services';
+
+// 事例をサービスのグループごとにまとめる（グループ・事例の順は services.ts と cases.ts の順）。
+// 詳細版がある事例は詳細版、無い事例は要約版で載せる
+const groups = serviceGroupsWithServices()
+  .map(({ group, services }) => ({
+    group,
+    services,
+    cases: cases.filter((c) => getService(c.service).group === group.id),
+  }))
+  .filter((g) => g.cases.length > 0);
+---
+<BaseLayout
+  title="支援事例"
+  description="NEXT Bridgeの支援事例です。情シス業務／PC・セキュリティ／生成AIの分野ごとに、ご支援の課題・支援内容・成果をご紹介します。"
+  ogDescription="情シス業務／PC・セキュリティ／生成AIの分野ごとに、ご支援の課題・支援内容・成果をご紹介します。"
+>
+  <PageHeader title="支援事例" subtitle="Cases" />
+
+  <section class="section section-gray cases-section">
+    <div class="container">
+      <!-- 絞り込み: JS が動くときだけ表示する（JS 無効時は全事例を分野別に表示） -->
+      <div class="case-filter" role="group" aria-label="分野で絞り込む" hidden>
+        <button type="button" class="case-filter-btn" aria-pressed="true" data-group="all">すべて</button>
+        {groups.map(({ group }) => (
+          <button type="button" class="case-filter-btn" aria-pressed="false" data-group={group.id}>{group.name}</button>
+        ))}
+      </div>
+
+      <div class="case-groups">
+        {groups.map(({ group, services, cases: groupCases }) => (
+          <section class="case-group" data-group={group.id} aria-labelledby={`case-group-${group.id}`}>
+            <div class="case-group-head">
+              <h2 id={`case-group-${group.id}`}>{group.name}</h2>
+              <ul class="case-group-links">
+                {services.map((service) => (
+                  <li><a href={service.href}>{service.title} →</a></li>
+                ))}
+              </ul>
+            </div>
+            <div class="case-grid">
+              {groupCases.map((entry) => <CaseCard entry={entry} variant="full" />)}
+            </div>
+          </section>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Cta buttonClass="btn btn-primary" />
+</BaseLayout>
+
+<script is:inline>
+  (function () {
+    var filter = document.querySelector('.case-filter');
+    if (!filter) return;
+    var buttons = Array.prototype.slice.call(filter.querySelectorAll('.case-filter-btn'));
+    var groups = Array.prototype.slice.call(document.querySelectorAll('.case-group'));
+    filter.hidden = false;
+    filter.addEventListener('click', function (e) {
+      var target = e.target.closest('.case-filter-btn');
+      if (!target) return;
+      var selected = target.getAttribute('data-group');
+      buttons.forEach(function (b) {
+        b.setAttribute('aria-pressed', String(b === target));
+      });
+      groups.forEach(function (g) {
+        g.hidden = selected !== 'all' && g.getAttribute('data-group') !== selected;
+      });
+    });
+  })();
+</script>
+
+<style>
+  /* 見出し（PageHeader）と同じ地の色が続くため、上の余白を詰めて一続きに見せる */
+  .cases-section {
+    padding-top: var(--space-6);
+  }
+
+  .case-filter {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-10);
+  }
+
+  .case-filter[hidden] {
+    display: none;
+  }
+
+  .case-filter-btn {
+    min-height: 44px;
+    padding: var(--space-2) var(--space-6);
+    border: 1.5px solid var(--line-strong);
+    border-radius: var(--radius-pill);
+    background-color: var(--surface);
+    color: var(--text);
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+  }
+
+  .case-filter-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent-strong);
+  }
+
+  .case-filter-btn[aria-pressed="true"] {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: var(--on-accent);
+  }
+
+  .case-groups {
+    display: grid;
+    gap: var(--space-18);
+  }
+
+  .case-group[hidden] {
+    display: none;
+  }
+
+  .case-group-head {
+    max-width: 880px;
+    margin: 0 auto var(--space-6);
+  }
+
+  .case-group-head h2 {
+    font-size: 28px;
+    line-height: 1.5;
+    margin-bottom: var(--space-2);
+  }
+
+  .case-group-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1) var(--space-6);
+  }
+
+  .case-group-links a {
+    font-size: var(--fs-small);
+    font-weight: 700;
+    color: var(--accent-strong);
+  }
+
+  .case-group-links a:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  @media (max-width: 768px) {
+    .case-filter {
+      justify-content: flex-start;
+      margin-bottom: var(--space-8);
+    }
+
+    .case-filter-btn {
+      padding: var(--space-2) var(--space-5);
+    }
+
+    .case-groups {
+      gap: var(--space-14);
+    }
+
+    .case-group-head h2 {
+      font-size: 24px;
+    }
+  }
+</style>

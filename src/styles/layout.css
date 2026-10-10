@@ -82,6 +82,135 @@
   color: var(--on-accent);
 }
 
+/* ---------- サービスのメニュー（Header の JS が .has-js を付けたときだけボタン＋パネルにする） ---------- */
+/* パネルはヘッダーの内側幅の右端に揃えて開く */
+.header .container {
+  position: relative;
+}
+
+.nav-services-toggle,
+.nav-panel {
+  display: none;
+}
+
+/* グループ・LP の一覧 */
+.nav-group-label {
+  font-size: var(--fs-caption);
+  font-weight: 700;
+  color: var(--accent-strong);
+  letter-spacing: 0.04em;
+}
+
+.nav-list .nav-group a {
+  display: block;
+  line-height: 1.6;
+}
+
+.nav-list .nav-group a[aria-current="page"] {
+  text-underline-offset: 4px;
+}
+
+.nav-list .nav-panel-all {
+  font-weight: 700;
+  color: var(--accent-strong);
+}
+
+/* サービス一覧・LP にいるとき（現在地の親項目） */
+.nav-list .is-current-section {
+  color: var(--accent-strong);
+}
+
+@media (min-width: 769px) {
+  .has-js .nav-services-link {
+    display: none;
+  }
+
+  .has-js .nav-services-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: 0;
+    background: none;
+    border: 0;
+    border-radius: var(--radius-sm);
+    font-size: 15px;
+    font-weight: 500;
+    line-height: inherit;
+    color: var(--text);
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+
+  /* 下向きの山形（開いているときは上向き） */
+  .has-js .nav-services-toggle::after {
+    content: "";
+    width: 7px;
+    height: 7px;
+    margin-top: -4px;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: rotate(45deg);
+  }
+
+  .has-js .nav-services-toggle[aria-expanded="true"]::after {
+    margin-top: 3px;
+    transform: rotate(-135deg);
+  }
+
+  .has-js .nav-services-toggle:hover,
+  .has-js .nav-services-toggle[aria-expanded="true"] {
+    color: var(--accent-strong);
+  }
+
+  .has-js .nav-services-toggle.is-current-section {
+    color: var(--accent-strong);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 8px;
+  }
+
+  .has-js .nav-services-toggle[aria-expanded="true"] + .nav-panel {
+    display: block;
+  }
+
+  .nav-panel {
+    position: absolute;
+    top: calc(100% - var(--space-2));
+    right: var(--gutter);
+    width: min(760px, calc(100% - var(--gutter) * 2));
+    background-color: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-hover);
+    padding: var(--space-6) var(--space-8);
+  }
+
+  .nav-panel-groups {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+  }
+
+  .nav-group-label {
+    margin-bottom: var(--space-2);
+  }
+
+  .nav-group li + li {
+    margin-top: var(--space-2);
+  }
+
+  .nav-panel-all {
+    display: inline-block;
+    margin-top: var(--space-5);
+  }
+
+  .nav-panel-groups + .nav-panel-all {
+    width: 100%;
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--line);
+  }
+}
+
 /* Hamburger Menu (button + JS で aria-expanded を切替) */
 .menu-icon {
   display: none;
@@ -202,6 +331,25 @@
 
   .nav-list a[aria-current="page"]:not(.nav-contact) {
     text-decoration: none;
+  }
+
+  /* ドロワーではサービスのグループ・LP を展開して並べる（「サービス」が一覧へのリンクを兼ねる） */
+  .has-js .nav-panel {
+    display: block;
+    padding-left: var(--space-4);
+  }
+
+  .nav-list a.nav-panel-all {
+    display: none;
+  }
+
+  .nav-group-label {
+    padding-top: var(--space-4);
+  }
+
+  .nav-list .nav-group a {
+    padding: var(--space-3) 0;
+    font-size: 15px;
   }
 
   .nav-list .nav-contact {
@@ -328,9 +476,21 @@ html.is-nav-locked {
   margin: 0 auto var(--space-8);
 }
 
+/* ボタンが2つのとき（コラム末尾の LP への導線など） */
+.cta-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
 @media (max-width: 768px) {
   .cta {
     padding: var(--space-14) 0;
+  }
+
+  .cta-actions .btn {
+    width: 100%;
   }
 
   .cta h2 {
@@ -386,6 +546,18 @@ html.is-nav-locked {
 }
 
 .footer-nav ul li {
+  margin-bottom: var(--space-2);
+}
+
+/* サービスのグループ見出し（情シス業務・PC・セキュリティ・生成AI） */
+.footer-group {
+  margin-top: var(--space-4);
+}
+
+.footer-group-label {
+  font-size: var(--fs-caption);
+  font-weight: 700;
+  color: var(--on-dark-sub);
   margin-bottom: var(--space-2);
 }
 

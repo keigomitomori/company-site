@@ -1,10 +1,17 @@
 ---
-interface Props {
-  text: string;
-  href: string;
-  label: string;
-}
-const { text, href, label } = Astro.props;
+import { getService, type ServiceSlug } from '../data/services';
+
+// LP 間の誘導は service（slug）を渡し、リンク先とラベルを services.ts から引く。
+// サービス以外のページ（料金など）への誘導は href と label を直接渡す
+type Props =
+  | { text: string; service: ServiceSlug; href?: never; label?: never }
+  | { text: string; href: string; label: string; service?: never };
+
+const props = Astro.props;
+const { text } = props;
+const target = props.service ? getService(props.service) : undefined;
+const href = target ? target.href : props.href;
+const label = target ? target.title : props.label;
 ---
 <div class="lp-banner">
   <p>{text}</p>

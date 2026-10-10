@@ -3,6 +3,7 @@ import BaseLayout from './BaseLayout.astro';
 import Cta from '../components/Cta.astro';
 import JsonLd from '../components/JsonLd.astro';
 import type { ArticleCategory } from '../data/articleCategories';
+import { serviceForArticleCategory } from '../data/services';
 import { fmt, iso } from '../utils/date';
 import { articleJsonLd } from '../utils/jsonld';
 
@@ -39,6 +40,8 @@ const ctaByCategory: Record<ArticleCategory, { heading: string; text: string }> 
   },
 };
 const cta = ctaByCategory[category];
+// カテゴリに対応する LP（src/data/services.ts の articleCategory）があれば、相談に加えて LP への導線を出す
+const relatedService = serviceForArticleCategory(category);
 
 const articleData = articleJsonLd(Astro.site!, {
   title,
@@ -96,6 +99,7 @@ const articleData = articleJsonLd(Astro.site!, {
     text={cta.text}
     buttonClass="btn btn-primary"
     buttonLabel="相談してみる"
+    secondary={relatedService && { href: relatedService.href, label: `${relatedService.shortTitle}のご案内` }}
   />
 </BaseLayout>
 
