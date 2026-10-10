@@ -1,11 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
+
+const thanksUrl = new URL('/thanks/', Astro.site).href;
 ---
 <BaseLayout
   title="お問い合わせ"
   description="NEXT Bridgeへのお問い合わせページです。サービスに関するご質問やお見積もりのご依頼はこちらからどうぞ。"
-  canonical="/contact.html"
   ogDescription="サービスに関するご質問やお見積もりのご依頼はこちらからどうぞ。"
 >
   <PageHeader title="お問い合わせ" subtitle="Contact" />
@@ -19,7 +20,7 @@ import PageHeader from '../components/PageHeader.astro';
 
       <form class="contact-form" action="https://formspree.io/f/myknjqar" method="POST">
         <!-- 非JS送信時のリダイレクト先指定（Formspree のプラン設定によっては無視され標準完了ページになる） -->
-        <input type="hidden" name="_next" value="https://nextb.net/thanks.html">
+        <input type="hidden" name="_next" value={thanksUrl}>
         <!-- honeypot: 人間には見えない欄。botが埋めると Formspree 側で破棄される -->
         <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
         <div class="form-group">
@@ -61,7 +62,7 @@ import PageHeader from '../components/PageHeader.astro';
         <div class="form-group form-consent">
           <label class="consent-label">
             <input type="checkbox" name="privacy-consent" value="同意する" required aria-required="true">
-            <span><a href="/privacy.html" target="_blank" rel="noopener">プライバシーポリシー</a>に同意する <span class="required">※必須</span></span>
+            <span><a href="/privacy/" target="_blank" rel="noopener">プライバシーポリシー</a>に同意する <span class="required">※必須</span></span>
           </label>
           <p class="consent-note">ご入力いただいた内容は、お問い合わせへの回答および関連するご提案・お見積もりのご案内のみに利用します。</p>
         </div>
@@ -97,7 +98,7 @@ import PageHeader from '../components/PageHeader.astro';
         }).then(function (res) {
           if (!res.ok) throw new Error('submit failed');
           try { sessionStorage.setItem('leadSubmitted', '1'); } catch (err) {}
-          window.location.href = '/thanks.html';
+          window.location.href = '/thanks/';
         }).catch(function () {
           btn.disabled = false;
           btn.textContent = '送信する';

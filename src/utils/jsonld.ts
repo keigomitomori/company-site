@@ -39,7 +39,7 @@ export const organizationJsonLd = (site: URL): JsonLdObject => ({
   contactPoint: {
     '@type': 'ContactPoint',
     contactType: 'customer support',
-    url: abs('/contact.html', site),
+    url: abs('/contact/', site),
     availableLanguage: 'ja',
   },
 });

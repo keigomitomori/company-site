@@ -1,0 +1,8 @@
+# 旧 GitHub Pages 時代の .html 形式の URL を /about/ 形式へ恒久転送する（2026-10-11 の URL 変更）
+/index.html     /            301
+/about.html     /about/      301
+/services.html  /services/   301
+/pricing.html   /pricing/    301
+/contact.html   /contact/    301
+/privacy.html   /privacy/    301
+/thanks.html    /thanks/     301

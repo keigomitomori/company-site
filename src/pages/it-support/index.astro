@@ -25,7 +25,7 @@ const faqItems = [
   { q: "どこまでお願いできますか？", a: "ご相談への助言に加えて、設定作業やアカウント発行などの実務にも対応します。範囲はご契約時にすり合わせます。" },
   { q: "付き合いのあるITベンダーや、社内に詳しい社員がいます。役割はどうなりますか？", a: "既存のご契約や役割分担はそのままで、社内側の相談相手として加わります。なお、ベンダーへの発注・契約・調整の代行は承っていません。" },
   { q: "途中でやめられますか？", a: "はい。最低契約期間はなく、1ヶ月前までのお申し出で解約できます。" },
-  { q: "費用はどのくらいですか？", a: "月10万円〜（税別）が目安で、支援範囲と頻度によって変わります。詳しくは<a href=\"/pricing.html\">料金ページ</a>をご覧ください。" },
+  { q: "費用はどのくらいですか？", a: "月10万円〜（税別）が目安で、支援範囲と頻度によって変わります。詳しくは<a href=\"/pricing/\">料金ページ</a>をご覧ください。" },
 ];
 
 const service = getService('/it-support/');
@@ -36,7 +36,7 @@ const description = "専任の情シスがいない会社のIT業務を、月額
   title="情シス伴走支援「もうひとりの情シス」"
   description={description}
   ogDescription="専任の情シスがいない会社のIT業務を、月額の顧問契約でまるごと支援。相談から実務まで「もうひとりの情シス」として伴走します。"
-  breadcrumbParents={[{ name: 'サービス', path: '/services.html' }]}
+  breadcrumbParents={[{ name: 'サービス', path: '/services/' }]}
 >
   <JsonLd slot="head" data={serviceJsonLd(Astro.site!, { name: service.title, description, path: service.href })} />
   <!-- イラスト素材: ソコスト https://soco-st.com（商用利用可・クレジット不要）。ブランドカラーに合わせて一部の色を変更 -->
@@ -48,7 +48,7 @@ const description = "専任の情シスがいない会社のIT業務を、月額
         <h1>あなたのチームに、<br>もうひとりの情シスを。</h1>
         <p class="lp-hero-sub">PCやアカウントの管理、セキュリティ、社員からの「困った」への対応まで。専任の情シスがいない会社のIT業務を、月額の顧問契約で引き受けます。</p>
         <div class="lp-hero-cta">
-          <a href="/contact.html" class="btn btn-primary btn-lg">無料で相談する</a>
+          <a href="/contact/" class="btn btn-primary btn-lg">無料で相談する</a>
         </div>
         <ul class="lp-hero-points">
           <li>3年以上の継続支援実績</li>

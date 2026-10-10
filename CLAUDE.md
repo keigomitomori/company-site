@@ -90,13 +90,14 @@
   - **`cf build` と `cf dev` は使わない**。cf は Astro を検出すると Cloudflare アダプター前提の処理に回し、アダプターを使わない静的サイトでは Build Output が作られず失敗する（cf 1.0.0-beta.14 で確認。cf 自身の自動設定どおりアダプターを入れても同じ失敗）
   - 代わりに `npm run build`（Astro）→ `npm run cf:package`（cf のビルドエンジン cf-wrangler で dist を Build Output に詰める）→ `npx cf deploy --prebuilt` の順で行う。プレビューは cf:package と deploy の両方に `--mode preview` を付ける
   - ローカルで本番相当の配信を試すときは `npm run cf:dev`
-- **URL の解決**（cloudflare.config.ts・worker/index.js）: `.html` 付きの URL を維持するため `htmlHandling` は `none`。アセットに一致しないリクエストだけ Worker が受け、次の順で GitHub Pages 時代と同じ動きを再現する
-  - `/dir/` → `dir/index.html`、`/dir` → `/dir/` へ 301、`/about` → `/about.html` へ 301、それ以外は 404.html を 404 で返す
-  - www.nextb.net → nextb.net の転送は Worker でなく Cloudflare ゾーンの Redirect Rule で行う
-  - レスポンスヘッダー（セキュリティ系・`/_astro/*` の長期キャッシュ）は public/_headers
+- **URL の形式は /about/**（ユーザー決定 2026-10-11。Astro の build.format は directory）
+  - GitHub Pages 時代の /about.html 形式は public/_redirects で /about/ へ 301 転送する。新しいページを .html 形式で作らない
+  - 配信は Worker コードを持たない静的アセットのみ。/about → /about/ の補完と 404.html の返却は Cloudflare の設定（cloudflare.config.ts の htmlHandling・notFoundHandling）に任せる
+  - www.nextb.net → nextb.net の転送はゾーンの Redirect Rule で行う
+  - レスポンスヘッダー（セキュリティ系・`/_astro/*` の長期キャッシュ）は public/_headers。プレビューだけ CI が scripts/mark-preview-noindex.mjs で noindex を足す
 - **dist/ はビルド成果物**（リポジトリ管理外）。CI が build するのでローカル build は検証用
 - **sitemap.xml はビルド時に自動生成**（scripts/sitemap-integration.mjs が dist の実ファイルから生成。手動追記は不要。noindex ページと404は自動除外）
-- **canonical は原則自動導出**。ルート直下の `.html` ページ（about・services 等）のみ BaseLayout に明示指定する（実URLとの一致はビルドが検証する）
+- **canonical は自動導出**（実URLとの一致はビルドが検証する）。明示指定は 404 のみ
 - **コラム公開手順**: _stock/ から md と OG 画像 png を mv して push するだけ（お知らせ・一覧・sitemap は自動生成。OG 画像の置き忘れは CI が検知）
 - **料金の目安**（ユーザー決定 2026-07-11）: 顧問契約 月10万円〜（税別）／プロジェクト型支援 30万円〜（税別）。金額は目安レンジ表記とする
 - **解約条件**（ユーザー決定 2026-07-17）: 顧問契約に最低契約期間は設けない。解約は1ヶ月前までの申し出

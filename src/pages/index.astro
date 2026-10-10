@@ -30,8 +30,8 @@ const latestArticles = (await getPublishedArticles()).slice(0, 3);
         <h1>導入するだけのITから、<br>使われるITへ。</h1>
         <p class="hero-lead">専任の情シスがいない会社や、ひとり情シスの現場を、<br class="pc-br">チームの一員として実務を支えます。</p>
         <div class="hero-actions">
-          <a href="/contact.html" class="btn btn-primary">相談してみる</a>
-          <a href="/services.html#cases" class="btn btn-outline">支援事例を見る</a>
+          <a href="/contact/" class="btn btn-primary">相談してみる</a>
+          <a href="/services/#cases" class="btn btn-outline">支援事例を見る</a>
         </div>
         <ul class="hero-badges">
           <li><strong>長期の伴走支援</strong><span>3年以上続く顧問契約も</span></li>
@@ -94,7 +94,7 @@ const latestArticles = (await getPublishedArticles()).slice(0, 3);
       <div class="card-grid card-grid--lp">
         {services.map((service) => <ServiceCard service={service} />)}
       </div>
-      <LpBanner text="それぞれの料金の目安は料金ページでご案内しています" href="/pricing.html" label="料金" />
+      <LpBanner text="それぞれの料金の目安は料金ページでご案内しています" href="/pricing/" label="料金" />
     </div>
   </section>
 
@@ -109,7 +109,7 @@ const latestArticles = (await getPublishedArticles()).slice(0, 3);
           <p>ITの困りごとは、社内では相談しづらいものです。人数が限られた情報システム部門であればなおさら、判断に迷う場面や、手が回らない業務が増えていきます。</p>
           <p>私たちは、そうした現場に外からチームの一員として加わり、戦略の立案から日々の運用まで一緒に取り組みます。</p>
           <p>定例の打ち合わせと随時のご相談を通じて、「もうひとりの情シス」として技術と経験でお力になります。</p>
-          <a href="/about.html" class="btn btn-outline">会社概要を見る</a>
+          <a href="/about/" class="btn btn-outline">会社概要を見る</a>
         </div>
         <figure class="figure">
           <div class="orgfig">
@@ -141,7 +141,7 @@ const latestArticles = (await getPublishedArticles()).slice(0, 3);
           <p class="eyebrow-light">Case</p>
           <p class="highlight-text">専任情シスが不在のスタートアップを、3年以上「もうひとりの情シス」として支援しています。</p>
         </div>
-        <a href="/services.html#cases" class="btn btn-outline">支援事例を見る</a>
+        <a href="/services/#cases" class="btn btn-outline">支援事例を見る</a>
       </div>
     </div>
   </section>

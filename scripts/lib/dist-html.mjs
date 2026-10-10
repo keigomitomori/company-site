@@ -7,7 +7,7 @@ import { join, relative, sep } from 'node:path';
  * distDir 配下の .html を再帰的に集める。
  * @returns {Promise<{ file: string; rel: string; urlPath: string }[]>}
  *   file: 絶対/相対のファイルパス、rel: distDir からの相対パス（"/" 区切り）、
- *   urlPath: 公開URLのパス（index.html はディレクトリ形式。例: "/articles/"・"/about.html"）
+ *   urlPath: 公開URLのパス（index.html はディレクトリ形式。例: "/articles/"・"/about/"・"/404.html"）
  */
 export const listHtmlFiles = async (distDir) => {
   const files = [];

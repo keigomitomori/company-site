@@ -1,6 +1,6 @@
 // ビルド成果物（dist）を対象にした自前インテグレーション。2つの役割を持つ:
-// 1. sitemap.xml の自動生成 — build.format 'preserve' の実URL（ルート直下は .html、
-//    index.html はディレクトリ形式）をそのまま反映するため、@astrojs/sitemap ではなく自前で生成する。
+// 1. sitemap.xml の自動生成 — dist の実ファイルから URL を導く（index.html はディレクトリ形式）。
+//    noindex ページの除外と canonical 検証を同じ走査で行うため、@astrojs/sitemap ではなく自前で生成する。
 //    noindex を宣言しているページと 404 は除外する。
 // 2. canonical の実URL一致検証 — 全ページの <link rel="canonical"> がそのファイルの
 //    実URLと一致しなければビルドを失敗させる（ページ複製時の書き換え忘れを機械的に止める）。

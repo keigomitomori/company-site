@@ -78,9 +78,11 @@ jobs:
         with:
           name: dist
           path: dist
-      # Astro は再ビルドせず、検証済みの dist を cf の Build Output に詰めて配信する
+      # Astro は再ビルドせず、検証済みの dist を cf の Build Output に詰めて配信する。
+      # プレビューは検索に載らないよう、配信前に _headers へ noindex を足す
       - name: Deploy preview
         run: |
+          node scripts/mark-preview-noindex.mjs
           npm run cf:package -- --mode preview
           npx cf deploy --prebuilt --mode preview
         env:

@@ -20,7 +20,7 @@ interface Props {
   /** 省略時は description と同じ */
   ogDescription?: string;
   /**
-   * 省略時はページの実URLから自動導出する。ルート直下の .html ページのみ明示する（CLAUDE.md の運用メモ）。
+   * 省略時はページの実URLから自動導出する。自動導出と異なる URL を出したいとき（404 等）だけ明示する。
    * サイトルートからのパスで渡し、絶対URLは Astro.site から組み立てる
    */
   canonical?: string;
