@@ -1,12 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
+
+const thanksUrl = new URL('/thanks/', Astro.site).href;
 ---
 <BaseLayout
-  title="お問い合わせ | 株式会社ネクストブリッジ"
+  title="お問い合わせ"
   description="NEXT Bridgeへのお問い合わせページです。サービスに関するご質問やお見積もりのご依頼はこちらからどうぞ。"
-  canonical="https://nextb.net/contact.html"
-  ogTitle="お問い合わせ | NEXT Bridge"
   ogDescription="サービスに関するご質問やお見積もりのご依頼はこちらからどうぞ。"
 >
   <PageHeader title="お問い合わせ" subtitle="Contact" />
@@ -20,7 +20,7 @@ import PageHeader from '../components/PageHeader.astro';
 
       <form class="contact-form" action="https://formspree.io/f/myknjqar" method="POST">
         <!-- 非JS送信時のリダイレクト先指定（Formspree のプラン設定によっては無視され標準完了ページになる） -->
-        <input type="hidden" name="_next" value="https://nextb.net/thanks.html">
+        <input type="hidden" name="_next" value={thanksUrl}>
         <!-- honeypot: 人間には見えない欄。botが埋めると Formspree 側で破棄される -->
         <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
         <div class="form-group">
@@ -62,7 +62,7 @@ import PageHeader from '../components/PageHeader.astro';
         <div class="form-group form-consent">
           <label class="consent-label">
             <input type="checkbox" name="privacy-consent" value="同意する" required aria-required="true">
-            <span><a href="/privacy.html" target="_blank" rel="noopener">プライバシーポリシー</a>に同意する <span class="required">※必須</span></span>
+            <span><a href="/privacy/" target="_blank" rel="noopener">プライバシーポリシー</a>に同意する <span class="required">※必須</span></span>
           </label>
           <p class="consent-note">ご入力いただいた内容は、お問い合わせへの回答および関連するご提案・お見積もりのご案内のみに利用します。</p>
         </div>
@@ -98,7 +98,7 @@ import PageHeader from '../components/PageHeader.astro';
         }).then(function (res) {
           if (!res.ok) throw new Error('submit failed');
           try { sessionStorage.setItem('leadSubmitted', '1'); } catch (err) {}
-          window.location.href = '/thanks.html';
+          window.location.href = '/thanks/';
         }).catch(function () {
           btn.disabled = false;
           btn.textContent = '送信する';
@@ -108,3 +108,135 @@ import PageHeader from '../components/PageHeader.astro';
     })();
   </script>
 </BaseLayout>
+
+<style>
+  /* このページの見出し下は英字ラベルではなく案内文のため、本文の体裁にする */
+  .section-title p {
+    color: var(--text-sub);
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: normal;
+    text-transform: none;
+  }
+
+  .contact-form {
+    max-width: 720px;
+    margin: 0 auto;
+    background-color: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-card);
+    padding: var(--space-10);
+  }
+
+  .form-group {
+    margin-bottom: var(--space-6);
+  }
+
+  .form-group label {
+    display: block;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: var(--space-2);
+    font-size: 15px;
+  }
+
+  .form-group label .required {
+    color: var(--error);
+    font-size: var(--fs-caption);
+    margin-left: var(--space-1);
+  }
+
+  /* 文字入力欄だけに枠と余白を当てる（同意チェックボックスは対象外） */
+  .form-group input:not([type="checkbox"]),
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    min-height: 48px;
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-sm);
+    font-size: var(--fs-body);
+    background-color: var(--surface);
+    color: var(--text);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .form-group input:not([type="checkbox"]):focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+
+  .form-group textarea {
+    height: 180px;
+    resize: vertical;
+  }
+
+  .form-consent {
+    margin-top: var(--space-8);
+  }
+
+  .form-consent .consent-label {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-weight: 400;
+    color: var(--text);
+    cursor: pointer;
+    margin-bottom: 0;
+  }
+
+  .consent-label input {
+    flex: none;
+    width: 20px;
+    height: 20px;
+    accent-color: var(--accent);
+    cursor: pointer;
+  }
+
+  .consent-label a {
+    color: var(--accent-strong);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .consent-note {
+    font-size: var(--fs-small);
+    color: var(--muted);
+    margin-top: var(--space-2);
+  }
+
+  .form-submit {
+    margin-top: var(--space-8);
+    text-align: center;
+  }
+
+  .form-submit .btn {
+    min-width: 260px;
+  }
+
+  @media (max-width: 768px) {
+    .section-title p {
+      text-align: left;
+    }
+
+    .contact-form {
+      padding: var(--space-6) var(--space-5);
+    }
+
+    .form-consent .consent-label {
+      align-items: flex-start;
+    }
+
+    .consent-label input {
+      margin-top: 4px;
+    }
+
+    .form-submit .btn {
+      width: 100%;
+      min-width: 0;
+    }
+  }
+</style>

@@ -1,63 +1,46 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Cta from '../components/Cta.astro';
-import { getCollection } from 'astro:content';
 import LpBanner from '../components/LpBanner.astro';
 import ServiceCard from '../components/ServiceCard.astro';
 import { services } from '../data/services';
+import JsonLd from '../components/JsonLd.astro';
 import { fmt, iso } from '../utils/date';
+import { getPublishedArticles } from '../utils/articles';
+import { organizationJsonLd, webSiteJsonLd } from '../utils/jsonld';
 
 // お知らせは最新の公開コラムから自動生成する（手動更新不要）
-const latestArticles = (await getCollection('articles', ({ data }) => !data.draft))
-  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
-  .slice(0, 3);
-
-const orgJsonLd = JSON.stringify({
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: '株式会社ネクストブリッジ',
-  alternateName: 'NEXT Bridge',
-  url: 'https://nextb.net/',
-  logo: 'https://nextb.net/images/logo.webp',
-  address: {
-    '@type': 'PostalAddress',
-    postalCode: '104-0061',
-    addressRegion: '東京都',
-    addressLocality: '中央区',
-    streetAddress: '銀座1-12-4 N&E BLD.7階',
-    addressCountry: 'JP',
-  },
-  contactPoint: {
-    '@type': 'ContactPoint',
-    contactType: 'customer support',
-    url: 'https://nextb.net/contact.html',
-    availableLanguage: 'ja',
-  },
-});
+const latestArticles = (await getPublishedArticles()).slice(0, 3);
 ---
 <BaseLayout
-  title="株式会社ネクストブリッジ | 導入するだけのITから、使われるITへ。"
+  title="ホーム"
+  fullTitle="株式会社ネクストブリッジ | 導入するだけのITから、使われるITへ。"
   description="株式会社ネクストブリッジの公式サイトです。情シスコンサルティング・製品導入支援・生成AI導入支援を行っています。"
   ogTitle="NEXT Bridge｜導入するだけのITから、使われるITへ。"
   ogDescription="情シスコンサルティング・製品導入支援・生成AI導入支援を行っています。"
+  breadcrumb={false}
 >
-  <script type="application/ld+json" set:html={orgJsonLd} />
+  <JsonLd slot="head" data={organizationJsonLd(Astro.site!)} />
+  <JsonLd slot="head" data={webSiteJsonLd(Astro.site!)} />
 
-  <section class="hero hero--cover">
-    <div class="container">
+  <section class="hero">
+    <div class="container hero-inner">
       <div class="hero-copy">
         <p class="hero-eyebrow">情シスコンサルティング / 製品導入支援 / 生成AI導入支援</p>
         <h1>導入するだけのITから、<br>使われるITへ。</h1>
         <p class="hero-lead">専任の情シスがいない会社や、ひとり情シスの現場を、<br class="pc-br">チームの一員として実務を支えます。</p>
         <div class="hero-actions">
-          <a href="/contact.html" class="btn btn-primary">相談してみる</a>
-          <a href="/services.html#cases" class="btn btn-outline">支援事例を見る</a>
+          <a href="/contact/" class="btn btn-primary">相談してみる</a>
+          <a href="/services/#cases" class="btn btn-outline">支援事例を見る</a>
         </div>
         <ul class="hero-badges">
           <li><strong>長期の伴走支援</strong><span>3年以上続く顧問契約も</span></li>
           <li><strong>戦略から実務まで</strong><span>自ら手を動かして支援</span></li>
           <li><strong>中立の製品選定</strong><span>特定製品の販売代理なし</span></li>
         </ul>
+      </div>
+      <div class="hero-visual">
+        <img src="/images/hero-bridge.webp" alt="" width="880" height="746" fetchpriority="high">
       </div>
     </div>
   </section>
@@ -111,7 +94,7 @@ const orgJsonLd = JSON.stringify({
       <div class="card-grid card-grid--lp">
         {services.map((service) => <ServiceCard service={service} />)}
       </div>
-      <LpBanner text="それぞれの料金の目安は料金ページでご案内しています" href="/pricing.html" label="料金" />
+      <LpBanner text="それぞれの料金の目安は料金ページでご案内しています" href="/pricing/" label="料金" />
     </div>
   </section>
 
@@ -126,7 +109,7 @@ const orgJsonLd = JSON.stringify({
           <p>ITの困りごとは、社内では相談しづらいものです。人数が限られた情報システム部門であればなおさら、判断に迷う場面や、手が回らない業務が増えていきます。</p>
           <p>私たちは、そうした現場に外からチームの一員として加わり、戦略の立案から日々の運用まで一緒に取り組みます。</p>
           <p>定例の打ち合わせと随時のご相談を通じて、「もうひとりの情シス」として技術と経験でお力になります。</p>
-          <a href="/about.html" class="btn btn-outline">会社概要を見る</a>
+          <a href="/about/" class="btn btn-outline">会社概要を見る</a>
         </div>
         <figure class="figure">
           <div class="orgfig">
@@ -158,10 +141,388 @@ const orgJsonLd = JSON.stringify({
           <p class="eyebrow-light">Case</p>
           <p class="highlight-text">専任情シスが不在のスタートアップを、3年以上「もうひとりの情シス」として支援しています。</p>
         </div>
-        <a href="/services.html#cases" class="btn btn-outline">支援事例を見る</a>
+        <a href="/services/#cases" class="btn btn-outline">支援事例を見る</a>
       </div>
     </div>
   </section>
 
   <Cta buttonClass="btn btn-primary" />
 </BaseLayout>
+
+<style>
+  /* ========== Hero ========== */
+  .hero {
+    background-color: var(--surface);
+    padding: var(--space-18) 0 var(--space-24);
+  }
+
+  .hero-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 420px);
+    gap: var(--space-10);
+    align-items: center;
+  }
+
+  .hero-eyebrow {
+    display: inline-block;
+    margin-bottom: var(--space-5);
+    padding: var(--space-1) 14px;
+    border-radius: var(--radius-pill);
+    background-color: var(--accent-soft);
+    color: var(--accent-strong);
+    font-size: var(--fs-caption);
+    font-weight: 700;
+  }
+
+  .hero h1 {
+    font-size: var(--fs-h1);
+    line-height: var(--lh-h1);
+    margin-bottom: var(--space-6);
+  }
+
+  .hero-lead {
+    font-size: var(--fs-lead);
+    color: var(--text-sub);
+    margin-bottom: var(--space-8);
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+  }
+
+  /* 白い地の上のため、ごく淡い線で区切る */
+  .hero-badges {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-3);
+    margin-top: var(--space-10);
+  }
+
+  .hero-badges li {
+    background-color: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-card);
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .hero-badges strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  .hero-badges span {
+    display: block;
+    margin-top: 2px;
+    font-size: var(--fs-caption);
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .hero-visual img {
+    width: 100%;
+    max-width: 440px;
+    margin: 0 auto;
+  }
+
+  /* ========== お知らせ ========== */
+  .news-bar {
+    border-top: 1px solid var(--line);
+    padding: var(--space-6) 0;
+  }
+
+  .news-bar .container {
+    display: flex;
+    gap: var(--space-8);
+    align-items: flex-start;
+  }
+
+  .news-bar h2 {
+    flex: 0 0 auto;
+    font-size: 15px;
+    line-height: 1.85;
+    padding-top: var(--space-1);
+  }
+
+  .news-list {
+    flex: 1;
+  }
+
+  .news-list li {
+    display: flex;
+    gap: var(--space-4);
+    align-items: baseline;
+    padding: var(--space-1) 0;
+    font-size: 15px;
+  }
+
+  .news-list time {
+    flex: 0 0 auto;
+    color: var(--muted);
+    font-size: var(--fs-small);
+  }
+
+  .news-list a:hover {
+    color: var(--accent-strong);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  /* ========== 特長 ========== */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+  }
+
+  .feature-item {
+    background-color: var(--surface);
+    border-radius: var(--radius-lg);
+    padding: var(--space-8);
+    box-shadow: var(--shadow-card);
+  }
+
+  .feature-num {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: var(--space-4);
+  }
+
+  .feature-item h3 {
+    font-size: 20px;
+    line-height: 1.55;
+    margin-bottom: var(--space-2);
+  }
+
+  .feature-item p {
+    font-size: 15px;
+    color: var(--muted);
+  }
+
+  /* ========== 企業理念（テキスト＋図） ========== */
+  .split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-14);
+    align-items: center;
+  }
+
+  .statement .section-title {
+    text-align: left;
+    margin-bottom: var(--space-6);
+  }
+
+  /* 見出しラベル（.section-title p）を巻き込まないよう、直下の段落だけに当てる */
+  .statement > p {
+    color: var(--text-sub);
+    margin-bottom: var(--space-3);
+  }
+
+  .statement .btn {
+    margin-top: var(--space-4);
+  }
+
+  .figure {
+    margin: 0;
+  }
+
+  /* 図は白いパネルに載せる（色付きの地のセクションのため） */
+  .orgfig {
+    background-color: var(--surface);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-card);
+    padding: var(--space-6);
+  }
+
+  .orgfig-illust {
+    margin-bottom: var(--space-3);
+  }
+
+  .orgfig-illust img {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .orgfig-labels {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding: 0 var(--space-1);
+    margin-bottom: var(--space-2);
+  }
+
+  .orgfig-label {
+    text-align: center;
+  }
+
+  .orgfig-label strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: var(--fs-body);
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  .orgfig-label span {
+    font-size: var(--fs-caption);
+    color: var(--muted);
+  }
+
+  .orgfig-label--nb strong {
+    color: var(--accent-strong);
+  }
+
+  .orgfig-note {
+    text-align: center;
+    font-size: var(--fs-caption);
+    font-weight: 700;
+    color: var(--accent-strong);
+    background-color: var(--accent-soft);
+    border-radius: var(--radius-pill);
+    padding: var(--space-1) var(--space-4);
+    width: fit-content;
+    margin: 0 auto;
+  }
+
+  .figure figcaption {
+    font-size: var(--fs-caption);
+    color: var(--muted);
+    text-align: center;
+    margin-top: var(--space-3);
+  }
+
+  /* ========== 事例への誘導パネル ========== */
+  .highlight-dark {
+    padding: var(--space-24) 0;
+  }
+
+  .highlight-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-6) var(--space-8);
+    flex-wrap: wrap;
+    background-color: var(--accent-soft);
+    border-radius: var(--radius-xl);
+    padding: var(--space-10) var(--space-14);
+  }
+
+  .eyebrow-light {
+    font-size: var(--fs-caption);
+    font-weight: 700;
+    color: var(--accent-strong);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: var(--space-2);
+  }
+
+  .highlight-text {
+    font-family: var(--font-display);
+    color: var(--ink);
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.7;
+    max-width: 680px;
+  }
+
+  /* ========== Responsive ========== */
+  @media (max-width: 1080px) {
+    .hero-inner {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-visual img {
+      max-width: 480px;
+      margin: 0 auto;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: var(--space-10) 0 var(--space-14);
+    }
+
+    .hero-actions .btn {
+      flex: 1 1 auto;
+    }
+
+    .hero-badges {
+      grid-template-columns: 1fr;
+      gap: var(--space-2);
+      margin-top: var(--space-8);
+    }
+
+    .hero-badges li {
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 0 var(--space-3);
+    }
+
+    .hero-badges span {
+      margin-top: 0;
+    }
+
+    .hero-visual img {
+      max-width: 340px;
+    }
+
+    /* 2行に折り返すため角丸を控えめにする */
+    .hero-eyebrow {
+      border-radius: var(--radius-md);
+    }
+
+    .news-bar .container {
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+
+    .news-list li {
+      flex-direction: column;
+      gap: 0;
+      padding: var(--space-2) 0;
+    }
+
+    .features-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+    }
+
+    .feature-item {
+      padding: var(--space-6);
+    }
+
+    .split {
+      grid-template-columns: 1fr;
+      gap: var(--space-10);
+    }
+
+    .orgfig {
+      padding: var(--space-4);
+    }
+
+    .highlight-dark {
+      padding: var(--space-14) 0;
+    }
+
+    .highlight-inner {
+      padding: var(--space-8) var(--space-6);
+    }
+
+    .highlight-text {
+      font-size: 18px;
+    }
+  }
+</style>

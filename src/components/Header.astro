@@ -1,3 +1,17 @@
+---
+const navItems = [
+  { href: '/', label: 'ホーム' },
+  { href: '/about/', label: '会社概要' },
+  { href: '/services/', label: 'サービス' },
+  { href: '/pricing/', label: '料金' },
+  { href: '/articles/', label: 'コラム' },
+  { href: '/contact/', label: 'お問い合わせ', className: 'nav-contact' },
+];
+
+// 現在のページに aria-current="page" を付ける（/articles/index.html のような表記も同一視する）
+const normalize = (path: string) => path.replace(/index\.html$/, '');
+const currentPath = normalize(Astro.url.pathname);
+---
 <header class="header">
   <div class="container">
     <div class="logo">
@@ -9,12 +23,9 @@
     <div class="nav-overlay" aria-hidden="true"></div>
     <nav class="nav" id="site-nav">
       <ul class="nav-list">
-        <li><a href="/">ホーム</a></li>
-        <li><a href="/about.html">会社概要</a></li>
-        <li><a href="/services.html">サービス</a></li>
-        <li><a href="/pricing.html">料金</a></li>
-        <li><a href="/articles/">コラム</a></li>
-        <li><a href="/contact.html" class="nav-contact">お問い合わせ</a></li>
+        {navItems.map((item) => (
+          <li><a href={item.href} class={item.className} aria-current={normalize(item.href) === currentPath ? 'page' : undefined}>{item.label}</a></li>
+        ))}
       </ul>
     </nav>
   </div>
@@ -27,9 +38,11 @@
         .nav {
           position: static;
           visibility: visible;
+          transform: none;
           width: 100%;
           max-width: none;
           height: auto;
+          overflow: visible;
           box-shadow: none;
           padding: 0;
           transition: none;
@@ -43,21 +56,59 @@
     var header = document.querySelector('.header');
     var btn = header && header.querySelector('.menu-icon');
     var overlay = header && header.querySelector('.nav-overlay');
-    if (!header || !btn || !overlay) return;
+    var nav = header && header.querySelector('.nav');
+    if (!header || !btn || !overlay || !nav) return;
+    var root = document.documentElement;
+    var mobile = window.matchMedia('(max-width: 768px)');
+    function isOpen() {
+      return btn.getAttribute('aria-expanded') === 'true';
+    }
+    function focusables() {
+      return [btn].concat(Array.prototype.slice.call(nav.querySelectorAll('a[href]')));
+    }
     function setOpen(open) {
       header.classList.toggle('nav-open', open);
+      root.classList.toggle('is-nav-locked', open);
       btn.setAttribute('aria-expanded', String(open));
       btn.setAttribute('aria-label', open ? 'メニューを閉じる' : 'メニューを開く');
+      // 開いたらメニュー内の先頭リンクへフォーカスを移す
+      if (open) {
+        var first = nav.querySelector('a[href]');
+        if (first) first.focus();
+      }
     }
     btn.addEventListener('click', function () {
-      setOpen(btn.getAttribute('aria-expanded') !== 'true');
+      setOpen(!isOpen());
     });
     overlay.addEventListener('click', function () { setOpen(false); });
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && btn.getAttribute('aria-expanded') === 'true') {
+      if (!isOpen()) return;
+      if (e.key === 'Escape') {
         setOpen(false);
         btn.focus();
+        return;
+      }
+      // 開いている間はメニューとボタンの中でフォーカスを循環させる
+      if (e.key === 'Tab') {
+        var items = focusables();
+        var first = items[0];
+        var last = items[items.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        } else if (items.indexOf(document.activeElement) === -1) {
+          e.preventDefault();
+          first.focus();
+        }
       }
     });
+    // PC幅に戻ったら開いた状態を解除する（スクロール固定が残らないように）
+    function onChange(e) {
+      if (!e.matches && isOpen()) setOpen(false);
+    }
+    if (mobile.addEventListener) mobile.addEventListener('change', onChange);
   })();
 </script>

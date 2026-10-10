@@ -1,0 +1,104 @@
+/* ========================================
+   ベース（リセット・要素の既定・フォーカス表示）
+   ======================================== */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  /* sticky ヘッダーの下にアンカーの着地点が隠れないようにする */
+  scroll-padding-top: var(--header-h);
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* OSで動きの抑制を指定している利用者にはスムーススクロールを適用しない */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--text);
+  background-color: var(--surface);
+  overflow-wrap: break-word;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--ink);
+  /* 対応ブラウザでは文節で折り返す（未対応ブラウザは通常の折り返し） */
+  word-break: auto-phrase;
+  text-wrap: pretty;
+}
+
+h4 {
+  font-weight: 700;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+/* キーボード操作時のフォーカスリング（サイト共通） */
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* キーボード利用者向けのスキップリンク（フォーカス時のみ表示） */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: var(--space-2);
+  z-index: 2000;
+  padding: var(--space-2) var(--space-5);
+  background-color: var(--ink);
+  color: var(--on-dark);
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-small);
+  font-weight: 700;
+}
+
+.skip-link:focus {
+  top: var(--space-2);
+}
+
+/* PCでのみ改行する <br> */
+@media (max-width: 768px) {
+  .pc-br {
+    display: none;
+  }
+}

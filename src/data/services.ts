@@ -41,3 +41,10 @@ export const services: ServiceCardData[] = [
     description: '専任の情シスがいない会社のIT業務を、月額の顧問契約でまるごと支援します。',
   },
 ];
+
+/** LP の href からサービス情報を引く（LP の構造化データ Service の name に使う） */
+export const getService = (href: string): ServiceCardData => {
+  const service = services.find((s) => s.href === href);
+  if (!service) throw new Error(`services.ts に ${href} のサービスがありません`);
+  return service;
+};

@@ -59,14 +59,16 @@
 
 ## デザイン・素材の規約
 
-- **LPは `lp-*` コンポーネントを共用する**（src/styles/global.css の「LP 共通部品」セクション）
+- **LPは `lp-*` コンポーネントを共用する**（src/styles/lp.css の「LP 共通部品」）
   - 標準構成: ヒーロー → お悩み → 宣言バンド → 3つの特長 → 中間CTA → 支援の流れ → 事例 → FAQ → CTA
 - **コンポーネント化の線引き**（2026-07-16 導入。過剰共通化を防ぐための基準）
   - **データ駆動にするもの**（構造が固定的な下回り）: 支援の流れ `LpSteps`・FAQ `LpFaq`・誘導バナー `LpBanner`・中間CTA `LpConsult`・事例 `CaseCard`（正本は src/data/cases.ts）
   - **直書きを維持するもの**（コピーと意匠を作り込む上物）: ヒーロー・宣言バンド・お悩み・特長・フロー図・Before/After
     - 理由: LPごとに構成が既に分岐しており、props に畳むと編集コストが逆に上がる。構造と変更理由が収束したら再評価する
 - **CSSの命名**: 新規モディファイアは BEM 風の `--` 形式（`.card--link` 等）。既存の単一ハイフン（`btn-primary`・`section-gray` 等）は互換のため維持する
-- **CSSの色・影はセマンティックトークンを使う**（:root の `--accent-soft`・`--muted-on-dark`・`--shadow-card` 等）。同じ意味の色を hex 直書きで増やさない
+- **CSSの構成**（2026-10 再編）: 入口は src/styles/index.css。カスケードレイヤー `tokens → base → layout → components → lp` の順に、tokens.css・base.css・layout.css（ヘッダー・フッター・セクション・CTA）・components.css（ボタン・チップ・表など共用部品）・lp.css を読み込む
+  - 1つのページ・コンポーネントだけで使う指定は、その .astro の scoped `<style>` に置く（レイヤー外なので共通指定より常に優先される）。`:global()` は Markdown 本文など避けられない場合のみ
+- **CSSの色・角丸・影・余白はセマンティックトークンを使う**（src/styles/tokens.css の `--accent-soft`・`--on-dark-muted`・`--radius-lg`・`--shadow-card` 等）。同じ意味の色を hex 直書きで増やさない
 - **イラストはソコストから調達する**（https://soco-st.com、商用利用可・クレジット不要）
   - SVG直リンク: `https://soco-st.com/wp-content/themes/socost/upload/<ID>_color.svg`
   - オレンジ系（#febe69・#ffda71 等）はブランド青 #8fb0f0 に置換してから `public/images/ill-*.svg` に配置する
@@ -79,11 +81,24 @@
 
 ## 運用メモ
 
-- **デプロイ**: main へ push すると GitHub Actions（.github/workflows/deploy.yml）が GitHub Pages に自動デプロイする
-  - CI の verify ジョブが型検査（astro check）・OG画像の存在・canonical の実URL一致・内部リンクを検証し、失敗するとデプロイされない
+- **デプロイ**: main へ push すると GitHub Actions（.github/workflows/deploy.yml）が Cloudflare Workers（静的アセット）に自動デプロイする（ユーザー決定 2026-10-10。それまでは GitHub Pages）
+  - デプロイには Cloudflare CLI の `cf` を使う（ユーザー決定 2026-10-11）。ベータのため `cf`・`wrangler` はバージョンを固定している。更新するときは下の手順がそのまま通るか確かめてから上げる
+  - CI の verify ジョブが型検査（astro check）・OG画像の存在・canonical の実URL一致・内部リンクを検証し、`cf deploy --dry-run` で配信設定まで確かめる。どれかが失敗するとデプロイされない
+  - PR では検証済みの dist を、プレビュー用の別 Worker `nextb-net-preview`（workers.dev のみ・noindex）に配信する。本番には反映されない。URL はジョブのログに出る。プレビューは1つなので、最後に push された PR の内容が表示される
+  - GitHub の Secrets に `CLOUDFLARE_API_TOKEN`・`CLOUDFLARE_ACCOUNT_ID` が必要
+- **cf の使い方**（設定は cloudflare.config.ts。dist の置き場所だけ wrangler.config.ts）
+  - **`cf build` と `cf dev` は使わない**。cf は Astro を検出すると Cloudflare アダプター前提の処理に回し、アダプターを使わない静的サイトでは Build Output が作られず失敗する（cf 1.0.0-beta.14 で確認。cf 自身の自動設定どおりアダプターを入れても同じ失敗）
+  - 代わりに `npm run build`（Astro）→ `npm run cf:package`（cf のビルドエンジン cf-wrangler で dist を Build Output に詰める）→ `npx cf deploy --prebuilt` の順で行う。プレビューは cf:package と deploy の両方に `--mode preview` を付ける
+  - ローカルで本番相当の配信を試すときは `npm run cf:dev`
+- **URL の形式は /about/**（ユーザー決定 2026-10-11。Astro の build.format は directory）
+  - GitHub Pages 時代の /about.html 形式は public/_redirects で /about/ へ 301 転送する。新しいページを .html 形式で作らない
+  - 配信は Worker コードを持たない静的アセットのみ。/about → /about/ の補完と 404.html の返却は Cloudflare の設定（cloudflare.config.ts の htmlHandling・notFoundHandling）に任せる
+  - www.nextb.net → nextb.net の転送はゾーンの Redirect Rule で行う
+  - ゾーンの Redirect Rules に「Redirect from root to WWW [Template]」（nextb.net → www）が無効の状態で残っている。**有効にしない**（2026-10-11 の切り替え時、これが有効だったため www との間で転送がループし、数分間サイトが表示されなかった）
+  - レスポンスヘッダー（セキュリティ系・`/_astro/*` の長期キャッシュ）は public/_headers。プレビューだけ CI が scripts/mark-preview-noindex.mjs で noindex を足す
 - **dist/ はビルド成果物**（リポジトリ管理外）。CI が build するのでローカル build は検証用
 - **sitemap.xml はビルド時に自動生成**（scripts/sitemap-integration.mjs が dist の実ファイルから生成。手動追記は不要。noindex ページと404は自動除外）
-- **canonical は原則自動導出**。ルート直下の `.html` ページ（about・services 等）のみ BaseLayout に明示指定する（実URLとの一致はビルドが検証する）
+- **canonical は自動導出**（実URLとの一致はビルドが検証する）。明示指定は 404 のみ
 - **コラム公開手順**: _stock/ から md と OG 画像 png を mv して push するだけ（お知らせ・一覧・sitemap は自動生成。OG 画像の置き忘れは CI が検知）
 - **料金の目安**（ユーザー決定 2026-07-11）: 顧問契約 月10万円〜（税別）／プロジェクト型支援 30万円〜（税別）。金額は目安レンジ表記とする
 - **解約条件**（ユーザー決定 2026-07-17）: 顧問契約に最低契約期間は設けない。解約は1ヶ月前までの申し出

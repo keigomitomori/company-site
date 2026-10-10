@@ -2,18 +2,27 @@
   "name": "coporate-site",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": ">=22.18.0"
+  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "check": "astro check"
+    "check": "astro check",
+    "cf:package": "cf-wrangler build",
+    "cf:dev": "astro build && cf-wrangler dev"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",
-    "astro": "^5.10.0"
+    "astro": "^7.3.8"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.9",
-    "typescript": "^5.9.3"
+    "@astrojs/check": "^0.9.10",
+    "cf": "1.0.0-beta.14",
+    "github-slugger": "^2.0.0",
+    "tinyglobby": "^0.2.17",
+    "typescript": "^6.0.3",
+    "wrangler": "4.149.0"
   }
 }

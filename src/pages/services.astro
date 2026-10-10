@@ -9,10 +9,8 @@ import ServiceCard from '../components/ServiceCard.astro';
 import { services } from '../data/services';
 ---
 <BaseLayout
-  title="サービス | 株式会社ネクストブリッジ"
+  title="サービス"
   description="NEXT Bridgeのサービス紹介ページです。情シスコンサルティング・製品導入支援・生成AI導入支援をご提供しています。"
-  canonical="https://nextb.net/services.html"
-  ogTitle="サービス | NEXT Bridge"
   ogDescription="情シスコンサルティング・製品導入支援・生成AI導入支援をご提供しています。"
 >
   <PageHeader title="サービス" subtitle="Services" />
@@ -92,7 +90,7 @@ import { services } from '../data/services';
       </div>
       <p class="contract-note">いずれのご契約も準委任です。詳しくは料金ページの注記をご覧ください。</p>
 
-      <LpBanner text="それぞれの料金の目安は料金ページでご案内しています" href="/pricing.html" label="料金" />
+      <LpBanner text="それぞれの料金の目安は料金ページでご案内しています" href="/pricing/" label="料金" />
     </div>
   </section>
 
@@ -101,3 +99,106 @@ import { services } from '../data/services';
     text="支援範囲と進め方は、状況を伺ったうえでご提案します。初回相談とお見積もりは無料です。"
   />
 </BaseLayout>
+
+<style>
+  /* ========== 支援の流れ ========== */
+  .flow-steps,
+  .contract-grid,
+  .contract-note {
+    max-width: 880px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .flow-step {
+    display: flex;
+    gap: var(--space-6);
+    align-items: flex-start;
+    padding: var(--space-6) 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .flow-step:last-child {
+    border-bottom: none;
+  }
+
+  .flow-step-number {
+    flex: 0 0 44px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: var(--accent);
+    color: var(--on-accent);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .flow-step-body h3 {
+    font-size: 20px;
+    line-height: 1.6;
+    margin-bottom: var(--space-1);
+  }
+
+  .flow-step-body p {
+    color: var(--text-sub);
+  }
+
+  /* ========== 契約形態 ========== */
+  .contract-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-5);
+    margin-top: var(--space-10);
+  }
+
+  /* 白い地に置くカードのため、ごく淡い線を添える */
+  .contract-card {
+    background-color: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6) var(--space-8);
+    box-shadow: var(--shadow-card);
+  }
+
+  .contract-card h3 {
+    font-size: 20px;
+    margin-bottom: var(--space-2);
+  }
+
+  .contract-card p {
+    color: var(--text-sub);
+    font-size: 15px;
+  }
+
+  .contract-note {
+    margin-top: var(--space-4);
+    color: var(--muted);
+    font-size: var(--fs-small);
+  }
+
+  @media (max-width: 768px) {
+    .flow-step {
+      gap: var(--space-4);
+      padding: var(--space-5) 0;
+    }
+
+    .flow-step-number {
+      flex-basis: 40px;
+      width: 40px;
+      height: 40px;
+      font-size: 16px;
+    }
+
+    .contract-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .contract-card {
+      padding: var(--space-5) var(--space-6);
+    }
+  }
+</style>

@@ -1,14 +1,20 @@
+---
+import { tokyoYear } from '../utils/date';
+
+// 著作権表示の年はビルド時点（日本時間）の年にする
+const year = tokyoYear();
+---
 <footer class="footer">
   <div class="container">
     <div class="footer-inner">
       <div class="footer-company">
         <div class="footer-logo">NEXT Bridge</div>
-        <p>〒104-0061<br>東京都中央区銀座1-12-4<br>N&amp;E BLD.7階</p>
+        <address class="footer-address"><p>〒104-0061<br>東京都中央区銀座1-12-4<br>N&amp;E BLD.7階</p></address>
       </div>
       <nav class="footer-nav" aria-label="サービス">
-        <h4>サービス</h4>
+        <h2 class="footer-heading">サービス</h2>
         <ul>
-          <li><a href="/services.html">サービス一覧</a></li>
+          <li><a href="/services/">サービス一覧</a></li>
           <li><a href="/it-support/">情シス伴走支援「もうひとりの情シス」</a></li>
           <li><a href="/device-management/">デバイス管理導入支援</a></li>
           <li><a href="/genai-adoption/">生成AI活用支援</a></li>
@@ -17,23 +23,23 @@
         </ul>
       </nav>
       <nav class="footer-nav" aria-label="メニュー">
-        <h4>メニュー</h4>
+        <h2 class="footer-heading">メニュー</h2>
         <ul>
           <li><a href="/">ホーム</a></li>
-          <li><a href="/about.html">会社概要</a></li>
-          <li><a href="/pricing.html">料金</a></li>
+          <li><a href="/about/">会社概要</a></li>
+          <li><a href="/pricing/">料金</a></li>
           <li><a href="/articles/">コラム</a></li>
-          <li><a href="/contact.html">お問い合わせ</a></li>
-          <li><a href="/privacy.html">プライバシーポリシー</a></li>
+          <li><a href="/contact/">お問い合わせ</a></li>
+          <li><a href="/privacy/">プライバシーポリシー</a></li>
         </ul>
       </nav>
       <div class="footer-contact">
-        <h4>お問い合わせ</h4>
+        <h2 class="footer-heading">お問い合わせ</h2>
         <p>Mail: <a href="mailto:contact@nextb.net">contact@nextb.net</a></p>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2026 NEXT Bridge All Rights Reserved.</p>
+      <p>&copy; {year} NEXT Bridge All Rights Reserved.</p>
     </div>
   </div>
 </footer>

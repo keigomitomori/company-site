@@ -3,10 +3,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
 ---
 <BaseLayout
-  title="ページが見つかりません | 株式会社ネクストブリッジ"
+  title="ページが見つかりません"
   description="お探しのページは見つかりませんでした。URLが変更または削除された可能性があります。"
-  canonical="https://nextb.net/404.html"
-  ogTitle="ページが見つかりません | NEXT Bridge"
+  canonical="/404.html"
   ogDescription="お探しのページは見つかりませんでした。"
   noindex={true}
 >
@@ -20,9 +19,9 @@ import PageHeader from '../components/PageHeader.astro';
         <div class="thanks-links">
           <p>お探しの情報は、こちらからご覧いただけます。</p>
           <ul class="feature-list">
-            <li><a href="/services.html">サービス</a> — ご支援内容の一覧</li>
+            <li><a href="/services/">サービス</a> — ご支援内容の一覧</li>
             <li><a href="/articles/">コラム</a> — 情シス・生成AI統制の実務記事</li>
-            <li><a href="/contact.html">お問い合わせ</a> — ご質問・ご相談はこちら</li>
+            <li><a href="/contact/">お問い合わせ</a> — ご質問・ご相談はこちら</li>
           </ul>
         </div>
         <a href="/" class="btn btn-primary">トップページへ戻る</a>

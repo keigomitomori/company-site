@@ -1,0 +1,435 @@
+/* ========================================
+   レイアウト（コンテナ・ヘッダー・フッター・セクション・下層ページ見出し・CTA）
+   ======================================== */
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+/* ========================================
+   Header
+   ======================================== */
+.header {
+  background-color: var(--surface);
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-4);
+  height: var(--header-h);
+}
+
+.logo a {
+  display: flex;
+  align-items: center;
+}
+
+.logo a img {
+  height: 28px;
+  width: auto;
+}
+
+.nav-list {
+  display: flex;
+  gap: var(--space-8);
+  align-items: center;
+}
+
+.nav-list a {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text);
+  transition: color 0.2s;
+}
+
+.nav-list a:hover,
+.nav-list a[aria-current="page"] {
+  color: var(--accent-strong);
+}
+
+/* 現在のページ: 下線で示す（お問い合わせボタンは除く） */
+.nav-list a[aria-current="page"]:not(.nav-contact) {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 8px;
+}
+
+.nav-list .nav-contact {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 var(--space-6);
+  border-radius: var(--radius-pill);
+  background-color: var(--accent);
+  color: var(--on-accent);
+  font-weight: 700;
+  transition: background-color 0.2s;
+}
+
+.nav-list .nav-contact:hover,
+.nav-list .nav-contact[aria-current="page"] {
+  background-color: var(--accent-strong);
+  color: var(--on-accent);
+}
+
+/* Hamburger Menu (button + JS で aria-expanded を切替) */
+.menu-icon {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  background: none;
+  border: 0;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  position: relative;
+  z-index: 1001;
+}
+
+.menu-icon span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  border-radius: 1px;
+  background-color: var(--ink);
+  position: relative;
+  transition: background-color 0.3s;
+}
+
+.menu-icon span::before,
+.menu-icon span::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 22px;
+  height: 2px;
+  border-radius: 1px;
+  background-color: var(--ink);
+  transition: transform 0.3s;
+}
+
+.menu-icon span::before {
+  transform: translateY(-7px);
+}
+
+.menu-icon span::after {
+  transform: translateY(7px);
+}
+
+.menu-icon[aria-expanded="true"] span {
+  background-color: transparent;
+}
+
+.menu-icon[aria-expanded="true"] span::before {
+  transform: rotate(45deg);
+}
+
+.menu-icon[aria-expanded="true"] span::after {
+  transform: rotate(-45deg);
+}
+
+.nav-overlay {
+  display: none;
+}
+
+@media (max-width: 1080px) {
+  .nav-list {
+    gap: var(--space-6);
+  }
+}
+
+@media (max-width: 768px) {
+  .logo a img {
+    height: 24px;
+  }
+
+  .menu-icon {
+    display: flex;
+  }
+
+  .nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 80%;
+    max-width: 320px;
+    height: 100vh;
+    height: 100dvh;
+    overflow-y: auto;
+    background-color: var(--surface);
+    box-shadow: var(--shadow-panel);
+    transform: translateX(100%);
+    /* visibility も切り替えて、閉状態のリンクをタブ順から外す */
+    visibility: hidden;
+    padding: calc(var(--header-h) + var(--space-4)) var(--space-6) var(--space-8);
+    z-index: 999;
+  }
+
+  .header.nav-open .nav {
+    transform: none;
+    visibility: visible;
+  }
+
+  .nav-list {
+    flex-direction: column;
+    gap: 0;
+    align-items: stretch;
+  }
+
+  .nav-list li {
+    width: 100%;
+  }
+
+  .nav-list a:not(.nav-contact) {
+    display: block;
+    padding: var(--space-4) 0;
+    border-bottom: 1px solid var(--line);
+    font-size: var(--fs-body);
+  }
+
+  .nav-list a[aria-current="page"]:not(.nav-contact) {
+    text-decoration: none;
+  }
+
+  .nav-list .nav-contact {
+    display: flex;
+    width: 100%;
+    margin-top: var(--space-6);
+    font-size: var(--fs-body);
+  }
+
+  .header.nav-open .nav-overlay {
+    display: block;
+  }
+
+  .nav-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: var(--overlay);
+    z-index: 998;
+  }
+}
+
+@media (max-width: 768px) and (prefers-reduced-motion: no-preference) {
+  /* 閉じるときはスライドし終えてから非表示にする */
+  .nav {
+    transition: transform 0.3s ease, visibility 0s linear 0.3s;
+  }
+
+  /* 開くときは即座に表示する（直後にメニュー内へフォーカスを移せるように） */
+  .header.nav-open .nav {
+    transition: transform 0.3s ease, visibility 0s;
+  }
+}
+
+/* メニュー展開中は背景のスクロールを止める（クラスは Header の JS が付け外し） */
+html.is-nav-locked {
+  overflow: hidden;
+}
+
+/* ========================================
+   Sections
+   ======================================== */
+.section {
+  padding: var(--section-y) 0;
+}
+
+.section-gray {
+  background-color: var(--bg-page);
+}
+
+.section-title {
+  margin-bottom: var(--space-14);
+  text-align: center;
+}
+
+.section-title h2 {
+  font-size: var(--fs-h2);
+  line-height: 1.45;
+  text-wrap: balance;
+}
+
+/* 英字の見出しラベル（装飾） */
+.section-title p {
+  margin-top: var(--space-2);
+  color: var(--accent-strong);
+  font-size: var(--fs-caption);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  .section-title {
+    margin-bottom: var(--space-10);
+  }
+}
+
+/* ========================================
+   Page Header (sub pages)
+   ======================================== */
+.page-header {
+  background-color: var(--bg-page);
+  padding: var(--space-18) 0 var(--space-14);
+}
+
+.page-header h1 {
+  font-size: var(--fs-h1-page);
+  line-height: 1.4;
+}
+
+.page-header p {
+  margin-top: var(--space-2);
+  color: var(--accent-strong);
+  font-size: var(--fs-caption);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  .page-header {
+    padding: var(--space-10) 0;
+  }
+}
+
+/* ========================================
+   CTA Section
+   ======================================== */
+.cta {
+  background-color: var(--accent-tint);
+  padding: var(--space-24) 0;
+  text-align: center;
+}
+
+.cta h2 {
+  font-size: 32px;
+  line-height: 1.5;
+  margin-bottom: var(--space-3);
+  text-wrap: balance;
+}
+
+.cta p {
+  color: var(--text-sub);
+  max-width: 640px;
+  margin: 0 auto var(--space-8);
+}
+
+@media (max-width: 768px) {
+  .cta {
+    padding: var(--space-14) 0;
+  }
+
+  .cta h2 {
+    font-size: 24px;
+  }
+
+  .cta p {
+    text-align: left;
+  }
+}
+
+/* ========================================
+   Footer
+   ======================================== */
+.footer {
+  background-color: var(--ink);
+  color: var(--on-dark);
+  padding: var(--space-18) 0 0;
+}
+
+.footer-inner {
+  display: grid;
+  grid-template-columns: 1.4fr 1.6fr 1fr 1fr;
+  gap: var(--space-10);
+  padding-bottom: var(--space-14);
+}
+
+.footer-company .footer-logo {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: var(--space-4);
+}
+
+.footer-company p {
+  font-size: var(--fs-small);
+  color: var(--on-dark-muted);
+}
+
+.footer-company .footer-address {
+  font-style: normal;
+}
+
+/* 見出しレベルは h2 だが、見た目は小見出し（基底の h2 の書体・折り返し指定を打ち消す） */
+.footer-heading {
+  font-family: inherit;
+  font-size: var(--fs-small);
+  margin-bottom: var(--space-4);
+  font-weight: 700;
+  color: var(--on-dark-sub);
+  word-break: normal;
+  text-wrap: wrap;
+}
+
+.footer-nav ul li {
+  margin-bottom: var(--space-2);
+}
+
+.footer-nav ul a {
+  font-size: var(--fs-small);
+  color: var(--on-dark-muted);
+  transition: color 0.2s;
+}
+
+.footer-nav ul a:hover,
+.footer-contact a:hover {
+  color: var(--on-dark);
+}
+
+.footer-contact p {
+  font-size: var(--fs-small);
+  color: var(--on-dark-muted);
+}
+
+.footer-bottom {
+  border-top: 1px solid var(--line-on-dark);
+  padding: var(--space-5) 0;
+  text-align: center;
+  font-size: var(--fs-caption);
+  color: var(--on-dark-muted);
+}
+
+.footer :focus-visible {
+  outline-color: var(--on-dark);
+}
+
+@media (max-width: 1080px) {
+  .footer-inner {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding-top: var(--space-14);
+  }
+
+  .footer-inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+}

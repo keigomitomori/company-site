@@ -23,10 +23,8 @@ const faqItems = [
 ];
 ---
 <BaseLayout
-  title="料金 | 株式会社ネクストブリッジ"
+  title="料金"
   description="NEXT Bridgeの料金のご案内。月額の顧問契約は月10万円〜、期間を定めたプロジェクト型支援は30万円〜が目安です。ご契約はいずれも準委任です。初回相談とお見積もりは無料。支援範囲に合わせて個別にお見積もりします。"
-  canonical="https://nextb.net/pricing.html"
-  ogTitle="料金 | NEXT Bridge"
   ogDescription="顧問契約は月10万円〜、プロジェクト型支援は30万円〜が目安（いずれも準委任）。初回相談とお見積もりは無料です。"
 >
   <PageHeader title="料金" subtitle="Pricing" />
@@ -156,3 +154,94 @@ const faqItems = [
     buttonLabel="無料で相談する"
   />
 </BaseLayout>
+
+<style>
+  .price-lead {
+    text-align: center;
+    color: var(--text-sub);
+    margin: calc(var(--space-8) * -1) auto var(--space-10);
+    max-width: 640px;
+  }
+
+  .price-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-6);
+    max-width: 880px;
+    margin: 0 auto;
+  }
+
+  /* 白い地に置くカードのため、ごく淡い線を添える */
+  .price-card {
+    background-color: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: var(--space-8);
+    text-align: center;
+    box-shadow: var(--shadow-card);
+  }
+
+  .price-ill {
+    height: 96px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--space-4);
+  }
+
+  .price-ill img {
+    max-height: 96px;
+    max-width: 60%;
+    width: auto;
+  }
+
+  .price-card h3 {
+    font-size: 20px;
+    margin-bottom: var(--space-2);
+  }
+
+  .price-amount {
+    font-family: var(--font-display);
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+
+  .price-amount span {
+    font-family: var(--font-body);
+    font-size: var(--fs-small);
+    font-weight: 500;
+    color: var(--muted);
+  }
+
+  .price-note {
+    font-size: var(--fs-small);
+    color: var(--muted);
+    margin: var(--space-1) 0 var(--space-5);
+  }
+
+  .price-card .feature-list {
+    display: inline-block;
+    text-align: left;
+  }
+
+  @media (max-width: 768px) {
+    .price-lead {
+      margin-top: calc(var(--space-5) * -1);
+      text-align: left;
+    }
+
+    .price-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .price-card {
+      padding: var(--space-6);
+    }
+
+    .price-amount {
+      font-size: 34px;
+    }
+  }
+</style>
