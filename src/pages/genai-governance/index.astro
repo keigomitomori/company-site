@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import JsonLd from '../../components/JsonLd.astro';
-import { getService } from '../../data/services';
+import { contactHref, getService } from '../../data/services';
 import { serviceJsonLd } from '../../utils/jsonld';
 import Cta from '../../components/Cta.astro';
 import CaseCard from '../../components/CaseCard.astro';
@@ -10,6 +10,8 @@ import LpSteps from '../../components/LpSteps.astro';
 import { ill } from '../../data/illustrations';
 import LpFaq from '../../components/LpFaq.astro';
 import LpConsult from '../../components/LpConsult.astro';
+import LpBanner from '../../components/LpBanner.astro';
+import LpRelatedArticles from '../../components/LpRelatedArticles.astro';
 
 const steps = [
   { image: ill.magnifier, title: "現状診断", items: ["利用実態の棚卸し", "プラン選定の支援", "機密データの区分整理"] },
@@ -25,7 +27,7 @@ const faqItems = [
   { q: "Claude 以外の生成AIにも対応できますか？", a: "Claude・Claude Code を中心としつつ、他の生成AIを含めた利用ルールづくりもご相談いただけます。" },
 ];
 
-const service = getService('/genai-governance/');
+const service = getService('genai-governance');
 // meta description と構造化データ Service の description で共用する
 const description = "Claude・Claude Codeを安全に社内展開するための統制支援です。利用ガイドライン策定、SSO・アカウント統制、managed settingsの設計、Intune/MDMでの配布、ISMSとの整合まで、情シスの視点で一貫して支援します。";
 ---
@@ -46,7 +48,7 @@ const description = "Claude・Claude Codeを安全に社内展開するための
         <h1>生成AIを<br>安心して全社へ。</h1>
         <p class="lp-hero-sub">Claude・Claude Code の導入設計からルールづくり、設定による統制、社内定着まで。情シスの実務がわかるコンサルタントが伴走します。</p>
         <div class="lp-hero-cta">
-          <a href="/contact/" class="btn btn-primary btn-lg">無料で相談する</a>
+          <a href={contactHref(service.slug)} class="btn btn-primary btn-lg">無料で相談する</a>
         </div>
         <ul class="lp-hero-points">
           <li>実案件にもとづく支援</li>
@@ -195,8 +197,9 @@ const description = "Claude・Claude Codeを安全に社内展開するための
   </section>
 
   <LpConsult
+    service={service.slug}
     text="「うちの場合はどう進める？」 — まずは現状をお聞かせください。"
-    note="費用の目安: 顧問契約・プロジェクト型支援とも 30万円〜（税別）で、統制範囲と端末数により変わります。継続運用は顧問契約 月10万円〜（税別）。"
+    note="費用の目安: プロジェクト型支援 30万円〜／顧問契約 月10万円〜（税別）。継続運用は顧問契約でご支援できます。金額は統制範囲と端末数により変わります。"
   />
 
   <section class="section">
@@ -219,9 +222,12 @@ const description = "Claude・Claude Codeを安全に社内展開するための
         <img src="/images/ill-handshake.svg" alt="" loading="lazy" width="365" height="239">
       </div>
       <div class="case-grid">
-        <CaseCard data={claudeEnterpriseCase.summary} />
-        <CaseCard data={claudeCodeGovernanceCase.summary} />
+        <CaseCard entry={claudeEnterpriseCase} />
+        <CaseCard entry={claudeCodeGovernanceCase} />
       </div>
+      <p class="lp-more">
+        <a href="/cases/" class="btn btn-outline">ほかの支援事例を見る</a>
+      </p>
     </div>
   </section>
 
@@ -232,13 +238,17 @@ const description = "Claude・Claude Codeを安全に社内展開するための
         <h2>よくあるご質問</h2>
       </div>
       <LpFaq items={faqItems} />
+      <LpBanner text="業務への活用（業務の棚卸し・試作・現場評価）の支援は専用ページでご案内しています" service="genai-adoption" />
     </div>
   </section>
+
+  <LpRelatedArticles service={service.slug} />
 
   <Cta
     heading="まずはお気軽にご相談ください"
     text="「何から始めればいいか」の整理からお手伝いします。現状の共有だけで大丈夫です。初回相談は無料です。"
     buttonClass="btn btn-primary"
     buttonLabel="相談してみる"
+    href={contactHref(service.slug)}
   />
 </BaseLayout>

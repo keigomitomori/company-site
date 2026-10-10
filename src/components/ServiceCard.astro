@@ -1,17 +1,19 @@
 ---
-import type { ServiceCardData } from '../data/services';
+import type { Service } from '../data/services';
 
 interface Props {
-  service: ServiceCardData;
+  service: Service;
+  /** 横長のカード（グループに1サービスだけのとき） */
+  wide?: boolean;
 }
-const { service } = Astro.props;
+const { service, wide = false } = Astro.props;
 ---
-<a href={service.href} class="card card--link">
+<a href={service.href} class:list={['card', 'card--link', { 'card--wide': wide }]}>
   <div class="card-illust">
     <img src={service.image.src} alt="" loading="lazy" width={service.image.width} height={service.image.height}>
   </div>
   <div class="card-body">
-    <h3>{service.title}</h3>
+    <h4>{service.title}</h4>
     <p>{service.description}</p>
     <span class="card-more">詳しく見る →</span>
   </div>
@@ -64,10 +66,15 @@ const { service } = Astro.props;
     flex: 1;
   }
 
-  .card-body h3 {
+  /* グループ見出し（h3）の下に置くため h4。見た目は既存のカード見出しのまま */
+  .card-body h4 {
+    font-family: var(--font-display);
+    color: var(--ink);
     font-size: 21px;
     line-height: 1.5;
     margin-bottom: var(--space-2);
+    word-break: auto-phrase;
+    text-wrap: pretty;
   }
 
   .card-body p {
@@ -85,6 +92,24 @@ const { service } = Astro.props;
     color: var(--accent-strong);
   }
 
+  /* 横長: イラストを左、文章を右に置く */
+  .card--wide {
+    height: auto;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-10);
+    padding: var(--space-8) var(--space-10);
+  }
+
+  .card--wide .card-illust {
+    flex: 0 0 200px;
+    margin-bottom: 0;
+  }
+
+  .card--wide .card-body h4 {
+    font-size: 24px;
+  }
+
   @media (max-width: 768px) {
     .card {
       padding: var(--space-6);
@@ -95,7 +120,23 @@ const { service } = Astro.props;
       margin-bottom: var(--space-5);
     }
 
-    .card-body h3 {
+    .card-body h4 {
+      font-size: 19px;
+    }
+
+    .card--wide {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      padding: var(--space-6);
+    }
+
+    .card--wide .card-illust {
+      flex: none;
+      margin-bottom: var(--space-5);
+    }
+
+    .card--wide .card-body h4 {
       font-size: 19px;
     }
   }

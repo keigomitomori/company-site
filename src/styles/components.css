@@ -290,6 +290,45 @@
   }
 }
 
+/* 比較表（サービスページ）: 列が多く文章が入るため、コンテナ幅いっぱいに広げて折り返す。
+   狭い画面では表の最小幅を保ち、枠の中で横スクロールさせる */
+.price-table-wrap--wide {
+  max-width: none;
+}
+
+.price-table-wrap--wide + .price-notes {
+  max-width: none;
+}
+
+.price-table--compare th,
+.price-table--compare td {
+  white-space: normal;
+  vertical-align: top;
+  line-height: 1.7;
+}
+
+.price-table--compare thead th {
+  white-space: nowrap;
+}
+
+.price-table--compare tbody th {
+  width: 16%;
+}
+
+.price-table--compare td:nth-child(4) {
+  white-space: nowrap;
+}
+
+.price-table--compare td:nth-child(5) {
+  width: 23%;
+}
+
+@media (max-width: 768px) {
+  .price-table--compare {
+    min-width: 820px;
+  }
+}
+
 /* 本文の前に置く注記（事例の但し書きなど）: 上詰め・下に間隔 */
 .price-notes--lead {
   margin: 0 auto var(--space-8);

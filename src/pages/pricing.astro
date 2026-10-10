@@ -5,9 +5,10 @@ import Cta from '../components/Cta.astro';
 import LpSteps from '../components/LpSteps.astro';
 import { ill } from '../data/illustrations';
 import LpFaq from '../components/LpFaq.astro';
+import { getService, type ServiceSlug } from '../data/services';
 
 const steps = [
-  { image: ill.magnifier, title: "無料相談", items: ["現状と困りごとを伺います", "オンラインで30分程度"] },
+  { image: ill.magnifier, title: "無料相談", items: ["お問い合わせ後に日程をご案内", "現状と困りごとを伺います", "オンラインで30分程度"] },
   { image: ill.meeting, title: "範囲のすり合わせ", items: ["やること・やらないことを整理", "ご予算に合わせて調整"] },
   { image: ill.document, title: "お見積もり", items: ["金額と進め方をご提示", "お見積もりは無料です"] },
   { image: ill.handshake, title: "ご契約・開始", items: ["契約手続きのうえ支援開始", "開始後も範囲を調整できます"] },
@@ -21,6 +22,15 @@ const faqItems = [
   { q: "顧問契約とプロジェクト型支援は併用できますか？", a: "はい。構築はプロジェクト型で、その後の運用は顧問契約で、という組み合わせが多いです。" },
   { q: "支援の範囲は途中で変えられますか？", a: "はい。定例ミーティングで状況を見ながら、範囲や頻度を調整できます。" },
 ];
+
+// サービス別の料金目安。顧問契約とプロジェクト型支援の両方があるサービスは、形ごとの目安を同じ順に1行ずつ並べる
+const estimateRows: { slug: ServiceSlug; contract: string[]; estimate: string[]; factor: string }[] = [
+  { slug: 'it-support', contract: ['顧問契約'], estimate: ['月10万円〜'], factor: '支援範囲・頻度' },
+  { slug: 'device-management', contract: ['プロジェクト型'], estimate: ['30万円〜'], factor: '台数・構成の複雑さ' },
+  { slug: 'scs', contract: ['プロジェクト型', '顧問契約'], estimate: ['30万円〜', '月10万円〜'], factor: '目指す段階・現状の整備状況' },
+  { slug: 'genai-adoption', contract: ['プロジェクト型'], estimate: ['30万円〜'], factor: '対象業務の数・期間' },
+  { slug: 'genai-governance', contract: ['プロジェクト型', '顧問契約'], estimate: ['30万円〜', '月10万円〜'], factor: '統制範囲・端末数' },
+];
 ---
 <BaseLayout
   title="料金"
@@ -29,7 +39,7 @@ const faqItems = [
 >
   <PageHeader title="料金" subtitle="Pricing" />
 
-  <section class="section">
+  <section class="section" id="contract">
     <div class="container">
       <div class="lp-title">
         <p class="lp-eyebrow">PLAN</p>
@@ -84,36 +94,17 @@ const faqItems = [
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th><a href="/device-management/">デバイス管理導入支援</a></th>
-              <td>プロジェクト型</td>
-              <td>30万円〜</td>
-              <td>台数・構成の複雑さ</td>
-            </tr>
-            <tr>
-              <th><a href="/genai-adoption/">生成AI活用支援</a></th>
-              <td>プロジェクト型</td>
-              <td>30万円〜</td>
-              <td>対象業務の数・期間</td>
-            </tr>
-            <tr>
-              <th><a href="/genai-governance/">生成AI・Claude Codeの社内統制支援</a></th>
-              <td>顧問／プロジェクト型</td>
-              <td>30万円〜</td>
-              <td>統制範囲・端末数</td>
-            </tr>
-            <tr>
-              <th><a href="/scs/">SCS評価制度対応支援</a></th>
-              <td>顧問／プロジェクト型</td>
-              <td>30万円〜</td>
-              <td>目指す段階・現状の整備状況</td>
-            </tr>
-            <tr>
-              <th><a href="/it-support/">情シス伴走支援</a></th>
-              <td>顧問契約</td>
-              <td>月10万円〜</td>
-              <td>支援範囲・頻度</td>
-            </tr>
+            {estimateRows.map((row) => {
+              const service = getService(row.slug);
+              return (
+                <tr>
+                  <th><a href={service.href}>{service.shortTitle}</a></th>
+                  <td>{row.contract.map((c) => <span class="estimate-line">{c}</span>)}</td>
+                  <td>{row.estimate.map((c) => <span class="estimate-line">{c}</span>)}</td>
+                  <td>{row.factor}</td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
@@ -127,11 +118,11 @@ const faqItems = [
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" id="flow">
     <div class="container">
       <div class="lp-title">
         <p class="lp-eyebrow">FLOW</p>
-        <h2>お見積もりの流れ</h2>
+        <h2>ご相談から契約までの流れ</h2>
       </div>
       <LpSteps steps={steps} />
     </div>
@@ -156,6 +147,11 @@ const faqItems = [
 </BaseLayout>
 
 <style>
+  /* 契約形態が2つあるサービスは、形と目安を1行ずつ対応させて並べる */
+  .estimate-line {
+    display: block;
+  }
+
   .price-lead {
     text-align: center;
     color: var(--text-sub);

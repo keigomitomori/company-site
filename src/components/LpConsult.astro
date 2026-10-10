@@ -1,15 +1,19 @@
 ---
+import { contactHref, type ServiceSlug } from '../data/services';
+
 interface Props {
   text: string;
   note?: string;
+  /** LP のサービス。お問い合わせフォームでこのサービスを選択済みにする */
+  service: ServiceSlug;
 }
-const { text, note } = Astro.props;
+const { text, note, service } = Astro.props;
 ---
 <section class="lp-consult">
   <div class="container">
     <div class="lp-consult-inner">
       <p>{text}</p>
-      <a href="/contact/" class="btn btn-primary">無料で相談する</a>
+      <a href={contactHref(service)} class="btn btn-primary">無料で相談する</a>
     </div>
     {note && <p class="lp-consult-note">{note}</p>}
   </div>

@@ -2,8 +2,8 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Cta from '../components/Cta.astro';
 import LpBanner from '../components/LpBanner.astro';
-import ServiceCard from '../components/ServiceCard.astro';
-import { services } from '../data/services';
+import ServiceGroups from '../components/ServiceGroups.astro';
+import { SERVICE_GROUPS } from '../data/services';
 import JsonLd from '../components/JsonLd.astro';
 import { fmt, iso } from '../utils/date';
 import { getPublishedArticles } from '../utils/articles';
@@ -15,9 +15,9 @@ const latestArticles = (await getPublishedArticles()).slice(0, 3);
 <BaseLayout
   title="ホーム"
   fullTitle="株式会社ネクストブリッジ | 導入するだけのITから、使われるITへ。"
-  description="株式会社ネクストブリッジの公式サイトです。情シスコンサルティング・製品導入支援・生成AI導入支援を行っています。"
+  description="株式会社ネクストブリッジの公式サイトです。情シス業務／PC・セキュリティ／生成AIの3分野で、情シス伴走支援、デバイス管理導入支援、SCS評価制度対応支援、生成AIの活用・社内統制の支援を行っています。"
   ogTitle="NEXT Bridge｜導入するだけのITから、使われるITへ。"
-  ogDescription="情シスコンサルティング・製品導入支援・生成AI導入支援を行っています。"
+  ogDescription="情シス業務／PC・セキュリティ／生成AIの3分野で、専任の情シスがいない会社やひとり情シスの現場を支援しています。"
   breadcrumb={false}
 >
   <JsonLd slot="head" data={organizationJsonLd(Astro.site!)} />
@@ -26,12 +26,14 @@ const latestArticles = (await getPublishedArticles()).slice(0, 3);
   <section class="hero">
     <div class="container hero-inner">
       <div class="hero-copy">
-        <p class="hero-eyebrow">情シスコンサルティング / 製品導入支援 / 生成AI導入支援</p>
+        <ul class="hero-eyebrow" aria-label="支援の分野">
+          {SERVICE_GROUPS.map((group) => <li>{group.name}</li>)}
+        </ul>
         <h1>導入するだけのITから、<br>使われるITへ。</h1>
         <p class="hero-lead">専任の情シスがいない会社や、ひとり情シスの現場を、<br class="pc-br">チームの一員として実務を支えます。</p>
         <div class="hero-actions">
           <a href="/contact/" class="btn btn-primary">相談してみる</a>
-          <a href="/services/#cases" class="btn btn-outline">支援事例を見る</a>
+          <a href="/cases/" class="btn btn-outline">支援事例を見る</a>
         </div>
         <ul class="hero-badges">
           <li><strong>長期の伴走支援</strong><span>3年以上続く顧問契約も</span></li>
@@ -91,9 +93,7 @@ const latestArticles = (await getPublishedArticles()).slice(0, 3);
         <h2>支援メニュー</h2>
         <p>Services</p>
       </div>
-      <div class="card-grid card-grid--lp">
-        {services.map((service) => <ServiceCard service={service} />)}
-      </div>
+      <ServiceGroups />
       <LpBanner text="それぞれの料金の目安は料金ページでご案内しています" href="/pricing/" label="料金" />
     </div>
   </section>
@@ -141,7 +141,7 @@ const latestArticles = (await getPublishedArticles()).slice(0, 3);
           <p class="eyebrow-light">Case</p>
           <p class="highlight-text">専任情シスが不在のスタートアップを、3年以上「もうひとりの情シス」として支援しています。</p>
         </div>
-        <a href="/services/#cases" class="btn btn-outline">支援事例を見る</a>
+        <a href="/cases/" class="btn btn-outline">支援事例を見る</a>
       </div>
     </div>
   </section>
@@ -164,8 +164,13 @@ const latestArticles = (await getPublishedArticles()).slice(0, 3);
   }
 
   .hero-eyebrow {
-    display: inline-block;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
     margin-bottom: var(--space-5);
+  }
+
+  .hero-eyebrow li {
     padding: var(--space-1) 14px;
     border-radius: var(--radius-pill);
     background-color: var(--accent-soft);
@@ -477,11 +482,6 @@ const latestArticles = (await getPublishedArticles()).slice(0, 3);
 
     .hero-visual img {
       max-width: 340px;
-    }
-
-    /* 2行に折り返すため角丸を控えめにする */
-    .hero-eyebrow {
-      border-radius: var(--radius-md);
     }
 
     .news-bar .container {

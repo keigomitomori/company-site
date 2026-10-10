@@ -1,16 +1,23 @@
 ---
+import { isServicePath, serviceGroupsWithServices } from '../data/services';
+
+// 「サービス」はグループ別の LP を並べたメニューを開く（項目は src/data/services.ts から導出）。
+// JS 無効時は /services/ への通常のリンクとして働く
 const navItems = [
-  { href: '/', label: 'ホーム' },
-  { href: '/about/', label: '会社概要' },
-  { href: '/services/', label: 'サービス' },
+  { href: '/cases/', label: '支援事例' },
   { href: '/pricing/', label: '料金' },
   { href: '/articles/', label: 'コラム' },
+  { href: '/about/', label: '会社概要' },
   { href: '/contact/', label: 'お問い合わせ', className: 'nav-contact' },
 ];
+const groups = serviceGroupsWithServices();
 
 // 現在のページに aria-current="page" を付ける（/articles/index.html のような表記も同一視する）
 const normalize = (path: string) => path.replace(/index\.html$/, '');
 const currentPath = normalize(Astro.url.pathname);
+const current = (href: string) => (normalize(href) === currentPath ? 'page' : undefined);
+// サービス一覧・LP にいるときは「サービス」を現在地として見た目で示す（aria-current は実際のページのリンクにだけ付ける）
+const inServices = isServicePath(currentPath);
 ---
 <header class="header">
   <div class="container">
@@ -21,10 +28,29 @@ const currentPath = normalize(Astro.url.pathname);
     </div>
     <button type="button" class="menu-icon" aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開く"><span></span></button>
     <div class="nav-overlay" aria-hidden="true"></div>
-    <nav class="nav" id="site-nav">
+    <nav class="nav" id="site-nav" aria-label="メインメニュー">
       <ul class="nav-list">
+        <li class="nav-services">
+          <a href="/services/" class:list={['nav-services-link', { 'is-current-section': inServices }]} aria-current={current('/services/')}>サービス</a>
+          <button type="button" class:list={['nav-services-toggle', { 'is-current-section': inServices }]} aria-expanded="false" aria-controls="nav-services-panel">サービス</button>
+          <div class="nav-panel" id="nav-services-panel">
+            <div class="nav-panel-groups">
+              {groups.map(({ group, services }) => (
+                <div class="nav-group">
+                  <p class="nav-group-label" id={`nav-group-${group.id}`}>{group.name}</p>
+                  <ul aria-labelledby={`nav-group-${group.id}`}>
+                    {services.map((service) => (
+                      <li><a href={service.href} aria-current={current(service.href)}>{service.title}</a></li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+            <a href="/services/" class="nav-panel-all" aria-current={current('/services/')}>サービス一覧 →</a>
+          </div>
+        </li>
         {navItems.map((item) => (
-          <li><a href={item.href} class={item.className} aria-current={normalize(item.href) === currentPath ? 'page' : undefined}>{item.label}</a></li>
+          <li><a href={item.href} class={item.className} aria-current={current(item.href)}>{item.label}</a></li>
         ))}
       </ul>
     </nav>
@@ -60,11 +86,41 @@ const currentPath = normalize(Astro.url.pathname);
     if (!header || !btn || !overlay || !nav) return;
     var root = document.documentElement;
     var mobile = window.matchMedia('(max-width: 768px)');
+
+    // ---------- サービスのメニュー（PC幅のディスクロージャー） ----------
+    // JS が動くときだけボタンに切り替える（.has-js が無ければ「サービス」は /services/ へのリンク）
+    header.classList.add('has-js');
+    var services = header.querySelector('.nav-services');
+    var toggle = services && services.querySelector('.nav-services-toggle');
+    function isPanelOpen() {
+      return !!toggle && toggle.getAttribute('aria-expanded') === 'true';
+    }
+    function setPanel(open) {
+      if (!toggle) return;
+      toggle.setAttribute('aria-expanded', String(open));
+    }
+    if (toggle) {
+      toggle.addEventListener('click', function () {
+        setPanel(!isPanelOpen());
+      });
+      // メニューの外をクリックしたら閉じる
+      document.addEventListener('click', function (e) {
+        if (isPanelOpen() && !services.contains(e.target)) setPanel(false);
+      });
+      // フォーカスがメニューの外へ出たら閉じる（Tab で次の項目へ進んだとき）
+      services.addEventListener('focusout', function (e) {
+        if (isPanelOpen() && e.relatedTarget && !services.contains(e.relatedTarget)) setPanel(false);
+      });
+    }
+
+    // ---------- モバイルのメニュー（ドロワー） ----------
     function isOpen() {
       return btn.getAttribute('aria-expanded') === 'true';
     }
+    // 表示されているリンクだけを対象にする（モバイルでは PC 用のボタン・一覧リンクが非表示）
     function focusables() {
-      return [btn].concat(Array.prototype.slice.call(nav.querySelectorAll('a[href]')));
+      var links = Array.prototype.slice.call(nav.querySelectorAll('a[href], button'));
+      return [btn].concat(links.filter(function (el) { return el.getClientRects().length > 0; }));
     }
     function setOpen(open) {
       header.classList.toggle('nav-open', open);
@@ -73,7 +129,7 @@ const currentPath = normalize(Astro.url.pathname);
       btn.setAttribute('aria-label', open ? 'メニューを閉じる' : 'メニューを開く');
       // 開いたらメニュー内の先頭リンクへフォーカスを移す
       if (open) {
-        var first = nav.querySelector('a[href]');
+        var first = focusables()[1];
         if (first) first.focus();
       }
     }
@@ -82,6 +138,12 @@ const currentPath = normalize(Astro.url.pathname);
     });
     overlay.addEventListener('click', function () { setOpen(false); });
     document.addEventListener('keydown', function (e) {
+      // PC幅: サービスのメニューを Esc で閉じ、ボタンへフォーカスを戻す
+      if (e.key === 'Escape' && isPanelOpen()) {
+        setPanel(false);
+        toggle.focus();
+        return;
+      }
       if (!isOpen()) return;
       if (e.key === 'Escape') {
         setOpen(false);
@@ -105,9 +167,10 @@ const currentPath = normalize(Astro.url.pathname);
         }
       }
     });
-    // PC幅に戻ったら開いた状態を解除する（スクロール固定が残らないように）
+    // 幅が切り替わったら開いた状態を解除する（スクロール固定やメニューの開きが残らないように）
     function onChange(e) {
       if (!e.matches && isOpen()) setOpen(false);
+      if (e.matches && isPanelOpen()) setPanel(false);
     }
     if (mobile.addEventListener) mobile.addEventListener('change', onChange);
   })();

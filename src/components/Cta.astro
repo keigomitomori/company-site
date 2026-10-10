@@ -4,18 +4,31 @@ interface Props {
   text?: string;
   buttonClass?: string;
   buttonLabel?: string;
+  /** ボタンのリンク先（LP ではサービスを選択済みにしたお問い合わせフォーム） */
+  href?: string;
+  /** 2つ目のボタン（コラム末尾の LP への導線など） */
+  secondary?: { href: string; label: string };
 }
 const {
   heading = 'お気軽にご相談ください',
   text = 'サービスに関するご質問やお見積もりなど、まずはお気軽にお問い合わせください。初回相談とお見積もりは無料です。',
   buttonClass = 'btn btn-outline',
   buttonLabel = 'お問い合わせ',
+  href = '/contact/',
+  secondary,
 } = Astro.props;
 ---
 <section class="cta">
   <div class="container">
     <h2>{heading}</h2>
     <p>{text}</p>
-    <a href="/contact/" class={buttonClass}>{buttonLabel}</a>
+    {secondary ? (
+      <div class="cta-actions">
+        <a href={href} class={buttonClass}>{buttonLabel}</a>
+        <a href={secondary.href} class="btn btn-outline">{secondary.label}</a>
+      </div>
+    ) : (
+      <a href={href} class={buttonClass}>{buttonLabel}</a>
+    )}
   </div>
 </section>
