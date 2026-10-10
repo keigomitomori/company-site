@@ -1,9 +1,9 @@
 // 本番では静的アセットに一致しなかったリクエストだけを処理する Worker。
-// assets.html_handling を "none" にして /about.html を転送させない代わりに、
+// assets.htmlHandling を "none" にして /about.html を転送させない代わりに、
 // GitHub Pages と同じディレクトリURLの解決と 404 応答をここで補う。
 // （本番の /about.html 等の実ファイルは Worker を通らずアセットとして直接返る）
 //
-// プレビュー環境（wrangler.jsonc の env.preview）は run_worker_first で全リクエストを受け、
+// プレビュー（cloudflare.config.ts の preview モード）は runWorkerFirst で全リクエストを受け、
 // 検索エンジンに載らないよう X-Robots-Tag: noindex を付ける。
 
 /**

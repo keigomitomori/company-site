@@ -11,3 +11,6 @@ _stock/
 
 # wrangler のローカル状態
 .wrangler/
+
+# cf（Cloudflare CLI）のビルド出力
+.cloudflare/

@@ -82,12 +82,15 @@
 ## 運用メモ
 
 - **デプロイ**: main へ push すると GitHub Actions（.github/workflows/deploy.yml）が Cloudflare Workers（静的アセット）に自動デプロイする（ユーザー決定 2026-10-10。それまでは GitHub Pages）
-  - CI の verify ジョブが型検査（astro check）・OG画像の存在・canonical の実URL一致・内部リンクを検証し、失敗するとデプロイされない
-  - PR では検証済みの dist を、プレビュー用の別 Worker `nextb-net-preview`（workers.dev のみ・noindex）に配信する。本番には反映されない。URL はジョブのログに出る
-    - プレビューは1つなので、最後に push された PR の内容が表示される
-    - wrangler.jsonc の `env.preview` は `routes: []` を必ず保つ（消すと top-level の routes が継承され、本番の独自ドメインがプレビューに付け替わる）
+  - デプロイには Cloudflare CLI の `cf` を使う（ユーザー決定 2026-10-11）。ベータのため `cf`・`wrangler` はバージョンを固定している。更新するときは下の手順がそのまま通るか確かめてから上げる
+  - CI の verify ジョブが型検査（astro check）・OG画像の存在・canonical の実URL一致・内部リンクを検証し、`cf deploy --dry-run` で配信設定まで確かめる。どれかが失敗するとデプロイされない
+  - PR では検証済みの dist を、プレビュー用の別 Worker `nextb-net-preview`（workers.dev のみ・noindex）に配信する。本番には反映されない。URL はジョブのログに出る。プレビューは1つなので、最後に push された PR の内容が表示される
   - GitHub の Secrets に `CLOUDFLARE_API_TOKEN`・`CLOUDFLARE_ACCOUNT_ID` が必要
-- **URL の解決**（wrangler.jsonc・worker/index.js）: `.html` 付きの URL を維持するため `html_handling` は `none`。アセットに一致しないリクエストだけ Worker が受け、次の順で GitHub Pages 時代と同じ動きを再現する
+- **cf の使い方**（設定は cloudflare.config.ts。dist の置き場所だけ wrangler.config.ts）
+  - **`cf build` と `cf dev` は使わない**。cf は Astro を検出すると Cloudflare アダプター前提の処理に回し、アダプターを使わない静的サイトでは Build Output が作られず失敗する（cf 1.0.0-beta.14 で確認。cf 自身の自動設定どおりアダプターを入れても同じ失敗）
+  - 代わりに `npm run build`（Astro）→ `npm run cf:package`（cf のビルドエンジン cf-wrangler で dist を Build Output に詰める）→ `npx cf deploy --prebuilt` の順で行う。プレビューは cf:package と deploy の両方に `--mode preview` を付ける
+  - ローカルで本番相当の配信を試すときは `npm run cf:dev`
+- **URL の解決**（cloudflare.config.ts・worker/index.js）: `.html` 付きの URL を維持するため `htmlHandling` は `none`。アセットに一致しないリクエストだけ Worker が受け、次の順で GitHub Pages 時代と同じ動きを再現する
   - `/dir/` → `dir/index.html`、`/dir` → `/dir/` へ 301、`/about` → `/about.html` へ 301、それ以外は 404.html を 404 で返す
   - www.nextb.net → nextb.net の転送は Worker でなく Cloudflare ゾーンの Redirect Rule で行う
   - レスポンスヘッダー（セキュリティ系・`/_astro/*` の長期キャッシュ）は public/_headers
