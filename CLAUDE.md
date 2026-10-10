@@ -94,6 +94,7 @@
   - GitHub Pages 時代の /about.html 形式は public/_redirects で /about/ へ 301 転送する。新しいページを .html 形式で作らない
   - 配信は Worker コードを持たない静的アセットのみ。/about → /about/ の補完と 404.html の返却は Cloudflare の設定（cloudflare.config.ts の htmlHandling・notFoundHandling）に任せる
   - www.nextb.net → nextb.net の転送はゾーンの Redirect Rule で行う
+  - ゾーンの Redirect Rules に「Redirect from root to WWW [Template]」（nextb.net → www）が無効の状態で残っている。**有効にしない**（2026-10-11 の切り替え時、これが有効だったため www との間で転送がループし、数分間サイトが表示されなかった）
   - レスポンスヘッダー（セキュリティ系・`/_astro/*` の長期キャッシュ）は public/_headers。プレビューだけ CI が scripts/mark-preview-noindex.mjs で noindex を足す
 - **dist/ はビルド成果物**（リポジトリ管理外）。CI が build するのでローカル build は検証用
 - **sitemap.xml はビルド時に自動生成**（scripts/sitemap-integration.mjs が dist の実ファイルから生成。手動追記は不要。noindex ページと404は自動除外）
