@@ -1,8 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
+import { serviceGroupsWithServices } from '../data/services';
 
 const thanksUrl = new URL('/thanks/', Astro.site).href;
+// 「ご相談のサービス」の選択肢（グループ順）。送信値はサービス名、?service=<slug> の照合には data-slug を使う
+const groups = serviceGroupsWithServices();
 ---
 <BaseLayout
   title="お問い合わせ"
@@ -55,6 +58,21 @@ const thanksUrl = new URL('/thanks/', Astro.site).href;
         </div>
 
         <div class="form-group">
+          <label for="service">ご相談のサービス</label>
+          <select id="service" name="service">
+            <option value="">選択してください</option>
+            {groups.map(({ group, services }) => (
+              <optgroup label={group.name}>
+                {services.map((service) => (
+                  <option value={service.title} data-slug={service.slug}>{service.title}</option>
+                ))}
+              </optgroup>
+            ))}
+            <option value="その他・まだ決まっていない">その他・まだ決まっていない</option>
+          </select>
+        </div>
+
+        <div class="form-group">
           <label for="message">お問い合わせ内容 <span class="required">※必須</span></label>
           <textarea id="message" name="message" required aria-required="true" placeholder="お問い合わせ内容をご記入ください"></textarea>
         </div>
@@ -74,6 +92,22 @@ const thanksUrl = new URL('/thanks/', Astro.site).href;
 
     </div>
   </section>
+
+  <script is:inline>
+    // LP からの ?service=<slug> で「ご相談のサービス」を選択済みにする（既知の slug だけ。それ以外は無視）
+    (function () {
+      var select = document.getElementById('service');
+      if (!select || !window.URLSearchParams) return;
+      var slug = new URLSearchParams(window.location.search).get('service');
+      if (!slug) return;
+      for (var i = 0; i < select.options.length; i++) {
+        if (select.options[i].getAttribute('data-slug') === slug) {
+          select.selectedIndex = i;
+          return;
+        }
+      }
+    })();
+  </script>
 
   <script is:inline>
     (function () {
