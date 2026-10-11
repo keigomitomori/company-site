@@ -4,6 +4,7 @@ import PageHeader from '../../components/PageHeader.astro';
 import Cta from '../../components/Cta.astro';
 import { fmt, iso } from '../../utils/date';
 import { getPublishedArticles } from '../../utils/articles';
+import { ogImageSrcset, ogImageWebp } from '../../utils/ogImage';
 
 const articles = await getPublishedArticles();
 ---
@@ -20,7 +21,7 @@ const articles = await getPublishedArticles();
         {articles.map((article) => (
           <li class="article-list-item">
             <a href={`/articles/${article.id}/`}>
-              <img class="article-list-thumb" src={`/images/og/${article.id}.png`} alt="" loading="lazy" width="1200" height="630">
+              <img class="article-list-thumb" src={ogImageWebp(article.id, 640)} srcset={ogImageSrcset(article.id)} sizes="(max-width: 768px) calc(100vw - 40px), (max-width: 1080px) calc(50vw - 36px), 368px" alt="" loading="lazy" width="1200" height="630">
               <div class="article-list-body">
                 <div class="article-list-meta">
                   <time datetime={iso(article.data.pubDate)}>{fmt(article.data.pubDate)}</time>

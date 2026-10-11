@@ -21,6 +21,7 @@
     "@astrojs/check": "^0.9.10",
     "cf": "1.0.0-beta.14",
     "github-slugger": "^2.0.0",
+    "sharp": "0.35.5",
     "tinyglobby": "^0.2.17",
     "typescript": "^6.0.3",
     "wrangler": "4.149.0"
