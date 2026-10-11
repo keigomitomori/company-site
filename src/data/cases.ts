@@ -93,7 +93,7 @@ export const claudeCodeGovernanceCase: CaseEntry = {
     title: 'コンサルティング会社 ― Claude Code の配布統制',
     problem: 'Claude Code の統一配布と、権限・接続範囲の統制が課題だった。',
     support: 'Intune による配布設計、managed settings の方針、接続範囲の設計を担当。',
-    outcome: '「個人任せの試行」から「会社として統制された活用」へ移行。',
+    outcome: '会社として統制された形での Claude Code の活用に移行。',
   },
 };
 
