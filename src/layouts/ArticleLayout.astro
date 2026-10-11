@@ -6,6 +6,7 @@ import type { ArticleCategory } from '../data/articleCategories';
 import { serviceForArticleCategory } from '../data/services';
 import { fmt, iso } from '../utils/date';
 import { articleJsonLd } from '../utils/jsonld';
+import { ogImagePng, ogImageSrcset, ogImageWebp } from '../utils/ogImage';
 
 interface Props {
   title: string;
@@ -18,7 +19,7 @@ interface Props {
 const { title, description, slug, pubDate, updatedDate, category } = Astro.props;
 
 // canonical は BaseLayout がページの実URL（/articles/<slug>/）から自動導出する
-const ogImage = `/images/og/${slug}.png`;
+const ogImage = ogImagePng(slug);
 
 // 記事末尾のCTAはカテゴリに合わせて出し分ける。カテゴリを追加して定義を漏らすと型エラーになる
 const ctaByCategory: Record<ArticleCategory, { heading: string; text: string }> = {
@@ -81,7 +82,7 @@ const articleData = articleJsonLd(Astro.site!, {
     </header>
 
     <div class="container article-column">
-      <img class="article-eyecatch" src={`/images/og/${slug}.png`} alt="" width="1200" height="630">
+      <img class="article-eyecatch" src={ogImageWebp(slug, 1200)} srcset={ogImageSrcset(slug)} sizes="(max-width: 808px) calc(100vw - 40px), 760px" alt="" width="1200" height="630" fetchpriority="high">
       <div class="article-body">
         <slot />
       </div>

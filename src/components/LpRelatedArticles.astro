@@ -3,6 +3,7 @@
 // 公開コラムを新しい順に最大3件出す。カテゴリが無い・該当記事が無いときはセクションごと出さない
 import { getService, type ServiceSlug } from '../data/services';
 import { getPublishedArticles } from '../utils/articles';
+import { ogImageSrcset, ogImageWebp } from '../utils/ogImage';
 import { fmt, iso } from '../utils/date';
 
 interface Props {
@@ -24,7 +25,7 @@ const articles = category
         {articles.map((article) => (
           <li class="lp-article">
             <a href={`/articles/${article.id}/`}>
-              <img class="lp-article-thumb" src={`/images/og/${article.id}.png`} alt="" loading="lazy" width="1200" height="630">
+              <img class="lp-article-thumb" src={ogImageWebp(article.id, 640)} srcset={ogImageSrcset(article.id)} sizes="(max-width: 768px) 120px, (max-width: 1080px) calc(50vw - 36px), 368px" alt="" loading="lazy" width="1200" height="630">
               <div class="lp-article-body">
                 <time datetime={iso(article.data.pubDate)}>{fmt(article.data.pubDate)}</time>
                 <h3>{article.data.title}</h3>
