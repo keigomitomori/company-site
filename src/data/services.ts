@@ -49,7 +49,7 @@ export const services: Service[] = [
     shortTitle: 'デバイス管理導入支援',
     href: '/device-management/',
     description: 'Intune / Entra ID でPCの管理を仕組み化。キッティングの自動化から運用の引き継ぎまで支援します。',
-    image: { src: '/images/ill-devicemgmt.png', width: 609, height: 470 },
+    image: { src: '/images/ill-devicemgmt.webp', width: 609, height: 470 },
     articleCategory: 'デバイス管理',
   },
   {
